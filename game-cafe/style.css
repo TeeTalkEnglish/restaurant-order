@@ -1,0 +1,414 @@
+/* ── RESET ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: #fdf0f0;
+  min-height: 100vh;
+}
+
+/* ════════════════════════════
+   HEADER
+════════════════════════════ */
+.game-header {
+  background: linear-gradient(135deg, #8b1a1a, #c0392b);
+  color: white;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+.back-btn {
+  color: white;
+  text-decoration: none;
+  font-size: 0.85rem;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+.back-btn:hover { opacity: 1; }
+.game-header h1 { font-size: 1.05rem; font-weight: 800; }
+.score-display  { font-size: 0.9rem; font-weight: 700; }
+
+/* ════════════════════════════
+   PROGRESS BAR
+════════════════════════════ */
+.progress-container { background: #e8d5d5; height: 6px; }
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #f39c12, #e74c3c);
+  transition: width 0.5s ease;
+}
+
+/* ════════════════════════════
+   INTRO SCREEN
+════════════════════════════ */
+.intro-screen {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+}
+.intro-card {
+  background: white;
+  border-radius: 20px;
+  padding: 36px 30px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+.intro-icon { font-size: 4rem; margin-bottom: 16px; }
+.intro-card h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #222;
+  margin-bottom: 8px;
+}
+.setting-badge {
+  display: inline-block;
+  background: #fff5e6;
+  color: #d35400;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+.intro-card p {
+  color: #666;
+  line-height: 1.7;
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+.intro-tips {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: left;
+  margin-bottom: 24px;
+}
+.intro-tips h4 {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #555;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.tip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 6px;
+}
+.btn-start {
+  background: #c0392b;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 14px 36px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.btn-start:hover { background: #a93226; transform: translateY(-2px); }
+
+/* ════════════════════════════
+   GAME SCREEN
+════════════════════════════ */
+.game-screen {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 20px 16px 100px;
+}
+.scene-label {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+/* ════════════════════════════
+   CHAT BUBBLES
+════════════════════════════ */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* NPC */
+.msg-npc {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  animation: slideInLeft 0.4s ease;
+}
+.npc-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+.npc-bubble {
+  background: white;
+  border-radius: 18px 18px 18px 4px;
+  padding: 14px 16px;
+  max-width: 80%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.npc-name {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #e67e22;
+  margin-bottom: 4px;
+}
+.npc-text { font-size: 0.95rem; color: #333; line-height: 1.5; }
+
+/* Player */
+.msg-player {
+  display: flex;
+  justify-content: flex-end;
+  animation: slideInRight 0.4s ease;
+}
+.player-bubble {
+  background: linear-gradient(135deg, #c0392b, #e74c3c);
+  color: white;
+  border-radius: 18px 18px 4px 18px;
+  padding: 14px 16px;
+  max-width: 80%;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  box-shadow: 0 2px 8px rgba(192,57,43,0.3);
+}
+
+/* ════════════════════════════
+   VOCAB TIP BOX
+════════════════════════════ */
+.vocab-tip {
+  background: #fff9e6;
+  border: 1.5px solid #f39c12;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  animation: fadeIn 0.4s ease;
+}
+.tip-icon    { font-size: 1.2rem; flex-shrink: 0; }
+.tip-word    { font-size: 0.85rem; font-weight: 800; color: #d35400; }
+.tip-meaning { font-size: 0.82rem; color: #666; margin-top: 2px; line-height: 1.4; }
+
+/* ════════════════════════════
+   OPTIONS
+════════════════════════════ */
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.option-btn {
+  background: white;
+  border: 2px solid #e8d5d5;
+  border-radius: 14px;
+  padding: 14px 16px;
+  text-align: left;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s;
+  line-height: 1.4;
+}
+.option-btn:hover:not(:disabled) {
+  border-color: #c0392b;
+  background: #fff5f5;
+  transform: translateX(4px);
+}
+.option-btn.correct   { background: #e8f8f0; border-color: #27ae60; color: #1e8449; }
+.option-btn.incorrect { background: #fdf0f0; border-color: #e74c3c; color: #c0392b; }
+.option-btn.dimmed    { opacity: 0.4; }
+.option-btn:disabled  { cursor: not-allowed; }
+
+/* ════════════════════════════
+   FEEDBACK BOX
+════════════════════════════ */
+.feedback-box {
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin-bottom: 14px;
+  animation: fadeIn 0.3s ease;
+}
+.correct-fb   { background: #e8f8f0; border-left: 4px solid #27ae60; color: #1a5e35; }
+.incorrect-fb { background: #fdf0f0; border-left: 4px solid #e74c3c; color: #7b241c; }
+
+/* ════════════════════════════
+   NEXT BUTTON
+════════════════════════════ */
+.btn-next {
+  width: 100%;
+  background: #c0392b;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  padding: 14px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s;
+  animation: fadeIn 0.3s ease;
+}
+.btn-next:hover { background: #a93226; }
+
+/* ════════════════════════════
+   COMPLETION SCREEN
+════════════════════════════ */
+.completion-screen {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+}
+.completion-card {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 30px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+.completion-icon  { font-size: 4rem; margin-bottom: 16px; }
+.completion-card h2 { font-size: 1.7rem; font-weight: 800; color: #222; margin-bottom: 8px; }
+.stars-display    { font-size: 2rem; letter-spacing: 4px; margin: 20px 0; }
+.score-text       { font-size: 1.1rem; font-weight: 700; color: #555; margin-bottom: 16px; }
+.completion-message { font-size: 0.95rem; color: #666; line-height: 1.7; margin-bottom: 28px; }
+.completion-btns  { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-replay {
+  background: #c0392b;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 28px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-replay:hover { background: #a93226; }
+.btn-home {
+  background: white;
+  color: #c0392b;
+  border: 2px solid #c0392b;
+  border-radius: 30px;
+  padding: 12px 28px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s;
+}
+.btn-home:hover { background: #c0392b; color: white; }
+
+/* ════════════════════════════
+   ANIMATIONS
+════════════════════════════ */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ════════════════════════════
+   RESPONSIVE
+════════════════════════════ */
+@media (max-width: 480px) {
+  .game-header h1           { font-size: 0.9rem; }
+  .npc-bubble, .player-bubble { max-width: 90%; }
+  .intro-card               { padding: 24px 18px; }
+  .completion-card          { padding: 28px 18px; }
+}
+
+/* ════════════════════════════
+   INTRO BUTTON GROUP
+════════════════════════════ */
+.intro-btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-menu {
+  display: inline-block;
+  background: white;
+  color: #c0392b;
+  border: 2px solid #c0392b;
+  border-radius: 30px;
+  padding: 13px 32px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: all 0.2s;
+  width: 100%;
+  text-align: center;
+}
+
+.btn-menu:hover {
+  background: #fff5f5;
+  transform: translateY(-2px);
+}
+
+.btn-start {
+  width: 100%;
+  background: #c0392b;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 14px 36px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn-start:hover {
+  background: #a93226;
+  transform: translateY(-2px);
+}
+
+/* small hint text below buttons */
+.intro-hint {
+  font-size: 0.78rem;
+  color: #aaa;
+  margin-top: 4px;
+}

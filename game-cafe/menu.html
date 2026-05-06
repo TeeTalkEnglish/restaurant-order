@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Corner Café – Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #f5efe6;
+      min-height: 100vh;
+    }
+
+    /* ── TOP NAV ── */
+    .top-nav {
+      background: linear-gradient(135deg, #8b1a1a, #c0392b);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .top-nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+    .top-nav span {
+      color: white;
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+    .btn-play-game {
+      background: white;
+      color: #c0392b;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 18px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-play-game:hover {
+      background: #fff0f0;
+    }
+
+    /* ── STUDY BANNER ── */
+    .study-banner {
+      background: #fff9e6;
+      border-bottom: 2px solid #f39c12;
+      padding: 12px 20px;
+      text-align: center;
+      font-size: 0.88rem;
+      color: #7d5a00;
+      font-weight: 600;
+    }
+    .study-banner strong { color: #d35400; }
+
+    /* ── MENU WRAPPER ── */
+    .menu-wrapper {
+      max-width: 820px;
+      margin: 30px auto;
+      padding: 0 16px 60px;
+    }
+
+    /* ── MENU CARD ── */
+    .menu-card {
+      background: #fffdf8;
+      border-radius: 4px;
+      box-shadow:
+        0 0 0 1px #d4b896,
+        0 4px 30px rgba(0,0,0,0.12),
+        8px 8px 0 0 #e8d5b7;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── MENU HEADER ── */
+    .menu-header {
+      background: linear-gradient(180deg, #2c1810 0%, #3d2314 100%);
+      padding: 36px 30px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .menu-header::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1.5px solid rgba(212,184,150,0.4);
+      border-radius: 2px;
+      pointer-events: none;
+    }
+    .cafe-flag {
+      font-size: 1.4rem;
+      letter-spacing: 4px;
+      margin-bottom: 8px;
+    }
+    .cafe-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3rem;
+      color: #f0d9b5;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .cafe-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: #c4a882;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .cafe-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: #c4a882;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+    }
+    .cafe-divider::before,
+    .cafe-divider::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 1px;
+      background: #c4a882;
+    }
+    .cafe-info {
+      margin-top: 12px;
+      color: #a08060;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── MENU BODY ── */
+    .menu-body {
+      padding: 0 28px 28px;
+    }
+
+    /* ── SECTION ── */
+    .menu-section {
+      margin-top: 32px;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+    .section-icon { font-size: 1.3rem; }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: #2c1810;
+      font-weight: 700;
+    }
+    .section-line {
+      border: none;
+      border-top: 1.5px solid #d4b896;
+      margin-bottom: 20px;
+      margin-top: 6px;
+    }
+    .section-note {
+      font-size: 0.78rem;
+      color: #999;
+      font-style: italic;
+      margin-top: -14px;
+      margin-bottom: 16px;
+    }
+
+    /* ── MENU ITEM ── */
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .item-left { flex: 1; }
+    .item-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2c1810;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .item-desc {
+      font-size: 0.82rem;
+      color: #7a6652;
+      line-height: 1.5;
+    }
+    .item-price {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: #2c1810;
+      font-size: 1rem;
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+
+    /* ── VOCAB BADGE ── */
+    .vocab-badge {
+      display: inline-block;
+      background: #fff3cd;
+      border: 1px solid #f39c12;
+      color: #d35400;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 10px;
+      cursor: pointer;
+      position: relative;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .vocab-badge:hover { background: #ffe69c; }
+
+    /* ── TOOLTIP ── */
+    .vocab-badge .tooltip {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #2c1810;
+      color: #f0d9b5;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 8px;
+      white-space: nowrap;
+      z-index: 99;
+      line-height: 1.5;
+      text-align: center;
+      min-width: 180px;
+      max-width: 240px;
+      white-space: normal;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .vocab-badge .tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: #2c1810;
+    }
+    .vocab-badge:hover .tooltip,
+    .vocab-badge:focus .tooltip {
+      display: block;
+    }
+
+    /* ── TAGS ── */
+    .tag {
+      display: inline-block;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 10px;
+    }
+    .tag-veg  { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+    .tag-gf   { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+    .tag-pop  { background: #fce4ec; color: #c62828; border: 1px solid #f48fb1; }
+    .tag-new  { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
+    .tag-spicy{ background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+
+    /* ── DRINKS GRID ── */
+    .drinks-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 24px;
+    }
+    .drink-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px dotted #d4b896;
+      padding-bottom: 6px;
+    }
+    .drink-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      color: #2c1810;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .drink-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #2c1810;
+      white-space: nowrap;
+      margin-left: 8px;
+    }
+
+    /* ── SPECIALS BOX ── */
+    .specials-box {
+      background: linear-gradient(135deg, #2c1810, #3d2314);
+      border-radius: 4px;
+      padding: 20px;
+      margin-top: 32px;
+      text-align: center;
+      color: #f0d9b5;
+      border: 1px solid #c4a882;
+    }
+    .specials-box h3 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+    .specials-box p {
+      font-size: 0.85rem;
+      color: #c4a882;
+      line-height: 1.6;
+    }
+    .special-items {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .special-item {
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px;
+      padding: 12px;
+      border: 1px solid rgba(212,184,150,0.3);
+    }
+    .special-item-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      color: #f0d9b5;
+      margin-bottom: 4px;
+    }
+    .special-item-price {
+      font-size: 0.8rem;
+      color: #f39c12;
+      font-weight: 700;
+    }
+
+    /* ── ALLERGEN NOTE ── */
+    .allergen-note {
+      margin-top: 28px;
+      padding: 14px 18px;
+      background: #fdf8f0;
+      border: 1px solid #d4b896;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      color: #7a6652;
+      line-height: 1.6;
+    }
+    .allergen-note strong { color: #2c1810; }
+
+    /* ── MENU FOOTER ── */
+    .menu-footer {
+      background: #2c1810;
+      padding: 20px;
+      text-align: center;
+    }
+    .menu-footer p {
+      color: #c4a882;
+      font-size: 0.78rem;
+      line-height: 1.8;
+    }
+    .menu-footer .hours {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      color: #f0d9b5;
+      margin-bottom: 6px;
+    }
+
+    /* ── VOCAB GLOSSARY ── */
+    .glossary-section {
+      margin-top: 30px;
+      background: #fff9e6;
+      border: 2px solid #f39c12;
+      border-radius: 12px;
+      padding: 22px;
+    }
+    .glossary-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #d35400;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .glossary-item {
+      background: white;
+      border-radius: 8px;
+      padding: 12px 14px;
+      border: 1px solid #f5dfa0;
+    }
+    .glossary-word {
+      font-weight: 800;
+      color: #2c1810;
+      font-size: 0.9rem;
+      margin-bottom: 3px;
+    }
+    .glossary-def {
+      font-size: 0.8rem;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    /* ── STUDY BUTTONS ── */
+    .study-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 30px;
+      padding: 12px 24px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+    }
+    .btn-primary { background: #c0392b; color: white; }
+    .btn-primary:hover { background: #a93226; transform: translateY(-2px); }
+    .btn-secondary { background: white; color: #c0392b; border: 2px solid #c0392b; }
+    .btn-secondary:hover { background: #fff5f5; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 560px) {
+      .menu-body { padding: 0 16px 20px; }
+      .cafe-name { font-size: 2.2rem; }
+      .drinks-grid { grid-template-columns: 1fr; }
+      .special-items { grid-template-columns: 1fr; }
+      .glossary-grid { grid-template-columns: 1fr 1fr; }
+      .menu-item { flex-direction: column; gap: 4px; }
+      .item-price { font-size: 0.9rem; }
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      .top-nav, .study-banner, .glossary-section,
+      .study-actions, .vocab-badge { display: none !important; }
+      body { background: white; }
+      .menu-card { box-shadow: none; border: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="top-nav">
+    <a href="../index.html">← Back to Games</a>
+    <span>📖 Study the Menu</span>
+    <a class="btn-play-game" href="index.html">▶ Play Game</a>
+  </nav>
+
+  <!-- STUDY BANNER -->
+  <div class="study-banner">
+    💡 Study this menu before playing! Hover over the <strong>🟡 yellow badges</strong> to learn key Aussie food words.
+  </div>
+
+  <div class="menu-wrapper">
+
+    <!-- ══════════════════════════════════════
+         MENU CARD
+    ══════════════════════════════════════ -->
+    <div class="menu-card">
+
+      <!-- HEADER -->
+      <div class="menu-header">
+        <div class="cafe-flag">🇦🇺 ☕ 🇦🇺</div>
+        <div class="cafe-name">The Corner Café</div>
+        <div class="cafe-tagline">Good food · Good coffee · Good vibes</div>
+        <div class="cafe-divider">Melbourne, Victoria</div>
+        <div class="cafe-info">📍 12 Collins Street, Melbourne VIC 3000 &nbsp;|&nbsp; ☎ (03) 9123 4567</div>
+      </div>
+
+      <!-- MENU BODY -->
+      <div class="menu-body">
+
+        <!-- ─────────────────────────────────
+             ALL DAY BREKKIE
+        ───────────────────────────────── -->
+        <div class="menu-section">
+          <div class="section-header">
+            <span class="section-icon">🍳</span>
+            <span class="section-title">All Day Brekkie</span>
+          </div>
+          <div class="section-note">Served all day until 3:00pm</div>
+          <hr class="section-line"/>
+
+          <!-- Item 1 -->
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Smashed Avo Toast
+                <span class="tag tag-veg">VEG</span>
+                <span class="tag tag-pop">⭐ POPULAR</span>
+                <span class="vocab-badge">
+                  🟡 What is "Avo"?
+                  <span class="tooltip">
+                    "Avo" = Avocado! Australians love to shorten words. Avocado → Avo. This dish is very famous in Australian cafés!
+                  </span>
+                </span>
+              </div>
+              <div class="item-desc">
+                Smashed avocado on toasted sourdough, two
+                <span class="vocab-badge">
+                  poached eggs
+                  <span class="tooltip">"Poached eggs" = eggs cooked gently in hot water. Not fried, not scrambled. Very popular in Aussie cafés!</span>
+                </span>,
+                cherry tomatoes, feta cheese, dukkah &amp; a squeeze of lemon
+              </div>
+            </div>
+            <div class="item-price">\$22.50</div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Big Brekkie Plate
+                <span class="tag tag-pop">⭐ POPULAR</span>
+                <span class="vocab-badge">
+                  🟡 What is a "Big Brekkie"?
+                  <span class="tooltip">"Brekkie" = Breakfast. A "Big Brekkie" or "Full Brekkie" is a large plate with many items — like the English "Full English" but Australian style!</span>
+                </span>
+              </div>
+              <div class="item-desc">
+                Two eggs your way
+                <span class="vocab-badge">
+                  (your way)
+                  <span class="tooltip">"Eggs your way" means you CHOOSE how you want them: scrambled, fried, poached, or soft boiled. The waiter will ask you!</span>
+                </span>,
+                bacon rashers, grilled tomato, sautéed mushrooms,
+                <span class="vocab-badge">
+                  hash brown
+                  <span class="tooltip">A "hash brown" is a crispy fried potato patty. Very common on Aussie breakfast plates!</span>
+                </span>
+                &amp; buttered toast
+              </div>
+            </div>
+            <div class="item-price">\$26.00</div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Eggs Benedict
+                <span class="vocab-badge">
+                  🟡 What is this?
+                  <span class="tooltip">"Eggs Benedict" = poached eggs on an English muffin with hollandaise sauce. It sounds fancy but it is very common in Aussie cafés!</span>
+                </span>
+              </div>
+              <div class="item-desc">
+                Two poached eggs on a toasted
+                <span class="vocab-badge">
+                  English muffin
+                  <span class="tooltip">An "English muffin" is a small round bread, flat and toasted. Very different from a sweet muffin — don't get confused!</span>
+                </span>
+                with your choice of: smoked salmon · bacon · spinach &amp;
+                <span class="vocab-badge">
+                  hollandaise sauce
+                  <span class="tooltip">Hollandaise = a creamy yellow sauce made from butter and egg yolk. It is rich and delicious!</span>
+                </span>
+              </div>
+            </div>
+            <div class="item-price">\$24.00</div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Acai Bowl
+                <span class="tag tag-veg">VEG</span>
+                <span class="tag tag-new">NEW</span>
+                <span class="vocab-badge">
+                  🟡 Pronounced: "ah-sigh-EE"
+                  <span class="tooltip">"Açaí" is a purple berry from Brazil. In Australia, it comes as a thick smoothie bowl topped with fruit and granola. Very trendy!</span>
+                </span>
+              </div>
+              <div class="item-desc">
+                Blended açaí, banana &amp; almond milk topped with
+                <span class="vocab-badge">
+                  granola
+                  <span class="tooltip">"Granola" = crunchy baked oats with nuts and honey. A very common topping in Aussie cafés.</span>
+                </span>,
+                fresh strawberries, blueberries &amp; a drizzle of honey
+              </div>
+            </div>
+            <div class="item-price">\$19.00</div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Banana Porridge
+                <span class="tag tag-veg">VEG</span>
+                <span class="tag tag-gf">GF option</span>
+              </div>
+              <div class="item-desc">
+                Creamy
+                <span class="vocab-badge">
+                  porridge
+                  <span class="tooltip">"Porridge" = hot oats cooked with milk or water. Called "oatmeal" in America. A very warm and filling brekkie!</span>
+                </span>
+                with caramelised banana, brown sugar, toasted almonds &amp; a side of warm honey
+              </div>
+            </div>
+            <div class="item-price">\$15.50</div>
+          </div>
+
+        </div><!-- end brekkie -->
+
+        <!-- ─────────────────────────────────
+             LUNCH
+        ───────────────────────────────── -->
+        <div class="menu-section">
+          <div class="section-header">
+            <span class="section-icon">🥗</span>
+            <span class="section-title">Lunch</span>
+          </div>
+          <div class="section-note">Served from 11:00am – 3:00pm</div>
+          <hr class="section-line"/>
+
+          <!-- Item 1 -->
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Chicken Schnitzel Roll
+                <span class="tag tag-pop">⭐ POPULAR</span>
+                <span class="vocab-badge">
+                  🟡 What is "Schnitzel"?
+                  <span class="tooltip">"Schnitzel" = crumbed and pan-fried chicken breast. Australians LOVE schnitzel — it is on almost every pub and café menu!</span>
+                </span>
+              </div>
+              <div class="item-desc">
+                Crispy crumbed chicken,
+                <span class="vocab-badge">
+                  cos lettuce
+                  <span class="tooltip">"Cos lettuce" = a type of crispy lettuce. Also called "Romaine" in other countries.</span>
+                </span>,
+                tomato, avocado &amp;
+                <span class="vocab-badge">
+                  aioli
+                  <span class="tooltip">"Aioli" = a creamy garlic mayonnaise sauce. Originally from Spain but very common in Australian cafés!</span>
+                </span>
+                on a toasted
+                <span class="vocab-badge">
+                  bap roll
+                  <span class="tooltip">A "roll" or "bap" is a small round bread used for sandwiches. In Australia they often just say "roll".</span>
+                </span>
+              </div>
+            </div>
+            <div class="item-price">\$18.50</div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Beef &amp; Cheese Toastie
+                <span class="vocab-badge">
+                  🟡 What is a "Toastie"?
+                  <span class="tooltip">"Toastie" = toasted sandwich. Aussies call a grilled/toasted sandwich a "toastie". Americans call it a "grilled cheese". Very popular for lunch!</span>
+                </span>
+              </div>
+              <div class="item-desc">
+                Slow-roasted beef, melted
+                <span class="vocab-badge">
+                  gruyère
+                  <span class="tooltip">"Gruyère" is a type of Swiss cheese. Pronounced "groo-YAIR". A popular cheese for melting in toasties.</span>
+                </span>,
+                caramelised onion &amp; whole grain mustard on thick sourdough bread
+              </div>
+            </div>
+            <div class="item-price">\$17.00</div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Garden Salad Bowl
+                <span class="tag tag-veg">VEG</span>
+                <span class="tag tag-gf">GF</span>
+              </div>
+              <div class="item-desc">
+                Mixed leaves,
+                <span class="vocab-badge">
+                  cherry toms
+                  <span class="tooltip">"Cherry toms" = cherry tomatoes. Australians often shorten "tomatoes" to "toms" in casual speech!</span>
+                </span>,
+                cucumber, radish, pumpkin seeds &amp;
+                <span class="vocab-badge">
+                  balsamic glaze
+                  <span class="tooltip">"Balsamic glaze" = a sweet and tangy dark sauce made from vinegar. Drizzled on top of salads.</span>
+                </span>
+                <br>
+                Add grilled chicken +\$5 · Add avocado +\$3 · Add halloumi +\$4
+              </div>
+            </div>
+            <div class="item-price">\$16.00</div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Loaded Chips
+                <span class="vocab-badge">
+                  🟡 "Chips" vs "Crisps"
+                  <span class="tooltip">In Australia: "Chips" = hot fried potato chips (like French fries). "Crisps" = thin cold potato chips from a bag. Very important difference!</span>
+                </span>
+              </div>
+              <div class="item-desc">
+                Crispy potato chips topped with melted cheese, bacon bits, sour cream &amp; sweet chilli sauce
+              </div>
+            </div>
+            <div class="item-price">\$14.00</div>
+          </div>
+
+        </div><!-- end lunch -->
+
+        <!-- ─────────────────────────────────
+             COFFEE & HOT DRINKS
+        ───────────────────────────────── -->
+        <div class="menu-section">
+          <div class="section-header">
+            <span class="section-icon">☕</span>
+            <span class="section-title">Coffee &amp; Hot Drinks</span>
+          </div>
+          <div class="section-note">All coffees available with: full cream · skim · oat · almond · soy milk</div>
+          <hr class="section-line"/>
+
+          <div class="drinks-grid">
+
+            <div class="drink-item">
+              <div class="drink-name">
+                Flat White
+                <span class="tag tag-pop">⭐</span>
+                <span class="vocab-badge">
+                  🟡
+                  <span class="tooltip">Australia's MOST popular coffee! Strong espresso with velvety steamed milk. Less milky than a latte. If you don't know what to order — order this!</span>
+                </span>
+              </div>
+              <div class="drink-price">\$5.50</div>
+            </div>
+
+            <div class="drink-item">
+              <div class="drink-name">
+                Long Black
+                <span class="vocab-badge">
+                  🟡
+                  <span class="tooltip">A "Long Black" = hot water with a double espresso shot poured on top. Similar to an Americano. Strong and bold — no milk!</span>
+                </span>
+              </div>
+              <div class="drink-price">\$5.00</div>
+            </div>
+
+            <div class="drink-item">
+              <div class="drink-name">
+                Cappuccino
+                <span class="vocab-badge">
+                  🟡
+                  <span class="tooltip">Espresso + steamed milk + thick foam on top, dusted with chocolate powder. Very popular! Pronounced "cap-uh-CHEE-no".</span>
+                </span>
+              </div>
+              <div class="drink-price">\$5.50</div>
+            </div>
+
+            <div class="drink-item">
+              <div class="drink-name">
+                Latte
+                <span class="vocab-badge">
+                  🟡
+                  <span class="tooltip">Espresso + a lot of steamed milk + small amount of foam. Milkier and milder than a flat white or cappuccino. Pronounced "LAH-tay".</span>
+                </span>
+              </div>
+              <div class="drink-price">\$5.50</div>
+            </div>
+
+            <div class="drink-item">
+              <div class="drink-name">Short Black
+                <span class="vocab-badge">
+                  🟡
+                  <span class="tooltip">A "Short Black" = a single espresso shot. Very small and very strong! Also called "espresso" in other countries.</span>
+                </span>
+              </div>
+              <div class="drink-price">\$4.50</div>
+            </div>
+
+            <div class="drink-item">
+              <div class="drink-name">Piccolo
+                <span class="vocab-badge">
+                  🟡
+                  <span class="tooltip">A "Piccolo" = a small latte in a small glass. Espresso + a little steamed milk. Small but strong! Very popular in Australia.</span>
+                </span>
+              </div>
+              <div class="drink-price">\$4.80</div>
+            </div>
+
+            <div class="drink-item">
+              <div class="drink-name">Mocha</div>
+              <div class="drink-price">\$6.00</div>
+            </div>
+
+            <div class="drink-item">
+              <div class="drink-name">Hot Chocolate</div>
+              <div class="drink-price">\$5.50</div>
+            </div>
+
+            <div class="drink-item">
+              <div class="drink-name">Chai Latte
+                <span class="vocab-badge">
+                  🟡
+                  <span class="tooltip">A "Chai Latte" = spiced tea with steamed milk. Not coffee! Made with cinnamon, ginger, cardamom and black tea. Very popular in Aussie cafés!</span>
+                </span>
+              </div>
+              <div class="drink-price">\$5.80</div>
+            </div>
+
+            <div class="drink-item">
+              <div class="drink-name">Pot of Tea
+                <span class="vocab-badge">
+                  🟡
+                  <span class="tooltip">In Australia a "pot of tea" means a small teapot with your choice of tea bag. You pour it yourself. Very common to say "Can I get a pot of English Breakfast, please?"</span>
+                </span>
+              </div>
+              <div class="drink-price">\$5.00</div>
+            </div>
+
+          </div>
+
+          <div style="margin-top:14px; font-size:0.8rem; color:#999; font-style:italic;">
+            ✦ Add an extra shot of coffee +\$1.00 &nbsp;|&nbsp; Alt milk (oat/almond/soy) +\$0.80
+          </div>
+
+        </div><!-- end drinks -->
+
+        <!-- ─────────────────────────────────
+             COLD DRINKS
+        ───────────────────────────────── -->
+        <div class="menu-section">
+          <div class="section-header">
+            <span class="section-icon">🧃</span>
+            <span class="section-title">Cold Drinks &amp; Juices</span>
+          </div>
+          <hr class="section-line"/>
+
+          <div class="drinks-grid">
+            <div class="drink-item">
+              <div class="drink-name">Orange Juice
+                <span class="vocab-badge">
+                  🟡
+                  <span class="tooltip">Always ask: "Is that freshly squeezed or from a bottle?" Fresh juice costs more but tastes much better! Say: "Is the OJ fresh?"</span>
+                </span>
+              </div>
+              <div class="drink-price">\$6.50</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Iced Coffee
+                <span class="vocab-badge">
+                  🟡
+                  <span class="tooltip">Australian "Iced Coffee" is different! It often comes with ice cream and whipped cream — like a dessert drink. Very sweet and cold!</span>
+                </span>
+              </div>
+              <div class="drink-price">\$7.50</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Sparkling Water</div>
+              <div class="drink-price">\$4.00</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Still Water
+                <span class="vocab-badge">
+                  🟡
+                  <span class="tooltip">In Australia you can ask for "tap water" for FREE! Just say: "Could I get a glass of tap water, please?" — they must give it to you at no charge.</span>
+                </span>
+              </div>
+              <div class="drink-price">\$3.50</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Lemonade</div>
+              <div class="drink-price">\$4.50</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Smoothie of the Day</div>
+              <div class="drink-price">\$9.00</div>
+            </div>
+          </div>
+
+        </div><!-- end cold drinks -->
+
+        <!-- ─────────────────────────────────
+             SWEETS
+        ───────────────────────────────── -->
+        <div class="menu-section">
+          <div class="section-header">
+            <span class="section-icon">🍰</span>
+            <span class="section-title">Sweet Treats</span>
+          </div>
+          <hr class="section-line"/>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Lamington
+                <span class="tag tag-pop">🇦🇺 AUSSIE ICON</span>
+                <span class="vocab-badge">
+                  🟡 Must try!
+                  <span class="tooltip">A "Lamington" is Australia's most famous cake! Sponge cake dipped in chocolate sauce and rolled in coconut. Every Australian grows up eating these!</span>
+                </span>
+              </div>
+              <div class="item-desc">Classic Australian sponge cake dipped in chocolate &amp; rolled in desiccated coconut</div>
+            </div>
+            <div class="item-price">\$6.50</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Tim Tam Cheesecake
+                <span class="vocab-badge">
+                  🟡 What is "Tim Tam"?
+                  <span class="tooltip">Tim Tam = Australia's most beloved chocolate biscuit! Made by Arnott's. If someone offers you a Tim Tam — always say yes! You can also do the "Tim Tam Slam" (suck coffee through it)!</span>
+                </span>
+              </div>
+              <div class="item-desc">Creamy baked cheesecake with a Tim Tam biscuit base, chocolate ganache topping &amp; whipped cream</div>
+            </div>
+            <div class="item-price">\$10.00</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Vegemite Toast
+                <span class="tag tag-veg">VEG</span>
+                <span class="vocab-badge">
+                  🟡 Australian or not?
+                  <span class="tooltip">Vegemite is a dark brown, very salty spread made from yeast. Australians LOVE it but many foreigners don't like it at first. Try just a TINY bit on butter — don't spread it thick!</span>
+                </span>
+              </div>
+              <div class="item-desc">Toasted sourdough with butter &amp; Vegemite — a true Aussie classic!</div>
+            </div>
+            <div class="item-price">\$5.00</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">Banana Bread
+                <span class="tag tag-pop">⭐ POPULAR</span>
+              </div>
+              <div class="item-desc">
+                Warm toasted banana bread served with
+                <span class="vocab-badge">
+                  ricotta
+                  <span class="tooltip">"Ricotta" is a soft white Italian cheese with a mild flavour. Often served with banana bread in Aussie cafés as a healthier alternative to butter.</span>
+                </span>
+                &amp; a drizzle of honey
+              </div>
+            </div>
+            <div class="item-price">\$8.50</div>
+          </div>
+
+        </div><!-- end sweets -->
+
+        <!-- DAILY SPECIALS BOX -->
+        <div class="specials-box">
+          <h3>Today's Specials ✦</h3>
+          <p>Ask your waiter about today's specials or check our chalkboard! 🪄</p>
+          <div class="special-items">
+            <div class="special-item">
+              <div class="special-item-name">☀️ Brekkie Special</div>
+              <div class="special-item-price">Big Brekkie + Flat White – \$30.00</div>
+            </div>
+            <div class="special-item">
+              <div class="special-item-name">🌿 Lunch Deal</div>
+              <div class="special-item-price">Any roll + drink – \$22.00</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ALLERGEN NOTE -->
+        <div class="allergen-note">
+          <strong>⚠️ Allergen Information:</strong> Our kitchen handles nuts, gluten, dairy, eggs and seafood.
+          Please let your waiter know of any allergies or dietary requirements before ordering.
+          <strong>GF</strong> = Gluten Free available on request. <strong>VEG</strong> = Vegetarian.
+          <br><br>
+          <strong>💳 We accept:</strong> Visa, Mastercard, EFTPOS &amp; cash. Tap &amp; Go available.
+          Tipping is appreciated but never required! 🙏
+        </div>
+
+      </div><!-- end menu-body -->
+
+      <!-- MENU FOOTER -->
+      <div class="menu-footer">
+        <div class="hours">⏰ Open Hours: Mon–Fri 6:30am – 4:00pm &nbsp;|&nbsp; Sat–Sun 7:00am – 3:00pm</div>
+        <p>
+          WiFi Password: <strong style="color:#f0d9b5">cornercafe2024</strong>
+          &nbsp;|&nbsp; 📸 Tag us @thecornercafe_melb
+          <br>
+          Thank you for visiting — see you again soon! ☕🇦🇺
+        </p>
+      </div>
+
+    </div><!-- end menu-card -->
+
+    <!-- ══════════════════════════════════════
+         VOCAB GLOSSARY
+    ══════════════════════════════════════ -->
+    <div class="glossary-section">
+      <div class="glossary-title">📚 Key Aussie Café Words to Remember</div>
+      <div class="glossary-grid">
+        <div class="glossary-item">
+          <div class="glossary-word">Brekkie 🍳</div>
+          <div class="glossary-def">= Breakfast. "What do you want for brekkie?"</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">Flat White ☕</div>
+          <div class="glossary-def">Most popular Aussie coffee. Espresso + steamed milk.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">Long Black ☕</div>
+          <div class="glossary-def">Strong black coffee. Like an Americano.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">Avo 🥑</div>
+          <div class="glossary-def">= Avocado. "Can I add avo to that?"</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">Chips 🍟</div>
+          <div class="glossary-def">= Hot French fries. NOT the bag kind!</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">Toastie 🥪</div>
+          <div class="glossary-def">= Toasted sandwich. "A cheese toastie, please."</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">Tap water 💧</div>
+          <div class="glossary-def">FREE water from the tap. Always ask for it!</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">EFTPOS 💳</div>
+          <div class="glossary-def">= Electronic card payment machine. "Can I tap?"</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">Schnitzel 🍗</div>
+          <div class="glossary-def">Crumbed and fried meat. Very popular in Australia!</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">Lamington 🍰</div>
+          <div class="glossary-def">Iconic Aussie cake. Chocolate + coconut sponge.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">Vegemite 🍞</div>
+          <div class="glossary-def">Dark salty spread. Very Australian! Try a little first.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">Poached eggs 🥚</div>
+          <div class="glossary-def">Eggs cooked in hot water. Very common on brekkie menus!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STUDY ACTION BUTTONS -->
+    <div class="study-actions">
+      <a class="btn-action btn-primary" href="index.html">▶ I'm Ready – Play the Game!</a>
+      <button class="btn-action btn-secondary" onclick="window.print()">🖨️ Print This Menu</button>
+    </div>
+
+  </div><!-- end menu-wrapper -->
+
+</body>
+</html>

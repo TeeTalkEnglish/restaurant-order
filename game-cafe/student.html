@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student – Café: Order Brekkie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #f5efe6;
+      min-height: 100vh;
+    }
+
+    /* ── TOP NAV ── */
+    .top-nav {
+      background: linear-gradient(135deg, #8b1a1a, #c0392b);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .top-nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.85rem;
+      opacity: 0.9;
+      transition: opacity 0.2s;
+    }
+    .top-nav a:hover { opacity: 1; }
+    .top-nav span {
+      color: white;
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+    .role-pill {
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    /* ── STUDENT BANNER ── */
+    .student-banner {
+      background: #fff9e6;
+      border-bottom: 2px solid #f39c12;
+      padding: 12px 20px;
+      text-align: center;
+      font-size: 0.88rem;
+      color: #7d5a00;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+    .student-banner strong { color: #d35400; }
+
+    /* ── MENU WRAPPER ── */
+    .menu-wrapper {
+      max-width: 820px;
+      margin: 30px auto;
+      padding: 0 16px 60px;
+    }
+
+    /* ── MENU CARD ── */
+    .menu-card {
+      background: #fffdf8;
+      border-radius: 4px;
+      box-shadow:
+        0 0 0 1px #d4b896,
+        0 4px 30px rgba(0,0,0,0.12),
+        8px 8px 0 0 #e8d5b7;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── MENU HEADER ── */
+    .menu-header {
+      background: linear-gradient(180deg, #2c1810 0%, #3d2314 100%);
+      padding: 36px 30px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .menu-header::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1.5px solid rgba(212,184,150,0.4);
+      border-radius: 2px;
+      pointer-events: none;
+    }
+    .cafe-flag { font-size: 1.4rem; letter-spacing: 4px; margin-bottom: 8px; }
+    .cafe-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3rem;
+      color: #f0d9b5;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .cafe-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: #c4a882;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .cafe-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: #c4a882;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+    }
+    .cafe-divider::before,
+    .cafe-divider::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 1px;
+      background: #c4a882;
+    }
+    .cafe-info {
+      margin-top: 12px;
+      color: #a08060;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── MENU BODY ── */
+    .menu-body { padding: 0 28px 28px; }
+
+    /* ── SECTION ── */
+    .menu-section { margin-top: 32px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+    .section-icon { font-size: 1.3rem; }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: #2c1810;
+      font-weight: 700;
+    }
+    .section-line {
+      border: none;
+      border-top: 1.5px solid #d4b896;
+      margin-bottom: 20px;
+      margin-top: 6px;
+    }
+    .section-note {
+      font-size: 0.78rem;
+      color: #999;
+      font-style: italic;
+      margin-top: -14px;
+      margin-bottom: 16px;
+    }
+
+    /* ── MENU ITEM ── */
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+    .item-left { flex: 1; }
+    .item-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2c1810;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .item-desc {
+      font-size: 0.82rem;
+      color: #7a6652;
+      line-height: 1.6;
+    }
+    .item-price {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: #2c1810;
+      font-size: 1rem;
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+
+    /* ── TAGS (keep these — they're on real menus) ── */
+    .tag {
+      display: inline-block;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 10px;
+    }
+    .tag-veg  { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+    .tag-gf   { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+    .tag-pop  { background: #fce4ec; color: #c62828; border: 1px solid #f48fb1; }
+    .tag-new  { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
+
+    /* ── DRINKS GRID ── */
+    .drinks-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 24px;
+    }
+    .drink-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px dotted #d4b896;
+      padding-bottom: 6px;
+    }
+    .drink-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      color: #2c1810;
+    }
+    .drink-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #2c1810;
+      white-space: nowrap;
+      margin-left: 8px;
+    }
+
+    /* ── SPECIALS BOX ── */
+    .specials-box {
+      background: linear-gradient(135deg, #2c1810, #3d2314);
+      border-radius: 4px;
+      padding: 20px;
+      margin-top: 32px;
+      text-align: center;
+      color: #f0d9b5;
+      border: 1px solid #c4a882;
+    }
+    .specials-box h3 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+    .specials-box p {
+      font-size: 0.85rem;
+      color: #c4a882;
+      line-height: 1.6;
+    }
+    .special-items {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .special-item {
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px;
+      padding: 12px;
+      border: 1px solid rgba(212,184,150,0.3);
+    }
+    .special-item-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      color: #f0d9b5;
+      margin-bottom: 4px;
+    }
+    .special-item-price {
+      font-size: 0.8rem;
+      color: #f39c12;
+      font-weight: 700;
+    }
+
+    /* ── ASK WAITRESS TIP ── */
+    .ask-tip {
+      background: #fff9e6;
+      border: 1.5px dashed #f39c12;
+      border-radius: 4px;
+      padding: 14px 18px;
+      margin-top: 20px;
+      font-size: 0.82rem;
+      color: #7d5a00;
+      text-align: center;
+      line-height: 1.6;
+    }
+    .ask-tip strong { color: #d35400; }
+
+    /* ── ALLERGEN NOTE ── */
+    .allergen-note {
+      margin-top: 24px;
+      padding: 14px 18px;
+      background: #fdf8f0;
+      border: 1px solid #d4b896;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      color: #7a6652;
+      line-height: 1.6;
+    }
+    .allergen-note strong { color: #2c1810; }
+
+    /* ── MENU FOOTER ── */
+    .menu-footer {
+      background: #2c1810;
+      padding: 20px;
+      text-align: center;
+    }
+    .menu-footer p { color: #c4a882; font-size: 0.78rem; line-height: 1.8; }
+    .menu-footer .hours {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      color: #f0d9b5;
+      margin-bottom: 6px;
+    }
+
+    /* ── SCENE GUIDE (bottom of page) ── */
+    .guide-section {
+      margin-top: 30px;
+      background: linear-gradient(135deg, #8b1a1a, #c0392b);
+      border-radius: 16px;
+      padding: 24px;
+      color: white;
+    }
+    .guide-section h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .guide-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .guide-item {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.92);
+    }
+    .guide-item strong {
+      display: block;
+      color: #ffd6d6;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    /* ── PRINT ACTIONS ── */
+    .actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 30px;
+      padding: 13px 26px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+    }
+    .btn-red     { background: #c0392b; color: white; }
+    .btn-red:hover { background: #a93226; transform: translateY(-2px); }
+    .btn-outline { background: white; color: #c0392b; border: 2px solid #c0392b; }
+    .btn-outline:hover { background: #fff5f5; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 560px) {
+      .menu-body     { padding: 0 16px 20px; }
+      .cafe-name     { font-size: 2.2rem; }
+      .drinks-grid   { grid-template-columns: 1fr; }
+      .special-items { grid-template-columns: 1fr; }
+      .guide-grid    { grid-template-columns: 1fr; }
+      .menu-item     { flex-direction: column; gap: 4px; }
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      .top-nav, .student-banner, .guide-section,
+      .actions, .ask-tip { display: none !important; }
+      body { background: white; }
+      .menu-card { box-shadow: none; border: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="top-nav">
+    <a href="index.html">← Back</a>
+    <span>☕ The Corner Café – Menu</span>
+    <span class="role-pill">🧑 Student</span>
+  </nav>
+
+  <!-- STUDENT BANNER -->
+  <div class="student-banner">
+    🧑 <strong>You are the customer!</strong> Read the menu carefully.
+    If you don't understand something — <strong>ask the waitress in English!</strong> 🇦🇺
+  </div>
+
+  <div class="menu-wrapper">
+
+    <!-- ══════════════════════════════════════
+         REAL MENU (no tooltips!)
+    ══════════════════════════════════════ -->
+    <div class="menu-card">
+
+      <!-- HEADER -->
+      <div class="menu-header">
+        <div class="cafe-flag">🇦🇺 ☕ 🇦🇺</div>
+        <div class="cafe-name">The Corner Café</div>
+        <div class="cafe-tagline">Good food · Good coffee · Good vibes</div>
+        <div class="cafe-divider">Melbourne, Victoria</div>
+        <div class="cafe-info">📍 12 Collins Street, Melbourne VIC 3000 &nbsp;|&nbsp; ☎ (03) 9123 4567</div>
+      </div>
+
+      <!-- MENU BODY -->
+      <div class="menu-body">
+
+        <!-- ── ALL DAY BREKKIE ── -->
+        <div class="menu-section">
+          <div class="section-header">
+            <span class="section-icon">🍳</span>
+            <span class="section-title">All Day Brekkie</span>
+          </div>
+          <div class="section-note">Served all day until 3:00pm</div>
+          <hr class="section-line"/>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Smashed Avo Toast
+                <span class="tag tag-veg">VEG</span>
+                <span class="tag tag-pop">⭐ POPULAR</span>
+              </div>
+              <div class="item-desc">
+                Smashed avocado on toasted sourdough, two poached eggs,
+                cherry tomatoes, feta cheese, dukkah &amp; a squeeze of lemon
+              </div>
+            </div>
+            <div class="item-price">\$22.50</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Big Brekkie Plate
+                <span class="tag tag-pop">⭐ POPULAR</span>
+              </div>
+              <div class="item-desc">
+                Two eggs your way, bacon rashers, grilled tomato,
+                sautéed mushrooms, hash brown &amp; buttered toast
+              </div>
+            </div>
+            <div class="item-price">\$26.00</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">Eggs Benedict</div>
+              <div class="item-desc">
+                Two poached eggs on a toasted English muffin with your choice of:
+                smoked salmon · bacon · spinach &amp; hollandaise sauce
+              </div>
+            </div>
+            <div class="item-price">\$24.00</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Acai Bowl
+                <span class="tag tag-veg">VEG</span>
+                <span class="tag tag-new">NEW</span>
+              </div>
+              <div class="item-desc">
+                Blended açaí, banana &amp; almond milk topped with granola,
+                fresh strawberries, blueberries &amp; a drizzle of honey
+              </div>
+            </div>
+            <div class="item-price">\$19.00</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Banana Porridge
+                <span class="tag tag-veg">VEG</span>
+                <span class="tag tag-gf">GF option</span>
+              </div>
+              <div class="item-desc">
+                Creamy porridge with caramelised banana, brown sugar,
+                toasted almonds &amp; a side of warm honey
+              </div>
+            </div>
+            <div class="item-price">\$15.50</div>
+          </div>
+
+        </div>
+
+        <!-- ── LUNCH ── -->
+        <div class="menu-section">
+          <div class="section-header">
+            <span class="section-icon">🥗</span>
+            <span class="section-title">Lunch</span>
+          </div>
+          <div class="section-note">Served from 11:00am – 3:00pm</div>
+          <hr class="section-line"/>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Chicken Schnitzel Roll
+                <span class="tag tag-pop">⭐ POPULAR</span>
+              </div>
+              <div class="item-desc">
+                Crispy crumbed chicken, cos lettuce, tomato,
+                avocado &amp; aioli on a toasted roll
+              </div>
+            </div>
+            <div class="item-price">\$18.50</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">Beef &amp; Cheese Toastie</div>
+              <div class="item-desc">
+                Slow-roasted beef, melted gruyère, caramelised onion
+                &amp; whole grain mustard on thick sourdough
+              </div>
+            </div>
+            <div class="item-price">\$17.00</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Garden Salad Bowl
+                <span class="tag tag-veg">VEG</span>
+                <span class="tag tag-gf">GF</span>
+              </div>
+              <div class="item-desc">
+                Mixed leaves, cherry tomatoes, cucumber, radish,
+                pumpkin seeds &amp; balsamic glaze
+                <br>
+                Add grilled chicken +\$5 · Add avocado +\$3 · Add halloumi +\$4
+              </div>
+            </div>
+            <div class="item-price">\$16.00</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">Loaded Chips</div>
+              <div class="item-desc">
+                Crispy potato chips topped with melted cheese, bacon bits,
+                sour cream &amp; sweet chilli sauce
+              </div>
+            </div>
+            <div class="item-price">\$14.00</div>
+          </div>
+
+        </div>
+
+        <!-- ── COFFEE & HOT DRINKS ── -->
+        <div class="menu-section">
+          <div class="section-header">
+            <span class="section-icon">☕</span>
+            <span class="section-title">Coffee &amp; Hot Drinks</span>
+          </div>
+          <div class="section-note">All coffees available with: full cream · skim · oat · almond · soy milk</div>
+          <hr class="section-line"/>
+
+          <div class="drinks-grid">
+            <div class="drink-item">
+              <div class="drink-name">Flat White <span class="tag tag-pop">⭐</span></div>
+              <div class="drink-price">\$5.50</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Long Black</div>
+              <div class="drink-price">\$5.00</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Cappuccino</div>
+              <div class="drink-price">\$5.50</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Latte</div>
+              <div class="drink-price">\$5.50</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Short Black</div>
+              <div class="drink-price">\$4.50</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Piccolo</div>
+              <div class="drink-price">\$4.80</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Mocha</div>
+              <div class="drink-price">\$6.00</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Hot Chocolate</div>
+              <div class="drink-price">\$5.50</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Chai Latte</div>
+              <div class="drink-price">\$5.80</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Pot of Tea</div>
+              <div class="drink-price">\$5.00</div>
+            </div>
+          </div>
+
+          <div style="margin-top:14px; font-size:0.8rem; color:#999; font-style:italic;">
+            ✦ Add an extra shot of coffee +\$1.00 &nbsp;|&nbsp; Alt milk (oat/almond/soy) +\$0.80
+          </div>
+        </div>
+
+        <!-- ── COLD DRINKS ── -->
+        <div class="menu-section">
+          <div class="section-header">
+            <span class="section-icon">🧃</span>
+            <span class="section-title">Cold Drinks &amp; Juices</span>
+          </div>
+          <hr class="section-line"/>
+
+          <div class="drinks-grid">
+            <div class="drink-item">
+              <div class="drink-name">Orange Juice</div>
+              <div class="drink-price">\$6.50</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Iced Coffee</div>
+              <div class="drink-price">\$7.50</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Sparkling Water</div>
+              <div class="drink-price">\$4.00</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Still Water</div>
+              <div class="drink-price">\$3.50</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Lemonade</div>
+              <div class="drink-price">\$4.50</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Smoothie of the Day</div>
+              <div class="drink-price">\$9.00</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── SWEET TREATS ── -->
+        <div class="menu-section">
+          <div class="section-header">
+            <span class="section-icon">🍰</span>
+            <span class="section-title">Sweet Treats</span>
+          </div>
+          <hr class="section-line"/>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Lamington
+                <span class="tag tag-pop">🇦🇺 AUSSIE ICON</span>
+              </div>
+              <div class="item-desc">
+                Classic Australian sponge cake dipped in chocolate &amp; rolled in desiccated coconut
+              </div>
+            </div>
+            <div class="item-price">\$6.50</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">Tim Tam Cheesecake</div>
+              <div class="item-desc">
+                Creamy baked cheesecake with a Tim Tam biscuit base,
+                chocolate ganache topping &amp; whipped cream
+              </div>
+            </div>
+            <div class="item-price">\$10.00</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Vegemite Toast
+                <span class="tag tag-veg">VEG</span>
+              </div>
+              <div class="item-desc">
+                Toasted sourdough with butter &amp; Vegemite — a true Aussie classic!
+              </div>
+            </div>
+            <div class="item-price">\$5.00</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Banana Bread
+                <span class="tag tag-pop">⭐ POPULAR</span>
+              </div>
+              <div class="item-desc">
+                Warm toasted banana bread served with ricotta &amp; a drizzle of honey
+              </div>
+            </div>
+            <div class="item-price">\$8.50</div>
+          </div>
+        </div>
+
+        <!-- DAILY SPECIALS -->
+        <div class="specials-box">
+          <h3>Today's Specials ✦</h3>
+          <p>Ask your waitress about today's specials or check our chalkboard! 🪄</p>
+          <div class="special-items">
+            <div class="special-item">
+              <div class="special-item-name">☀️ Brekkie Special</div>
+              <div class="special-item-price">Big Brekkie + Flat White – \$30.00</div>
+            </div>
+            <div class="special-item">
+              <div class="special-item-name">🌿 Lunch Deal</div>
+              <div class="special-item-price">Any roll + drink – \$22.00</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ASK WAITRESS TIP -->
+        <div class="ask-tip">
+          🤔 <strong>Don't understand something on the menu?</strong>
+          <br>Ask the waitress! Try: <em>"Excuse me, what is a [word]?"</em>
+          or <em>"Sorry, could you explain what [dish] is?"</em>
+        </div>
+
+        <!-- ALLERGEN NOTE -->
+        <div class="allergen-note">
+          <strong>⚠️ Allergen Information:</strong> Our kitchen handles nuts, gluten, dairy, eggs and seafood.
+          Please let your waitress know of any allergies or dietary requirements before ordering.
+          <strong>GF</strong> = Gluten Free available on request. <strong>VEG</strong> = Vegetarian.
+          <br><br>
+          <strong>💳 We accept:</strong> Visa, Mastercard, EFTPOS &amp; cash. Tap &amp; Go available.
+          Tipping is appreciated but never required! 🙏
+        </div>
+
+      </div><!-- end menu-body -->
+
+      <!-- MENU FOOTER -->
+      <div class="menu-footer">
+        <div class="hours">⏰ Open Hours: Mon–Fri 6:30am – 4:00pm &nbsp;|&nbsp; Sat–Sun 7:00am – 3:00pm</div>
+        <p>
+          WiFi Password: <strong style="color:#f0d9b5">cornercafe2024</strong>
+          &nbsp;|&nbsp; 📸 Tag us @thecornercafe_melb
+          <br>Thank you for visiting — see you again soon! ☕🇦🇺
+        </p>
+      </div>
+
+    </div><!-- end menu-card -->
+
+    <!-- ══════════════════════════════════════
+         QUICK SCENE GUIDE
+    ══════════════════════════════════════ -->
+    <div class="guide-section">
+      <h3>🎯 Your Mission Today</h3>
+      <div class="guide-grid">
+        <div class="guide-item">
+          <strong>☀️ Scene 1 – Welcome</strong>
+          Greet the waitress. Tell her you're dining alone.
+        </div>
+        <div class="guide-item">
+          <strong>☕ Scene 2 – Coffee</strong>
+          Order a coffee. Handle it if a milk type is unavailable.
+        </div>
+        <div class="guide-item">
+          <strong>🍳 Scene 3 – Food Order</strong>
+          Order breakfast. Handle a sold out item!
+        </div>
+        <div class="guide-item">
+          <strong>⚠️ Scene 4 – Allergies</strong>
+          Answer allergy questions. Understand "surcharge".
+        </div>
+        <div class="guide-item">
+          <strong>🍽️ Scene 5 – Food Arrives</strong>
+          Thank the waitress. Correct a wrong order politely!
+        </div>
+        <div class="guide-item">
+          <strong>💳 Scene 6 – Pay the Bill</strong>
+          Ask for the bill. Handle a broken EFTPOS machine!
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="actions">
+      <button class="btn-action btn-outline" onclick="window.print()">🖨️ Print Menu</button>
+      <a class="btn-action btn-outline" href="index.html">🏠 Back to Home</a>
+    </div>
+
+  </div><!-- end menu-wrapper -->
+
+</body>
+</html>

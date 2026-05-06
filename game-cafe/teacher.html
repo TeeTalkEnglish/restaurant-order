@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Teacher Notes – The Corner Café</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #f0f4f8;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: linear-gradient(135deg, #1a3a5c, #2471a3);
+      color: white;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+    .header-left h1 {
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+    .header-left p {
+      font-size: 0.78rem;
+      opacity: 0.8;
+      margin-top: 2px;
+    }
+    .header-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .header-badge {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .header-badge.teacher { background: #e74c3c; border-color: #e74c3c; }
+
+    /* ── TOP BANNER ── */
+    .top-banner {
+      background: #fff3cd;
+      border-bottom: 2px solid #f39c12;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: #7d5a00;
+      font-weight: 600;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .main-wrapper {
+      max-width: 1000px;
+      margin: 28px auto;
+      padding: 0 16px 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      overflow: hidden;
+    }
+    .card-header {
+      padding: 16px 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-header h2 {
+      font-size: 1rem;
+      font-weight: 800;
+    }
+    .card-header p {
+      font-size: 0.8rem;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
+    .card-header.blue   { background: linear-gradient(135deg, #1a3a5c, #2471a3); color: white; }
+    .card-header.green  { background: linear-gradient(135deg, #1a5c2a, #27ae60); color: white; }
+    .card-header.orange { background: linear-gradient(135deg, #7d3c00, #e67e22); color: white; }
+    .card-header.red    { background: linear-gradient(135deg, #7b241c, #c0392b); color: white; }
+    .card-header.purple { background: linear-gradient(135deg, #4a1580, #8e44ad); color: white; }
+    .card-header.dark   { background: linear-gradient(135deg, #1c2833, #2c3e50); color: white; }
+    .card-icon { font-size: 1.5rem; }
+    .card-body { padding: 22px; }
+
+    /* ── CHARACTER PROFILE ── */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .profile-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f39c12, #e67e22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      flex-shrink: 0;
+      border: 3px solid #f0d9b5;
+    }
+    .profile-info h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #222;
+      margin-bottom: 4px;
+    }
+    .profile-tag {
+      display: inline-block;
+      background: #e8f4fd;
+      color: #1a5276;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+    .profile-desc {
+      font-size: 0.85rem;
+      color: #555;
+      line-height: 1.6;
+      margin-top: 8px;
+    }
+
+    /* ── SCENE STEPS ── */
+    .scene-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .scene-item {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 0 16px;
+      position: relative;
+    }
+    .scene-item:not(:last-child) .scene-line {
+      position: absolute;
+      left: 17px;
+      top: 44px;
+      bottom: 0;
+      width: 2px;
+      background: #e0e8f0;
+    }
+    .scene-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+      margin-top: 2px;
+      z-index: 1;
+    }
+    .dot-blue   { background: #2471a3; }
+    .dot-green  { background: #27ae60; }
+    .dot-orange { background: #e67e22; }
+    .dot-red    { background: #c0392b; }
+    .dot-purple { background: #8e44ad; }
+    .dot-dark   { background: #2c3e50; }
+
+    .scene-content {
+      padding-bottom: 28px;
+    }
+    .scene-title {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: #222;
+      margin-bottom: 6px;
+    }
+
+    /* ── SPEECH BUBBLE ── */
+    .speech {
+      background: #eaf4fb;
+      border-left: 4px solid #2471a3;
+      border-radius: 0 10px 10px 0;
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      color: #1a3a5c;
+      line-height: 1.6;
+      margin-bottom: 10px;
+      font-style: italic;
+      position: relative;
+    }
+    .speech::before {
+      content: '👩 Say:';
+      display: block;
+      font-style: normal;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #2471a3;
+      margin-bottom: 4px;
+    }
+    .speech.challenge {
+      background: #fef9e7;
+      border-left-color: #f39c12;
+      color: #7d5a00;
+    }
+    .speech.challenge::before {
+      content: '😈 Challenge:';
+      color: #d35400;
+    }
+    .speech.follow-up {
+      background: #f4ecf7;
+      border-left-color: #8e44ad;
+      color: #4a1580;
+    }
+    .speech.follow-up::before {
+      content: '💬 Follow-up:';
+      color: #8e44ad;
+    }
+
+    /* ── LOOK FOR BOX ── */
+    .look-for {
+      background: #eafaf1;
+      border: 1.5px solid #27ae60;
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-top: 8px;
+    }
+    .look-for-title {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #1e8449;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .look-for ul {
+      list-style: none;
+      padding: 0;
+    }
+    .look-for ul li {
+      font-size: 0.82rem;
+      color: #1a5e35;
+      padding: 3px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .look-for ul li::before { content: '✅'; font-size: 0.75rem; }
+
+    /* ── IF STUDENT STRUGGLES ── */
+    .help-box {
+      background: #fdf2f8;
+      border: 1.5px solid #c39bd3;
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-top: 8px;
+    }
+    .help-box-title {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #7d3c98;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .help-box p {
+      font-size: 0.82rem;
+      color: #6c3483;
+      line-height: 1.5;
+    }
+
+    /* ── CHALLENGE SCENARIOS ── */
+    .challenge-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .challenge-card {
+      background: #fef9e7;
+      border: 2px solid #f39c12;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .challenge-card h4 {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #d35400;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .challenge-card p {
+      font-size: 0.82rem;
+      color: #7d5a00;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    .challenge-card .say {
+      font-size: 0.82rem;
+      font-style: italic;
+      color: #1a3a5c;
+      background: white;
+      border-radius: 8px;
+      padding: 8px 10px;
+      border: 1px solid #e0c9a0;
+    }
+    .challenge-card .say::before {
+      content: '👩 ';
+    }
+
+    /* ── ASSESSMENT TABLE ── */
+    .assess-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .assess-table thead th {
+      background: #1a3a5c;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .assess-table tbody tr:nth-child(even) { background: #f4f8fc; }
+    .assess-table tbody tr:hover { background: #e8f4fd; }
+    .assess-table tbody td {
+      padding: 10px 14px;
+      color: #333;
+      border-bottom: 1px solid #e0e8f0;
+      vertical-align: top;
+    }
+    .assess-table tbody td:first-child { font-weight: 700; }
+    .star-rating { color: #f39c12; letter-spacing: 2px; }
+
+    /* ── VOCAB CHEAT SHEET ── */
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+    }
+    .vocab-item {
+      background: #f4f8fc;
+      border-radius: 8px;
+      padding: 10px 14px;
+      border-left: 3px solid #2471a3;
+    }
+    .vocab-word { font-weight: 800; color: #1a3a5c; font-size: 0.88rem; }
+    .vocab-meaning { font-size: 0.78rem; color: #666; margin-top: 3px; line-height: 1.4; }
+
+    /* ── TIPS BOX ── */
+    .tips-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .tip-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 12px 16px;
+    }
+    .tip-emoji { font-size: 1.3rem; flex-shrink: 0; }
+    .tip-text { font-size: 0.85rem; color: #444; line-height: 1.5; }
+    .tip-text strong { color: #1a3a5c; }
+
+    /* ── PRINT BUTTON ── */
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 30px;
+      padding: 12px 24px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+    }
+    .btn-blue { background: #2471a3; color: white; }
+    .btn-blue:hover { background: #1a5276; }
+    .btn-outline { background: white; color: #2471a3; border: 2px solid #2471a3; }
+    .btn-outline:hover { background: #eaf4fb; }
+
+    /* ── CHECKLIST ── */
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .check-item:hover { background: #eaf4fb; }
+    .check-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #27ae60;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .check-item label {
+      font-size: 0.85rem;
+      color: #333;
+      cursor: pointer;
+      line-height: 1.4;
+    }
+    .check-item.checked { background: #eafaf1; }
+    .check-item.checked label { color: #1e8449; text-decoration: line-through; }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      border: none;
+      border-top: 2px dashed #e0e8f0;
+      margin: 4px 0 16px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .challenge-grid { grid-template-columns: 1fr; }
+      .profile-grid   { grid-template-columns: 1fr; text-align: center; }
+      .profile-avatar { margin: 0 auto; }
+      .vocab-grid     { grid-template-columns: 1fr 1fr; }
+      .header         { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      .header, .actions, .top-banner { display: none !important; }
+      body { background: white; }
+      .card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+    }
+    /* ════════════════════════════
+   VISUAL GRID
+════════════════════════════ */
+.visual-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+/* ════════════════════════════
+   VISUAL CARD
+════════════════════════════ */
+.visual-card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  border: 2px solid #e8edf2;
+  display: flex;
+  flex-direction: column;
+}
+.visual-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.14);
+  border-color: #27ae60;
+}
+
+/* ── IMAGE ── */
+.visual-img-wrap {
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  background: #f0ece6;
+  flex-shrink: 0;
+}
+.visual-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+.visual-card:hover .visual-img-wrap img {
+  transform: scale(1.08);
+}
+
+/* ── INFO ── */
+.visual-info {
+  padding: 10px 12px 6px;
+  flex: 1;
+}
+.visual-name {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #1c2833;
+  margin-bottom: 3px;
+  line-height: 1.3;
+}
+.visual-price {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #27ae60;
+  margin-bottom: 6px;
+}
+.visual-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: 20px;
+}
+
+/* ── HINT BAR ── */
+.visual-hint {
+  background: #27ae60;
+  color: white;
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 6px 8px;
+  letter-spacing: 0.3px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+.visual-card:hover .visual-hint {
+  opacity: 1;
+}
+
+/* ════════════════════════════
+   CATEGORY LABEL
+════════════════════════════ */
+.visual-category-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin: 18px 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.visual-category-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e0e8f0;
+}
+
+/* ════════════════════════════
+   DISH MODAL OVERLAY
+════════════════════════════ */
+.dish-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.dish-modal.active {
+  display: flex;
+  animation: modalFadeIn 0.25s ease;
+}
+
+/* ── MODAL INNER ── */
+.dish-modal-inner {
+  background: white;
+  border-radius: 20px;
+  max-width: 640px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+  animation: modalSlideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* ── CLOSE BUTTON ── */
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(0,0,0,0.55);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 8px 18px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s;
+  backdrop-filter: blur(4px);
+}
+.modal-close:hover { background: rgba(0,0,0,0.8); }
+
+/* ── MODAL IMAGE ── */
+.modal-img-wrap {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  background: #f0ece6;
+  flex-shrink: 0;
+}
+.modal-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── MODAL BODY ── */
+.modal-info {
+  padding: 22px 24px 26px;
+}
+.modal-name {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #1c2833;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+.modal-price {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #27ae60;
+  margin-bottom: 12px;
+}
+.modal-desc {
+  font-size: 0.88rem;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1.5px solid #f0f0f0;
+}
+.modal-tip {
+  background: #e8f8f0;
+  border: 1.5px solid #a9dfbf;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 0.85rem;
+  color: #1a5e35;
+  line-height: 1.6;
+}
+.modal-tip strong { color: #1a5e35; }
+.modal-tip em {
+  font-style: italic;
+  display: block;
+  margin-top: 4px;
+  color: #1e8449;
+  font-size: 0.9rem;
+}
+
+/* ════════════════════════════
+   MODAL ANIMATIONS
+════════════════════════════ */
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes modalSlideUp {
+  from { opacity: 0; transform: translateY(40px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0)   scale(1);    }
+}
+
+/* ════════════════════════════
+   INFO BANNER (inside card body)
+════════════════════════════ */
+.visual-how-to {
+  background: #e8f8f0;
+  border: 1.5px solid #a9dfbf;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 0.84rem;
+  color: #1a5e35;
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.visual-how-to-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+/* ════════════════════════════
+   RESPONSIVE
+════════════════════════════ */
+@media (max-width: 600px) {
+  .visual-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .visual-img-wrap { height: 100px; }
+  .modal-img-wrap  { height: 220px; }
+  .modal-name      { font-size: 1.2rem; }
+  .modal-info      { padding: 16px 18px 20px; }
+}
+
+@media (max-width: 380px) {
+  .visual-grid { grid-template-columns: 1fr 1fr; }
+}
+/* ════════════════════════════
+   HEADER RIGHT SECTION
+════════════════════════════ */
+.header {
+  /* update existing .header to use space-between */
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+/* ════════════════════════════
+   HEADER BUTTONS
+════════════════════════════ */
+.header-btns {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.header-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: all 0.2s;
+  white-space: nowrap;
+  border: 2px solid transparent;
+}
+
+.btn-menu {
+  background: #f39c12;
+  color: white;
+  border-color: #f39c12;
+}
+.btn-menu:hover {
+  background: #d68910;
+  border-color: #d68910;
+  transform: translateY(-2px);
+}
+
+.btn-student {
+  background: #c0392b;
+  color: white;
+  border-color: #c0392b;
+}
+.btn-student:hover {
+  background: #a93226;
+  border-color: #a93226;
+  transform: translateY(-2px);
+}
+
+.btn-home {
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border-color: rgba(255,255,255,0.35);
+}
+.btn-home:hover {
+  background: rgba(255,255,255,0.25);
+  transform: translateY(-2px);
+}
+
+/* ════════════════════════════
+   RESPONSIVE HEADER
+════════════════════════════ */
+@media (max-width: 700px) {
+  .header           { flex-direction: column; align-items: flex-start; }
+  .header-right     { align-items: flex-start; width: 100%; }
+  .header-btns      { justify-content: flex-start; }
+  .header-badges    { flex-wrap: wrap; }
+}
+  </style>
+</head>
+<body>
+
+ <!-- HEADER -->
+<header class="header">
+  <div class="header-left">
+    <h1>☕ The Corner Café – Teacher Notes</h1>
+    <p>Café: Order Brekkie · Role-play Guide for the Teacher/Waitress</p>
+  </div>
+  <div class="header-right">
+    <div class="header-badges">
+      <span class="header-badge teacher">👩‍🏫 TEACHER VIEW</span>
+      <span class="header-badge">🎭 Role-Play</span>
+      <span class="header-badge">🇦🇺 Aussie English</span>
+    </div>
+    <div class="header-btns">
+      <a class="header-btn btn-menu" href="menu.html" target="_blank">
+        📖 Full Menu
+      </a>
+      <a class="header-btn btn-student" href="student.html" target="_blank">
+        🧑 Student Page
+      </a>
+      <a class="header-btn btn-home" href="index.html">
+        🏠 Home
+      </a>
+    </div>
+  </div>
+</header>
+  <!-- TOP BANNER -->
+  <div class="top-banner">
+    ⚠️ <strong>Teacher only!</strong> Do NOT share this page with your student. The student uses the <strong>Menu Page</strong> on their device.
+  </div>
+
+  <div class="main-wrapper">
+
+    <!-- ══════════════════════════════════
+         HOW TO RUN THIS LESSON
+    ══════════════════════════════════ -->
+    <div class="card">
+      <div class="card-header blue">
+        <span class="card-icon">📋</span>
+        <div>
+          <h2>How to Run This Lesson</h2>
+          <p>Setup instructions before you begin</p>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="tips-list">
+          <div class="tip-row">
+            <div class="tip-emoji">📱</div>
+            <div class="tip-text">
+              <strong>Student device:</strong> Open <code>game-cafe/menu.html</code> — the student reads the menu as a real customer would.
+            </div>
+          </div>
+          <div class="tip-row">
+            <div class="tip-emoji">👩‍💻</div>
+            <div class="tip-text">
+              <strong>Teacher device:</strong> Keep this page open. Follow the script scene by scene. Use the challenges when the student is doing well.
+            </div>
+          </div>
+          <div class="tip-row">
+            <div class="tip-emoji">🎭</div>
+            <div class="tip-text">
+              <strong>Stay in character!</strong> Speak naturally as an Aussie waitress. Use real Aussie expressions. Don't correct the student mid-sentence — wait until after each scene.
+            </div>
+          </div>
+          <div class="tip-row">
+            <div class="tip-emoji">😈</div>
+            <div class="tip-text">
+              <strong>Use the challenges!</strong> The more challenges you throw at the student, the better they'll be prepared for real life. Start easy, then get harder.
+            </div>
+          </div>
+          <div class="tip-row">
+            <div class="tip-emoji">⏱️</div>
+            <div class="tip-text">
+              <strong>Timing:</strong> This role-play should take <strong>20–30 minutes</strong>. After each scene, pause briefly to give quick feedback before moving on.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         YOUR CHARACTER
+    ══════════════════════════════════ -->
+    <div class="card">
+      <div class="card-header green">
+        <span class="card-icon">🎭</span>
+        <div>
+          <h2>Your Character – Sarah</h2>
+          <p>The Corner Café, Melbourne — Monday Morning</p>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="profile-grid">
+          <div class="profile-avatar">👩</div>
+          <div class="profile-info">
+            <h3>Sarah Thompson</h3>
+            <span class="profile-tag">👩 Waitress</span>
+            <span class="profile-tag">☕ The Corner Café</span>
+            <span class="profile-tag">🇦🇺 Melbourne Local</span>
+            <span class="profile-tag">⏰ Monday 7:30am</span>
+            <div class="profile-desc">
+              You are Sarah, a friendly and experienced waitress at The Corner Café in Melbourne.
+              You have worked here for 3 years. You are upbeat and chatty in the morning.
+              You speak with casual Aussie expressions — say <em>"yeah"</em>, <em>"no worries"</em>,
+              <em>"you right?"</em>, <em>"heaps good"</em>, <em>"arvo"</em> naturally.
+              <br><br>
+              The café is <strong>busy this morning</strong>. You are professional but warm.
+              You genuinely want to help the customer have a great experience.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         SCENE BY SCENE SCRIPT
+    ══════════════════════════════════ -->
+    <div class="card">
+      <div class="card-header orange">
+        <span class="card-icon">🎬</span>
+        <div>
+          <h2>Scene-by-Scene Script</h2>
+          <p>Follow this order. Add challenges when ready!</p>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="scene-list">
+
+          <!-- SCENE 1 -->
+          <div class="scene-item">
+            <div class="scene-line"></div>
+            <div class="scene-dot dot-blue">1</div>
+            <div class="scene-content">
+              <div class="scene-title">☀️ Scene 1 — Welcome & Seating</div>
+              <div class="speech">
+                "Good morning! Welcome to The Corner Café. Table for one today, yeah? 
+                Grab a seat anywhere you like — I'll be right with ya!"
+              </div>
+              <div class="speech challenge">
+                "Oh, just so you know — we're pretty busy this morning, so it might take 
+                a few minutes. That all right with you?"
+              </div>
+              <div class="look-for">
+                <div class="look-for-title">✅ What the student should do</div>
+                <ul>
+                  <li>Greet you back politely ("Good morning!")</li>
+                  <li>Say yes with please ("Yes please, just me")</li>
+                  <li>Respond to the busy café notice naturally</li>
+                  <li>NOT just say "yes" or "okay" with no other words</li>
+                </ul>
+              </div>
+              <div class="help-box">
+                <div class="help-box-title">🆘 If student struggles</div>
+                <p>Slow down and repeat. Give a hint: <em>"Are you dining alone today?"</em> — 
+                a simpler version to help them respond.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SCENE 2 -->
+          <div class="scene-item">
+            <div class="scene-line"></div>
+            <div class="scene-dot dot-green">2</div>
+            <div class="scene-content">
+              <div class="scene-title">☕ Scene 2 — Coffee Order</div>
+              <div class="speech">
+                "Great! Can I get you started with a coffee or something to drink while 
+                you have a look at the menu?"
+              </div>
+              <div class="speech challenge">
+                "Just so you know, we've actually just run out of oat milk this morning. 
+                We still have full cream, skim, almond, and soy. Does that work for you?"
+              </div>
+              <div class="speech follow-up">
+                "Would you like that as a large or regular size?"
+              </div>
+              <div class="speech follow-up">
+                "Have you tried our piccolo? It's really popular — strong but small!"
+              </div>
+              <div class="look-for">
+                <div class="look-for-title">✅ What the student should do</div>
+                <ul>
+                  <li>Use "I'll have a..." or "Could I get a..."</li>
+                  <li>Name a specific coffee from the menu</li>
+                  <li>Specify milk type if asked</li>
+                  <li>Respond to the "out of oat milk" challenge gracefully</li>
+                  <li>Always say "please" at the end</li>
+                </ul>
+              </div>
+              <div class="help-box">
+                <div class="help-box-title">🆘 If student struggles</div>
+                <p>Point to your pretend notepad and say: <em>"We've got flat white, latte, 
+                cappuccino, long black — what takes your fancy?"</em></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SCENE 3 -->
+          <div class="scene-item">
+            <div class="scene-line"></div>
+            <div class="scene-dot dot-orange">3</div>
+            <div class="scene-content">
+              <div class="scene-title">🍳 Scene 3 — Taking the Food Order</div>
+              <div class="speech">
+                "Here's your coffee! Are you ready to order some brekkie, 
+                or do you need a few more minutes?"
+              </div>
+              <div class="speech challenge">
+                "Oh, I'm really sorry — the Smashed Avo Toast is actually sold out today. 
+                It's super popular on Mondays! Can I suggest something else? 
+                The Big Brekkie Plate is really good, or we also have Eggs Benedict."
+              </div>
+              <div class="speech challenge">
+                "How would you like your eggs? We can do scrambled, fried, or poached."
+              </div>
+              <div class="speech follow-up">
+                "Would you like white toast or sourdough with that?"
+              </div>
+              <div class="speech follow-up">
+                "Is that for here or takeaway?"
+              </div>
+              <div class="look-for">
+                <div class="look-for-title">✅ What the student should do</div>
+                <ul>
+                  <li>Order a specific dish from the menu</li>
+                  <li>Handle the "sold out" situation politely — ask for something else</li>
+                  <li>Specify egg preference when asked</li>
+                  <li>Ask "how does that come?" or similar to understand the dish</li>
+                  <li>Respond to "for here or takeaway?" correctly</li>
+                </ul>
+              </div>
+              <div class="help-box">
+                <div class="help-box-title">🆘 If student struggles with "sold out"</div>
+                <p>Give them time. If totally stuck, help: <em>"Would you like to hear 
+                what else we have on today?"</em></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SCENE 4 -->
+          <div class="scene-item">
+            <div class="scene-line"></div>
+            <div class="scene-dot dot-red">4</div>
+            <div class="scene-content">
+              <div class="scene-title">⚠️ Scene 4 — Dietary & Allergy Check</div>
+              <div class="speech">
+                "Just before I put that through — do you have any allergies or 
+                dietary requirements I should know about?"
+              </div>
+              <div class="speech challenge">
+                "Oh, just so you know — that dish does contain nuts in the dukkah. 
+                Is that okay for you, or would you prefer it without?"
+              </div>
+              <div class="speech challenge">
+                "Are you gluten free at all? We can do the toast on GF bread 
+                for a small surcharge — just \$2 extra."
+              </div>
+              <div class="look-for">
+                <div class="look-for-title">✅ What the student should do</div>
+                <ul>
+                  <li>Clearly say whether they have allergies or not</li>
+                  <li>Understand what "dietary requirements" means</li>
+                  <li>Handle the nuts/allergy scenario — either accept or ask to remove</li>
+                  <li>Respond to "surcharge" — this means extra cost</li>
+                  <li>Use polite language: "That's fine", "Could you please leave that out?"</li>
+                </ul>
+              </div>
+              <div class="help-box">
+                <div class="help-box-title">🆘 If student doesn't know "surcharge"</div>
+                <p>Stay in character and add: <em>"That just means it costs a little bit more — 
+                \$2 extra for the GF bread."</em></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SCENE 5 -->
+          <div class="scene-item">
+            <div class="scene-line"></div>
+            <div class="scene-dot dot-purple">5</div>
+            <div class="scene-content">
+              <div class="scene-title">🍽️ Scene 5 — Serving the Food & Check-in</div>
+              <div class="speech">
+                "Here we go! Big Brekkie for you. Enjoy! 
+                Can I grab you anything else — maybe some
+                tomato sauce or extra toast?"
+              </div>
+              <div class="speech challenge">
+                "Oh sorry, quick check — I think I might have given you the wrong order. 
+                Did you order the scrambled eggs? Or was it poached?"
+              </div>
+              <div class="speech challenge">
+                "How's everything tasting for you? Is the coffee okay? 
+                Not too strong or anything?"
+              </div>
+              <div class="look-for">
+                <div class="look-for-title">✅ What the student should do</div>
+                <ul>
+                  <li>Thank the waitress politely when food arrives</li>
+                  <li>Politely correct a wrong order: "Actually, I ordered poached eggs."</li>
+                  <li>Respond to food check-in: "It's delicious, thank you!"</li>
+                  <li>Ask for extra items if needed: "Could I get some tomato sauce, please?"</li>
+                </ul>
+              </div>
+              <div class="help-box">
+                <div class="help-box-title">🆘 If student accepts wrong order</div>
+                <p>This is a teachable moment! After the scene, explain: 
+                <em>"In Australia it's totally okay to politely correct the waiter. 
+                You can say 'Sorry, I actually ordered poached eggs.'"</em></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SCENE 6 -->
+          <div class="scene-item">
+            <div class="scene-dot dot-dark">6</div>
+            <div class="scene-content">
+              <div class="scene-title">💳 Scene 6 — Paying the Bill</div>
+              <div class="speech">
+                "How was everything? Can I get you anything else — 
+                maybe a little something sweet? Our lamingtons are 
+                fresh today! 😄"
+              </div>
+              <div class="speech follow-up">
+                "Of course! I'll grab the bill for you. That comes to... 
+                \$26.50 all up. Are you paying by card or cash today?"
+              </div>
+              <div class="speech challenge">
+                "Oh — our EFTPOS machine is actually having a bit of trouble today. 
+                Do you happen to have cash on you, or I can try the machine again?"
+              </div>
+              <div class="speech challenge">
+                "Just so you know — we do have a small card surcharge of 1.5% 
+                for Visa and Mastercard. Is that okay?"
+              </div>
+              <div class="look-for">
+                <div class="look-for-title">✅ What the student should do</div>
+                <ul>
+                  <li>Politely decline or accept the dessert offer</li>
+                  <li>Ask for the bill: "Could I get the bill please?"</li>
+                  <li>Respond to payment method question: "Card please" / "I'll tap"</li>
+                  <li>Handle EFTPOS problem calmly</li>
+                  <li>Understand what a "surcharge" is</li>
+                  <li>Thank the staff and say goodbye warmly</li>
+                </ul>
+              </div>
+              <div class="help-box">
+                <div class="help-box-title">🆘 Wrap up the scene</div>
+                <p>End warmly: <em>"Lovely! Thanks so much, have a wonderful day! 
+                Hope to see you again soon! ☕"</em></p>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end scene-list -->
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+     VISUAL DISH GUIDE
+══════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header" style="background: linear-gradient(135deg, #1a5c2a, #27ae60);">
+    <span class="card-icon">📸</span>
+    <div>
+      <h2>Visual Dish Guide</h2>
+      <p>Click any dish to show the student what it looks like!</p>
+    </div>
+  </div>
+  <div class="card-body">
+
+    <div style="background:#e8f8f0; border:1.5px solid #27ae60; border-radius:10px; padding:12px 16px; margin-bottom:16px; font-size:0.85rem; color:#1a5e35;">
+      💡 <strong>How to use:</strong> When the student doesn't know what a dish or drink is, click the card below to show them a full-screen image on your screen!
+    </div>
+<!-- ── BREKKIE ── -->
+<div class="visual-category-label">🍳 All Day Brekkie</div>
+<div class="visual-grid">
+
+  <div class="visual-card" onclick="showDish('Smashed Avo Toast', 'images/brekkie/smashed-avo-toast.jpg', '\$22.50', 'Smashed avocado on toasted sourdough, two poached eggs, cherry tomatoes, feta cheese, dukkah & a squeeze of lemon')">
+    <div class="visual-img-wrap">
+      <img src="images/brekkie/smashed-avo-toast.jpg" alt="Smashed Avo Toast" loading="lazy"/>
+    </div>
+    <div class="visual-info">
+      <div class="visual-name">Smashed Avo Toast</div>
+      <div class="visual-price">\$22.50</div>
+      <div class="visual-tags">
+        <span class="tag tag-veg">VEG</span>
+        <span class="tag tag-pop">⭐ POPULAR</span>
+      </div>
+    </div>
+    <div class="visual-hint">👆 Click to show student</div>
+  </div>
+
+  <div class="visual-card" onclick="showDish('Big Brekkie Plate', 'images/brekkie/big-brekkie-plate.jpg', '\$26.00', 'Two eggs your way, bacon rashers, grilled tomato, sautéed mushrooms, hash brown & buttered toast')">
+    <div class="visual-img-wrap">
+      <img src="images/brekkie/big-brekkie-plate.jpg" alt="Big Brekkie Plate" loading="lazy"/>
+    </div>
+    <div class="visual-info">
+      <div class="visual-name">Big Brekkie Plate</div>
+      <div class="visual-price">\$26.00</div>
+      <div class="visual-tags">
+        <span class="tag tag-pop">⭐ POPULAR</span>
+      </div>
+    </div>
+    <div class="visual-hint">👆 Click to show student</div>
+  </div>
+
+  <div class="visual-card" onclick="showDish('Eggs Benedict', 'images/brekkie/eggs-benedict.jpg', '\$24.00', 'Two poached eggs on a toasted English muffin with your choice of: smoked salmon, bacon, spinach & hollandaise sauce')">
+    <div class="visual-img-wrap">
+      <img src="images/brekkie/eggs-benedict.jpg" alt="Eggs Benedict" loading="lazy"/>
+    </div>
+    <div class="visual-info">
+      <div class="visual-name">Eggs Benedict</div>
+      <div class="visual-price">\$24.00</div>
+    </div>
+    <div class="visual-hint">👆 Click to show student</div>
+  </div>
+
+  <div class="visual-card" onclick="showDish('Acai Bowl', 'images/brekkie/acai-bowl.jpg', '\$19.00', 'Blended açaí, banana & almond milk topped with granola, fresh strawberries, blueberries & a drizzle of honey')">
+    <div class="visual-img-wrap">
+      <img src="images/brekkie/acai-bowl.jpg" alt="Acai Bowl" loading="lazy"/>
+    </div>
+    <div class="visual-info">
+      <div class="visual-name">Acai Bowl</div>
+      <div class="visual-price">\$19.00</div>
+      <div class="visual-tags">
+        <span class="tag tag-veg">VEG</span>
+        <span class="tag tag-new">NEW</span>
+      </div>
+    </div>
+    <div class="visual-hint">👆 Click to show student</div>
+  </div>
+
+  <div class="visual-card" onclick="showDish('Banana Porridge', 'images/brekkie/banana-porridge.jpg', '\$15.50', 'Creamy porridge with caramelised banana, brown sugar, toasted almonds & a side of warm honey')">
+    <div class="visual-img-wrap">
+      <img src="images/brekkie/banana-porridge.jpg" alt="Banana Porridge" loading="lazy"/>
+    </div>
+    <div class="visual-info">
+      <div class="visual-name">Banana Porridge</div>
+      <div class="visual-price">\$15.50</div>
+      <div class="visual-tags">
+        <span class="tag tag-veg">VEG</span>
+        <span class="tag tag-gf">GF option</span>
+      </div>
+    </div>
+    <div class="visual-hint">👆 Click to show student</div>
+  </div>
+
+</div>
+
+<!-- ── LUNCH ── -->
+<div class="visual-category-label">🥗 Lunch</div>
+<div class="visual-grid">
+
+  <div class="visual-card" onclick="showDish('Chicken Schnitzel Roll', 'images/brekkie/chicken-schnitzel-roll.jpg', '\$18.50', 'Crispy crumbed chicken, cos lettuce, tomato, avocado & aioli on a toasted roll')">
+    <div class="visual-img-wrap">
+      <img src="images/brekkie/chicken-schnitzel-roll.jpg" alt="Chicken Schnitzel Roll" loading="lazy"/>
+    </div>
+    <div class="visual-info">
+      <div class="visual-name">Chicken Schnitzel Roll</div>
+      <div class="visual-price">\$18.50</div>
+      <div class="visual-tags">
+        <span class="tag tag-pop">⭐ POPULAR</span>
+      </div>
+    </div>
+    <div class="visual-hint">👆 Click to show student</div>
+  </div>
+
+  <div class="visual-card" onclick="showDish('Beef & Cheese Toastie', 'images/lunch/beef-cheese-toastie.jpg', '\$17.00', 'Slow-roasted beef, melted gruyère, caramelised onion & whole grain mustard on thick sourdough')">
+    <div class="visual-img-wrap">
+      <img src="images/lunch/beef-cheese-toastie.jpg" alt="Beef & Cheese Toastie" loading="lazy"/>
+    </div>
+    <div class="visual-info">
+      <div class="visual-name">Beef &amp; Cheese Toastie</div>
+      <div class="visual-price">\$17.00</div>
+    </div>
+    <div class="visual-hint">👆 Click to show student</div>
+  </div>
+
+  <div class="visual-card" onclick="showDish('Garden Salad Bowl', 'images/lunch/garden-salad-bowl.jpg', '\$16.00', 'Mixed leaves, cherry tomatoes, cucumber, radish, pumpkin seeds & balsamic glaze')">
+    <div class="visual-img-wrap">
+      <img src="images/lunch/garden-salad-bowl.jpg" alt="Garden Salad Bowl" loading="lazy"/>
+    </div>
+    <div class="visual-info">
+      <div class="visual-name">Garden Salad Bowl</div>
+      <div class="visual-price">\$16.00</div>
+      <div class="visual-tags">
+        <span class="tag tag-veg">VEG</span>
+        <span class="tag tag-gf">GF</span>
+      </div>
+    </div>
+    <div class="visual-hint">👆 Click to show student</div>
+  </div>
+
+  <div class="visual-card" onclick="showDish('Loaded Chips', 'images/lunch/loaded-chips.jpg', '\$14.00', 'Crispy potato chips topped with melted cheese, bacon bits, sour cream & sweet chilli sauce')">
+    <div class="visual-img-wrap">
+      <img src="images/lunch/loaded-chips.jpg" alt="Loaded Chips" loading="lazy"/>
+    </div>
+    <div class="visual-info">
+      <div class="visual-name">Loaded Chips</div>
+      <div class="visual-price">\$14.00</div>
+    </div>
+    <div class="visual-hint">👆 Click to show student</div>
+  </div>
+
+</div>
+
+<!-- ── COFFEE & DRINKS ── -->
+<div class="visual-category-label">☕ Coffee & Drinks</div>
+<div class="visual-grid">
+
+  <div class="visual-card" onclick="showDish('Flat White ⭐', 'images/drinks/flat-white.jpg', '\$5.50', 'Australia\'s most popular coffee! Strong espresso with smooth velvety steamed milk. Less milky than a latte.')">
+    <div class="visual-img-wrap">
+      <img src="images/drinks/flat-white.jpg" alt="Flat White" loading="lazy"/>
+    </div>
+    <div class="visual-info">
+      <div class="visual-name">Flat White ⭐</div>
+      <div class="visual-price">\$5.50</div>
+      <div class="visual-tags">
+        <span class="tag tag-pop">MOST POPULAR</span>
+      </div>
+    </div>
+    <div class="visual-hint">👆 Click to show student</div>
+  </div>
+
+  <div class="visual-card" onclick="showDish('Long Black', 'images/drinks/long-black.jpg', '\$5.00', 'Strong black coffee — hot water with a double espresso shot on top. No milk. Similar to an Americano!')">
+    <div class="visual-img-wrap">
+      <img src="images/drinks/long-black.jpg" alt="Long Black" loading="lazy"/>
+    </div>
+    <div class="visual-info">
+      <div class="visual-name">Long Black</div>
+      <div class="visual-price">\$5.00</div>
+    </div>
+    <div class="visual-hint">👆 Click to show student</div>
+  </div>
+
+  <div class="visual-card" onclick="showDish('Cappuccino', 'images/drinks/cappuccino.jpg', '\$5.50', 'Espresso + steamed milk + thick foam on top, dusted with chocolate powder. Very popular!')">
+    <div class="visual-img-wrap">
+      <img src="images/drinks/cappuccino.jpg" alt="Cappuccino" loading="lazy"/>
+    </div>
+    <div class="visual-info">
+      <div class="visual-name">Cappuccino</div>
+      <div class="visual-price">\$5.50</div>
+    </div>
+    <div class="visual-hint">👆 Click to show student</div>
+  </div>
+
+  <div class="visual-card" onclick="showDish('Latte', 'images/drinks/latte.jpg', '\$5.50', 'Espresso + lots of steamed milk + a small amount of foam. Milder and milkier than a flat white.')">
+    <div class="visual-img-wrap">
+      <img src="images/drinks/latte.jpg" alt="Latte" loading="lazy"/>
+    </div>
+    <div class="visual-info">
+      <div class="visual-name">Latte</div>
+      <div class="visual-price">\$5.50</div>
+    </div>
+    <div class="visual-hint">👆 Click to show student</div>
+  </div>
+
+  <div class="visual-card" onclick="showDish('Chai Latte', 'images/drinks/chai-latte.jpg', '\$5.80', 'Spiced tea with steamed milk — NOT coffee! Made with cinnamon, ginger & cardamom. Very popular in Australia!')">
+    <div class="visual-img-wrap">
+      <img src="images/drinks/chai-latte.jpg" alt="Chai Latte" loading="lazy"/>
+    </div>
+    <div class="visual-info">
+      <div class="visual-name">Chai Latte</div>
+      <div class="visual-price">\$5.80</div>
+    </div>
+    <div class="visual-hint">👆 Click to show student</div>
+  </div>
+
+  <div class="visual-card" onclick="showDish('Iced Coffee', 'images/drinks/iced-coffee.jpg', '\$7.50', 'Australian iced coffee often comes with ice cream & whipped cream — like a dessert drink! Very cold and sweet.')">
+    <div class="visual-img-wrap">
+      <img src="images/drinks/iced-coffee.jpg" alt="Iced Coffee" loading="lazy"/>
+    </div>
+    <div class="visual-info">
+      <div class="visual-name">Iced Coffee</div>
+      <div class="visual-price">\$7.50</div>
+    </div>
+    <div class="visual-hint">👆 Click to show student</div>
+  </div>
+
+</div>
+
+<!-- ── SWEET TREATS ── -->
+<div class="visual-category-label">🍰 Sweet Treats</div>
+<div class="visual-grid">
+
+  <div class="visual-card" onclick="showDish('Lamington 🇦🇺', 'images/drinks/lamington.jpg', '\$6.50', 'Australia\'s most famous cake! Sponge cake dipped in chocolate sauce and rolled in desiccated coconut.')">
+    <div class="visual-img-wrap">
+      <img src="images/drinks/lamington.jpg" alt="Lamington" loading="lazy"/>
+    </div>
+    <div class="visual-info">
+      <div class="visual-name">Lamington 🇦🇺</div>
+      <div class="visual-price">\$6.50</div>
+      <div class="visual-tags">
+        <span class="tag tag-pop">AUSSIE ICON</span>
+      </div>
+    </div>
+    <div class="visual-hint">👆 Click to show student</div>
+  </div>
+
+  <div class="visual-card" onclick="showDish('Tim Tam Cheesecake', 'images/drinks/tim-tam-cheesecake.jpg', '\$10.00', 'Creamy baked cheesecake with a Tim Tam biscuit base, chocolate ganache topping & whipped cream.')">
+    <div class="visual-img-wrap">
+      <img src="images/drinks/tim-tam-cheesecake.jpg" alt="Tim Tam Cheesecake" loading="lazy"/>
+    </div>
+    <div class="visual-info">
+      <div class="visual-name">Tim Tam Cheesecake</div>
+      <div class="visual-price">\$10.00</div>
+    </div>
+    <div class="visual-hint">👆 Click to show student</div>
+  </div>
+
+  <div class="visual-card" onclick="showDish('Banana Bread', 'images/drinks/banana-bread.jpg', '\$8.50', 'Warm toasted banana bread served with ricotta cheese & a drizzle of honey on top.')">
+    <div class="visual-img-wrap">
+      <img src="images/drinks/banana-bread.jpg" alt="Banana Bread" loading="lazy"/>
+    </div>
+    <div class="visual-info">
+      <div class="visual-name">Banana Bread</div>
+      <div class="visual-price">\$8.50</div>
+      <div class="visual-tags">
+        <span class="tag tag-pop">⭐ POPULAR</span>
+      </div>
+    </div>
+    <div class="visual-hint">👆 Click to show student</div>
+  </div>
+
+  <div class="visual-card" onclick="showDish('Vegemite Toast 🇦🇺', 'images/sweets/vegemite-toast.jpg', '\$5.00', 'Toasted sourdough with butter & Vegemite — a dark, very salty Australian spread. Try just a tiny bit first!')">
+    <div class="visual-img-wrap">
+      <img src="images/sweets/vegemite-toast.jpg" alt="Vegemite Toast" loading="lazy"/>
+    </div>
+    <div class="visual-info">
+      <div class="visual-name">Vegemite Toast 🇦🇺</div>
+      <div class="visual-price">\$5.00</div>
+      <div class="visual-tags">
+        <span class="tag tag-veg">VEG</span>
+      </div>
+    </div>
+    <div class="visual-hint">👆 Click to show student</div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════
+     DISH MODAL (fullscreen popup)
+══════════════════════════════════════ -->
+<div class="dish-modal" id="dishModal" onclick="closeDish()">
+  <div class="dish-modal-inner" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeDish()">✕ Close</button>
+    <div class="modal-img-wrap">
+      <img id="modalImg" src="" alt="" />
+    </div>
+    <div class="modal-info">
+      <div class="modal-name" id="modalName"></div>
+      <div class="modal-price" id="modalPrice"></div>
+      <div class="modal-desc" id="modalDesc"></div>
+      <div class="modal-tip">
+        💬 <strong>Say to student:</strong> <em id="modalSay"></em>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- ══════════════════════════════════
+         EXTRA CHALLENGE SCENARIOS
+    ══════════════════════════════════ -->
+    <div class="card">
+      <div class="card-header red">
+        <span class="card-icon">😈</span>
+        <div>
+          <h2>Extra Challenge Scenarios</h2>
+          <p>Use these if your student is doing well and needs more difficulty!</p>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="challenge-grid">
+
+          <div class="challenge-card">
+            <h4>🚫 Item Sold Out</h4>
+            <p>Tell the student their first choice is not available and they must choose something else from the menu.</p>
+            <div class="say">"Sorry, we've actually just run out of that one this morning. Can I suggest something similar?"</div>
+          </div>
+
+          <div class="challenge-card">
+            <h4>🔇 Noisy Café</h4>
+            <p>Pretend you didn't hear the order and ask them to repeat — tests if they can repeat confidently.</p>
+            <div class="say">"Sorry, it's a bit loud in here! Could you say that again for me?"</div>
+          </div>
+
+          <div class="challenge-card">
+            <h4>💳 Card Not Working</h4>
+            <p>Pretend the card machine is down — can the student handle an unexpected problem?</p>
+            <div class="say">"Oh, I'm so sorry — our machine is playing up today. Do you have cash, or shall I try again?"</div>
+          </div>
+
+          <div class="challenge-card">
+            <h4>🧾 Wrong Bill Amount</h4>
+            <p>Quote the wrong total and see if the student notices and speaks up politely.</p>
+            <div class="say">"That'll be \$34.50 thanks!" (correct amount is \$26.50)</div>
+          </div>
+
+          <div class="challenge-card">
+            <h4>🥜 Allergy Warning</h4>
+            <p>Warn the student their dish contains a common allergen — do they know how to respond?</p>
+            <div class="say">"Just a heads up — that dish has nuts in it. Is that okay for you?"</div>
+          </div>
+
+          <div class="challenge-card">
+            <h4>🪑 No Table Available</h4>
+            <p>Tell them there's a short wait — can they respond politely to waiting?</p>
+            <div class="say">"We're actually fully booked right now — it'll be about a 10-minute wait. Are you right to wait?"</div>
+          </div>
+
+          <div class="challenge-card">
+            <h4>🍳 Wrong Order Delivered</h4>
+            <p>Bring the "wrong" food and see if the student can politely correct you.</p>
+            <div class="say">"Here's your scrambled eggs!" (they ordered poached)</div>
+          </div>
+
+          <div class="challenge-card">
+            <h4>💬 Recommend a Special</h4>
+            <p>Push a daily special and see if they can ask follow-up questions about it.</p>
+            <div class="say">"Can I also recommend today's special? It's a smoked salmon bowl — it's absolutely amazing!"</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         AUSSIE VOCAB CHEAT SHEET
+    ══════════════════════════════════ -->
+    <div class="card">
+      <div class="card-header purple">
+        <span class="card-icon">📖</span>
+        <div>
+          <h2>Aussie Vocab Cheat Sheet</h2>
+          <p>Words to use naturally in the role-play</p>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="vocab-grid">
+          <div class="vocab-item">
+            <div class="vocab-word">Yeah</div>
+            <div class="vocab-meaning">= Yes. Very natural. "Yeah, no worries!"</div>
+          </div>
+          <div class="vocab-item">
+            <div class="vocab-word">No worries</div>
+            <div class="vocab-meaning">= No problem / You're welcome. Use constantly!</div>
+          </div>
+          <div class="vocab-item">
+            <div class="vocab-word">You right?</div>
+            <div class="vocab-meaning">= Are you okay? / Can I help you?</div>
+          </div>
+          <div class="vocab-item">
+            <div class="vocab-word">All up</div>
+            <div class="vocab-meaning">= Total price. "That's \$18.50 all up."</div>
+          </div>
+          <div class="vocab-item">
+            <div class="vocab-word">Heaps</div>
+            <div class="vocab-meaning">= Very / a lot. "It's heaps popular today!"</div>
+          </div>
+          <div class="vocab-item">
+            <div class="vocab-word">Arvo</div>
+            <div class="vocab-meaning">= Afternoon. "We stop serving at 3 in the arvo."</div>
+          </div>
+          <div class="vocab-item">
+            <div class="vocab-word">Brekkie</div>
+            <div class="vocab-meaning">= Breakfast. Use this word often!</div>
+          </div>
+          <div class="vocab-item">
+            <div class="vocab-word">Tap & Go</div>
+            <div class="vocab-meaning">= Contactless card payment. "Just tap your card!"</div>
+          </div>
+          <div class="vocab-item">
+            <div class="vocab-word">EFTPOS</div>
+            <div class="vocab-meaning">= Card payment machine. "The EFTPOS is right here."</div>
+          </div>
+          <div class="vocab-item">
+            <div class="vocab-word">Surcharge</div>
+            <div class="vocab-meaning">= Extra fee. "There's a 1.5% card surcharge."</div>
+          </div>
+          <div class="vocab-item">
+            <div class="vocab-word">For here or takeaway?</div>
+            <div class="vocab-meaning">= Eating in or taking the food to go?</div>
+          </div>
+          <div class="vocab-item">
+            <div class="vocab-word">Put that through</div>
+            <div class="vocab-meaning">= Submit the order to the kitchen.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         LIVE ASSESSMENT CHECKLIST
+    ══════════════════════════════════ -->
+    <div class="card">
+      <div class="card-header dark">
+        <span class="card-icon">✅</span>
+        <div>
+          <h2>Live Assessment Checklist</h2>
+          <p>Tick off each skill as the student demonstrates it</p>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="checklist" id="checklist">
+
+          <div class="check-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <label>Greeted the waitress politely and naturally</label>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <label>Used "please" and "thank you" throughout the conversation</label>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <label>Ordered coffee using "I'll have a..." or "Could I get a..."</label>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <label>Named a specific coffee correctly from the menu</label>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <label>Ordered food confidently and specifically</label>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <label>Handled a "sold out" or unavailable item gracefully</label>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <label>Responded correctly to dietary/allergy questions</label>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <label>Understood Aussie slang used naturally (yeah, no worries, etc.)</label>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <label>Politely corrected a wrong order when needed</label>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <label>Asked for the bill politely: "Could I get the bill please?"</label>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <label>Handled a payment problem (broken EFTPOS) calmly</label>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <label>Thanked staff warmly and said goodbye naturally</label>
+          </div>
+
+        </div>
+
+        <div style="margin-top: 16px; text-align:right;">
+          <button class="btn btn-outline" onclick="resetChecklist()">🔄 Reset Checklist</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         ASSESSMENT SCORING TABLE
+    ══════════════════════════════════ -->
+    <div class="card">
+      <div class="card-header blue">
+        <span class="card-icon">⭐</span>
+        <div>
+          <h2>Scoring Guide</h2>
+          <p>Use this after the role-play to give feedback</p>
+        </div>
+      </div>
+      <div class="card-body">
+        <table class="assess-table">
+          <thead>
+            <tr>
+              <th>Score</th>
+              <th>Stars</th>
+              <th>Level</th>
+              <th>What it means</th>
+              <th>Teacher Feedback</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>11–12 ✅</td>
+              <td><span class="star-rating">⭐⭐⭐</span></td>
+              <td>Excellent</td>
+              <td>Student handled all scenarios naturally and politely</td>
+              <td>"You're ready for a real Aussie café! Brilliant work."</td>
+            </tr>
+            <tr>
+              <td>8–10 ✅</td>
+              <td><span class="star-rating">⭐⭐</span></td>
+              <td>Good</td>
+              <td>Managed most situations, minor mistakes in phrasing</td>
+              <td>"Really solid! Just keep practising the tricky scenarios."</td>
+            </tr>
+            <tr>
+              <td>5–7 ✅</td>
+              <td><span class="star-rating">⭐</span></td>
+              <td>Developing</td>
+              <td>Got the basics but needs more confidence and vocabulary</td>
+              <td>"Good start! Study the menu vocab and let's try again."</td>
+            </tr>
+            <tr>
+              <td>0–4 ✅</td>
+              <td>—</td>
+              <td>Beginner</td>
+              <td>Needs more preparation before the role-play</td>
+              <td>"Let's go through the menu vocab together first, then replay."</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="actions">
+      <button class="btn btn-blue" onclick="window.print()">🖨️ Print Teacher Notes</button>
+      <a class="btn btn-outline" href="menu.html" target="_blank">📖 View Student Menu</a>
+      <a class="btn btn-outline" href="../index.html">🏠 Back to Games</a>
+    </div>
+
+  </div><!-- end main-wrapper -->
+
+  <script>
+    // ── CHECKLIST TOGGLE ──
+    function toggleCheck(item) {
+      const checkbox = item.querySelector('input[type="checkbox"]');
+      checkbox.checked = !checkbox.checked;
+      item.classList.toggle('checked', checkbox.checked);
+      updateChecklistCount();
+    }
+
+    function updateChecklistCount() {
+      const total   = document.querySelectorAll('.check-item').length;
+      const checked = document.querySelectorAll('.check-item.checked').length;
+      console.log(`Score: ${checked}/${total}`);
+    }
+
+    function resetChecklist() {
+      document.querySelectorAll('.check-item').forEach(item => {
+        item.classList.remove('checked');
+        item.querySelector('input[type="checkbox"]').checked = false;
+      });
+    }
+  </script>
+
+</body>
+</html>
