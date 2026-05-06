@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Ironbark Hotel – Pub Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #1a1a2e;
+      min-height: 100vh;
+    }
+
+    /* ── TOP NAV ── */
+    .top-nav {
+      background: linear-gradient(135deg, #1a3a1a, #27ae60);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    .top-nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+    .top-nav a:hover { opacity: 1; }
+    .top-nav span {
+      color: white;
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+    .btn-play-nav {
+      background: white;
+      color: #1a5c2a;
+      border-radius: 20px;
+      padding: 7px 16px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-play-nav:hover { background: #e8f8f0; }
+
+    /* ── STUDY BANNER ── */
+    .study-banner {
+      background: #fff9e6;
+      border-bottom: 2px solid #f39c12;
+      padding: 12px 20px;
+      text-align: center;
+      font-size: 0.88rem;
+      color: #7d5a00;
+      font-weight: 600;
+    }
+    .study-banner strong { color: #d35400; }
+
+    /* ── MENU WRAPPER ── */
+    .menu-wrapper {
+      max-width: 820px;
+      margin: 30px auto;
+      padding: 0 16px 60px;
+    }
+
+    /* ── MENU CARD ── */
+    .menu-card {
+      background: #1c1c2e;
+      border-radius: 4px;
+      box-shadow:
+        0 0 0 1px #4a3728,
+        0 4px 30px rgba(0,0,0,0.4),
+        8px 8px 0 0 #2d2240;
+      overflow: hidden;
+    }
+
+    /* ── MENU HEADER ── */
+    .menu-header {
+      background: linear-gradient(180deg, #0d0d1a 0%, #1a0a2e 100%);
+      padding: 36px 30px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .menu-header::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1.5px solid rgba(180,140,80,0.35);
+      border-radius: 2px;
+      pointer-events: none;
+    }
+    .pub-flag   { font-size: 1.4rem; letter-spacing: 4px; margin-bottom: 8px; }
+    .pub-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3rem;
+      color: #f0c060;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .pub-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: #b8956a;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .pub-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: #b8956a;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+    }
+    .pub-divider::before,
+    .pub-divider::after {
+      content: '';
+      display: block;
+      width: 60px; height: 1px;
+      background: #b8956a;
+    }
+    .pub-info {
+      margin-top: 12px;
+      color: #806040;
+      font-size: 0.75rem;
+    }
+
+    /* ── MENU BODY ── */
+    .menu-body { padding: 0 28px 28px; background: #f5f0e8; }
+
+    /* ── SECTION ── */
+    .menu-section { margin-top: 32px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+    .section-icon  { font-size: 1.3rem; }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: #2c1810;
+      font-weight: 700;
+    }
+    .section-line {
+      border: none;
+      border-top: 1.5px solid #c8a878;
+      margin-bottom: 20px;
+      margin-top: 6px;
+    }
+    .section-note {
+      font-size: 0.78rem;
+      color: #999;
+      font-style: italic;
+      margin-top: -14px;
+      margin-bottom: 16px;
+    }
+
+    /* ── MENU ITEM ── */
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+    .item-left { flex: 1; }
+    .item-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2c1810;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .item-desc {
+      font-size: 0.82rem;
+      color: #7a6652;
+      line-height: 1.6;
+    }
+    .item-price {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: #2c1810;
+      font-size: 1rem;
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+
+    /* ── VOCAB BADGE ── */
+    .vocab-badge {
+      display: inline-block;
+      background: #fff3cd;
+      border: 1px solid #f39c12;
+      color: #d35400;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 10px;
+      cursor: pointer;
+      position: relative;
+      white-space: nowrap;
+    }
+    .vocab-badge .tooltip {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #2c1810;
+      color: #f0d9b5;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 8px;
+      z-index: 99;
+      line-height: 1.5;
+      text-align: center;
+      min-width: 180px;
+      max-width: 240px;
+      white-space: normal;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .vocab-badge .tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%; left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: #2c1810;
+    }
+    .vocab-badge:hover .tooltip { display: block; }
+
+    /* ── TAGS ── */
+    .tag {
+      display: inline-block;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 10px;
+    }
+    .tag-veg  { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+    .tag-gf   { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+    .tag-pop  { background: #fce4ec; color: #c62828; border: 1px solid #f48fb1; }
+    .tag-new  { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
+    .tag-spicy{ background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+
+    /* ── DRINKS GRID ── */
+    .drinks-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 24px;
+    }
+    .drink-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px dotted #c8a878;
+      padding-bottom: 6px;
+    }
+    .drink-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      color: #2c1810;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .drink-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #2c1810;
+      white-space: nowrap;
+      margin-left: 8px;
+    }
+
+    /* ── SPECIALS ── */
+    .specials-box {
+      background: linear-gradient(135deg, #1a0a2e, #2d1a4a);
+      border-radius: 4px;
+      padding: 20px;
+      margin-top: 32px;
+      text-align: center;
+      color: #f0c060;
+      border: 1px solid #b8956a;
+    }
+    .specials-box h3 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+    .specials-box p {
+      font-size: 0.85rem;
+      color: #b8956a;
+      line-height: 1.6;
+    }
+    .special-items {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .special-item {
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px;
+      padding: 12px;
+      border: 1px solid rgba(180,140,80,0.3);
+    }
+    .special-item-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      color: #f0c060;
+      margin-bottom: 4px;
+    }
+    .special-item-price {
+      font-size: 0.8rem;
+      color: #f39c12;
+      font-weight: 700;
+    }
+
+    /* ── ALLERGEN NOTE ── */
+    .allergen-note {
+      margin-top: 24px;
+      padding: 14px 18px;
+      background: #fdf8f0;
+      border: 1px solid #c8a878;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      color: #7a6652;
+      line-height: 1.6;
+    }
+    .allergen-note strong { color: #2c1810; }
+
+    /* ── MENU FOOTER ── */
+    .menu-footer {
+      background: #0d0d1a;
+      padding: 20px;
+      text-align: center;
+    }
+    .menu-footer p { color: #b8956a; font-size: 0.78rem; line-height: 1.8; }
+    .menu-footer .hours {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      color: #f0c060;
+      margin-bottom: 6px;
+    }
+
+    /* ── GLOSSARY ── */
+    .glossary-section {
+      margin-top: 30px;
+      background: #fff9e6;
+      border: 2px solid #f39c12;
+      border-radius: 12px;
+      padding: 22px;
+    }
+    .glossary-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #d35400;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .glossary-item {
+      background: white;
+      border-radius: 8px;
+      padding: 12px 14px;
+      border: 1px solid #f5dfa0;
+    }
+    .glossary-word { font-weight: 800; color: #2c1810; font-size: 0.9rem; margin-bottom: 3px; }
+    .glossary-def  { font-size: 0.8rem; color: #666; line-height: 1.4; }
+
+    /* ── ACTIONS ── */
+    .study-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 30px;
+      padding: 12px 24px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+    }
+    .btn-green   { background: #27ae60; color: white; }
+    .btn-green:hover { background: #1e8449; transform: translateY(-2px); }
+    .btn-outline { background: white; color: #27ae60; border: 2px solid #27ae60; }
+    .btn-outline:hover { background: #e8f8f0; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 560px) {
+      .menu-body     { padding: 0 16px 20px; }
+      .pub-name      { font-size: 2.2rem; }
+      .drinks-grid   { grid-template-columns: 1fr; }
+      .special-items { grid-template-columns: 1fr; }
+      .glossary-grid { grid-template-columns: 1fr 1fr; }
+      .menu-item     { flex-direction: column; gap: 4px; }
+    }
+
+    @media print {
+      .top-nav, .study-banner, .glossary-section,
+      .study-actions, .vocab-badge { display: none !important; }
+      body { background: white; }
+      .menu-card { box-shadow: none; border: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="top-nav">
+    <a href="../index.html">← Back to Games</a>
+    <span>🍺 The Ironbark Hotel Menu</span>
+    <a class="btn-play-nav" href="index.html">▶ Play Game</a>
+  </nav>
+
+  <div class="study-banner">
+    💡 Study this menu before playing! Hover the <strong>🟡 yellow badges</strong> to learn key Aussie pub words.
+  </div>
+
+  <div class="menu-wrapper">
+    <div class="menu-card">
+
+      <!-- HEADER -->
+      <div class="menu-header">
+        <div class="pub-flag">🇦🇺 🍺 🇦🇺</div>
+        <div class="pub-name">The Ironbark Hotel</div>
+        <div class="pub-tagline">Good food · Cold beer · Great mates</div>
+        <div class="pub-divider">Melbourne, Victoria</div>
+        <div class="pub-info">📍 88 Swanston Street, Melbourne VIC 3000 &nbsp;|&nbsp; ☎ (03) 9456 7890</div>
+      </div>
+
+      <!-- MENU BODY -->
+      <div class="menu-body">
+
+        <!-- ── MAINS ── -->
+        <div class="menu-section">
+          <div class="section-header">
+            <span class="section-icon">🍽️</span>
+            <span class="section-title">Pub Mains</span>
+          </div>
+          <div class="section-note">Served from 11:00am – 9:00pm daily</div>
+          <hr class="section-line"/>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Chicken Parma
+                <span class="tag tag-pop">⭐ AUSSIE ICON</span>
+                <span class="vocab-badge">🟡 What is a "Parma"?
+                  <span class="tooltip">A "Chicken Parma" (or Parmi) = crumbed chicken breast topped with tomato sauce, ham & melted cheese. It's THE most popular pub meal in Australia!</span>
+                </span>
+              </div>
+              <div class="item-desc">
+                Crumbed chicken breast topped with
+                <span class="vocab-badge">Napoli sauce
+                  <span class="tooltip">Napoli sauce = Italian tomato sauce. Also called "Napoletana". Rich, herby tomato flavour!</span>
+                </span>,
+                leg ham &amp; melted mozzarella. Served with
+                <span class="vocab-badge">chips & salad
+                  <span class="tooltip">"Chips & salad" is the classic side dish with almost every pub meal in Australia. You can sometimes swap chips for mash or veggies!</span>
+                </span>
+              </div>
+            </div>
+            <div class="item-price">\$28.00</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Beef Schnitzel
+                <span class="tag tag-pop">⭐ POPULAR</span>
+                <span class="vocab-badge">🟡 Schnitzel vs Parma?
+                  <span class="tooltip">A "Schnitzel" = crumbed and pan-fried meat WITHOUT the tomato sauce and cheese on top. A Parma = schnitzel WITH the sauce and cheese. Schnitzel is cheaper!</span>
+                </span>
+              </div>
+              <div class="item-desc">
+                Crumbed beef
+                <span class="vocab-badge">schnitzel
+                  <span class="tooltip">Schnitzel = crumbed and pan-fried meat. Originally from Austria/Germany, but very popular in Australian pubs!</span>
+                </span>
+                with your choice of sauce:
+                <span class="vocab-badge">gravy
+                  <span class="tooltip">Gravy = a thick brown sauce made from meat juices. Very popular at Australian pubs — "Can I get extra gravy please?"</span>
+                </span>,
+                mushroom or pepper. Served with chips &amp; salad
+              </div>
+            </div>
+            <div class="item-price">\$24.00</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Beef Burger
+                <span class="tag tag-pop">⭐ POPULAR</span>
+              </div>
+              <div class="item-desc">
+                200g beef
+                <span class="vocab-badge">pattie
+                  <span class="tooltip">In Australia they say "pattie" not "patty"! A pattie = the round piece of ground beef in a burger.</span>
+                </span>,
+                bacon, cheese, lettuce, tomato, pickles,
+                <span class="vocab-badge">beetroot
+                  <span class="tooltip">Beetroot on a burger is a UNIQUELY Australian thing! It's a sliced cooked purple/red vegetable. Many Australians love it — try it!</span>
+                </span>
+                &amp; BBQ sauce on a toasted brioche bun. Served with chips
+              </div>
+            </div>
+            <div class="item-price">\$22.00</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Mixed Grill
+                <span class="tag tag-pop">⭐ POPULAR</span>
+                <span class="vocab-badge">🟡 What is a "Mixed Grill"?
+                  <span class="tooltip">A Mixed Grill = a large plate with MANY different grilled meats! Usually steak, sausage, lamb chop and bacon all together. Very filling!</span>
+                </span>
+              </div>
+              <div class="item-desc">
+                200g
+                <span class="vocab-badge">rump steak
+                  <span class="tooltip">Rump steak = a cut from the back of the cow. Great for grilling! In Australia you'll hear cuts like "rump", "scotch fillet" and "eye fillet" at pubs.</span>
+                </span>,
+                lamb chop, pork sausage, bacon &amp; fried egg. Served with chips &amp; salad
+              </div>
+            </div>
+            <div class="item-price">\$36.00</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Fish &amp; Chips
+                <span class="tag tag-pop">⭐ POPULAR</span>
+                <span class="vocab-badge">🟡 Classic Pub Meal!
+                  <span class="tooltip">Fish & Chips is a classic British and Australian pub meal! Battered fish fillet with hot crispy chips. Always comes with tartare sauce and lemon!</span>
+                </span>
+              </div>
+              <div class="item-desc">
+                <span class="vocab-badge">Battered
+                  <span class="tooltip">"Battered" = dipped in a thick flour and beer batter then deep fried. Makes the fish golden and crispy on the outside!</span>
+                </span>
+                barramundi fillet, thick-cut chips,
+                <span class="vocab-badge">tartare sauce
+                  <span class="tooltip">Tartare sauce = a creamy white sauce with capers and herbs. Always served with fish in Australia!</span>
+                </span>
+                &amp; lemon wedge
+              </div>
+            </div>
+            <div class="item-price">\$26.00</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Vegetarian Pasta
+                <span class="tag tag-veg">VEG</span>
+              </div>
+              <div class="item-desc">
+                <span class="vocab-badge">Penne
+                  <span class="tooltip">Penne = a type of pasta shaped like small tubes. Very common in Australian pubs for vegetarian options!</span>
+                </span>
+                pasta with roasted vegetables, cherry tomatoes, basil pesto &amp; shaved parmesan
+              </div>
+            </div>
+            <div class="item-price">\$20.00</div>
+          </div>
+
+        </div>
+
+        <!-- ── SIDES ── -->
+        <div class="menu-section">
+          <div class="section-header">
+            <span class="section-icon">🍟</span>
+            <span class="section-title">Sides &amp; Extra</span>
+          </div>
+          <hr class="section-line"/>
+
+          <div class="drinks-grid">
+            <div class="drink-item">
+              <div class="drink-name">Bowl of Chips
+                <span class="vocab-badge">🟡
+                  <span class="tooltip">A "bowl of chips" = a large bowl of hot crispy french fries. Very popular to share at a pub!</span>
+                </span>
+              </div>
+              <div class="drink-price">\$8.00</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Garlic Bread</div>
+              <div class="drink-price">\$7.00</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Side Salad
+                <span class="vocab-badge">🟡
+                  <span class="tooltip">You can often "swap" your chips for a side salad at no extra cost. Say: "Could I swap the chips for a salad please?"</span>
+                </span>
+              </div>
+              <div class="drink-price">\$6.00</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Mashed Potato</div>
+              <div class="drink-price">\$6.00</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Extra Gravy</div>
+              <div class="drink-price">\$2.00</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Extra Sauce</div>
+              <div class="drink-price">\$2.00</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── DRINKS ── -->
+        <div class="menu-section">
+          <div class="section-header">
+            <span class="section-icon">🍺</span>
+            <span class="section-title">Drinks</span>
+          </div>
+          <div class="section-note">Responsible service of alcohol applies. Must be 18+ to purchase alcohol.</div>
+          <hr class="section-line"/>
+
+          <div class="drinks-grid">
+            <div class="drink-item">
+              <div class="drink-name">
+                VB – Schooner
+                <span class="vocab-badge">🟡
+                  <span class="tooltip">VB = Victoria Bitter. One of Australia's most iconic beers! A "schooner" is a large glass of beer (425ml). A "middy" or "pot" is smaller (285ml).</span>
+                </span>
+              </div>
+              <div class="drink-price">\$9.50</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">
+                Coopers – Schooner
+                <span class="vocab-badge">🟡
+                  <span class="tooltip">Coopers = a very popular South Australian beer brand. Famous for being slightly cloudy. "Coopers Green" (lager) and "Coopers Pale Ale" are the most popular.</span>
+                </span>
+              </div>
+              <div class="drink-price">\$10.00</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">
+                XXXX Gold – Pot
+                <span class="vocab-badge">🟡
+                  <span class="tooltip">XXXX (pronounced "Four-Ex") = a very popular Queensland beer. A "pot" = 285ml — a smaller glass than a schooner. Common in Victoria!</span>
+                </span>
+              </div>
+              <div class="drink-price">\$7.50</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">
+                House Wine – Glass
+                <span class="vocab-badge">🟡
+                  <span class="tooltip">"House wine" = the cheapest wine the pub serves. Available as red or white. Say: "Could I get a glass of house white, please?"</span>
+                </span>
+              </div>
+              <div class="drink-price">\$10.00</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">
+                Spirits + Mixer
+                <span class="vocab-badge">🟡
+                  <span class="tooltip">A "spirit + mixer" = alcohol (like vodka, rum, bourbon) mixed with a soft drink (like Coke, lemonade). Say "rum and Coke" or "vodka lemonade".</span>
+                </span>
+              </div>
+              <div class="drink-price">\$12.00</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">
+                Soft Drink
+                <span class="vocab-badge">🟡
+                  <span class="tooltip">In Australia, fizzy drinks are called "soft drinks" — not "soda". Options: Coke, Lemonade, Sprite, Ginger Beer. Say "Can I get a Coke please?"</span>
+                </span>
+              </div>
+              <div class="drink-price">\$4.50</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">Sparkling Water</div>
+              <div class="drink-price">\$4.00</div>
+            </div>
+            <div class="drink-item">
+              <div class="drink-name">
+                Tap Water
+                <span class="vocab-badge">🟡
+                  <span class="tooltip">Tap water is FREE in Australian pubs! Always ask: "Could I also get a glass of tap water?" — they must give it to you!</span>
+                </span>
+              </div>
+              <div class="drink-price">FREE</div>
+            </div>
+          </div>
+
+          <div style="margin-top:14px; font-size:0.8rem; color:#7a6652; font-style:italic; background:#fff8f0; padding:10px 14px; border-radius:8px; border-left: 3px solid #f39c12;">
+            🔞 <strong>Responsible Service of Alcohol (RSA):</strong> Staff may ask for ID if you look under 25. This is completely normal in Australia — don't be offended! Simply show your passport.
+          </div>
+        </div>
+
+        <!-- ── DESSERTS ── -->
+        <div class="menu-section">
+          <div class="section-header">
+            <span class="section-icon">🍮</span>
+            <span class="section-title">Desserts</span>
+          </div>
+          <hr class="section-line"/>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Sticky Date Pudding
+                <span class="tag tag-pop">⭐ POPULAR</span>
+                <span class="vocab-badge">🟡 Must try!
+                  <span class="tooltip">Sticky Date Pudding = Australia's most popular pub dessert! A warm, moist cake made with dates, covered in butterscotch sauce with ice cream. Absolutely delicious!</span>
+                </span>
+              </div>
+              <div class="item-desc">
+                Warm sticky date cake with
+                <span class="vocab-badge">butterscotch sauce
+                  <span class="tooltip">Butterscotch sauce = a warm, sweet golden sauce made from butter and brown sugar. Poured over the pudding while hot!</span>
+                </span>
+                &amp; a scoop of vanilla ice cream
+              </div>
+            </div>
+            <div class="item-price">\$12.00</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">
+                Pavlova
+                <span class="tag tag-pop">🇦🇺 AUSSIE ICON</span>
+                <span class="vocab-badge">🟡 What is Pavlova?
+                  <span class="tooltip">Pavlova = Australia's most famous dessert! A light meringue base (crispy outside, soft inside) topped with whipped cream and fresh fruit. Both Australians and New Zealanders claim to have invented it!</span>
+                </span>
+              </div>
+              <div class="item-desc">
+                Crispy
+                <span class="vocab-badge">meringue
+                  <span class="tooltip">Meringue = a light, airy dessert made from whipped egg whites and sugar. Crispy on the outside, soft and chewy on the inside!</span>
+                </span>
+                base topped with whipped cream, fresh strawberries, kiwi &amp; passionfruit
+              </div>
+            </div>
+            <div class="item-price">\$13.00</div>
+          </div>
+
+          <div class="menu-item">
+            <div class="item-left">
+              <div class="item-name">Chocolate Lava Cake</div>
+              <div class="item-desc">
+                Warm chocolate
+                <span class="vocab-badge">fondant
+                  <span class="tooltip">A fondant cake = a cake with a gooey melted chocolate centre that flows out when you cut into it. Also called a "lava cake" or "molten chocolate cake"!</span>
+                </span>
+                with a molten centre, served with vanilla ice cream &amp; raspberries
+              </div>
+            </div>
+            <div class="item-price">\$14.00</div>
+          </div>
+
+        </div>
+
+        <!-- SPECIALS -->
+        <div class="specials-box">
+          <h3>Friday Night Specials ✦</h3>
+          <p>Every Friday from 5pm – ask our staff for tonight's special board! 🎉</p>
+          <div class="special-items">
+            <div class="special-item">
+              <div class="special-item-name">🍺 Happy Hour</div>
+              <div class="special-item-price">All schooners \$7.00 – 5pm to 7pm!</div>
+            </div>
+            <div class="special-item">
+              <div class="special-item-name">🍗 Parma Night</div>
+              <div class="special-item-price">Chicken Parma + drink – \$32.00</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ALLERGEN -->
+        <div class="allergen-note">
+          <strong>⚠️ Allergen Information:</strong> Our kitchen handles nuts, gluten, dairy, eggs and seafood.
+          Please let your server know of any allergies or dietary requirements before ordering.
+          <strong>GF</strong> = Gluten Free available on request (+\$2). <strong>VEG</strong> = Vegetarian.
+          <br><br>
+          <strong>🔞 RSA Notice:</strong> This venue operates under Responsible Service of Alcohol guidelines.
+          Please drink responsibly. Staff may refuse service if intoxicated.
+          <strong>💳 We accept:</strong> Visa, Mastercard, EFTPOS &amp; cash. Tap &amp; Go available.
+        </div>
+
+      </div><!-- end menu-body -->
+
+      <!-- MENU FOOTER -->
+      <div class="menu-footer">
+        <div class="hours">⏰ Open: Mon–Thu 11am–11pm &nbsp;|&nbsp; Fri–Sat 11am–1am &nbsp;|&nbsp; Sun 12pm–10pm</div>
+        <p>
+          WiFi: <strong style="color:#f0c060">ironbark_guest</strong>
+          &nbsp;|&nbsp; 📸 @ironbarkhotel_melb
+          <br>Thanks for joining us — cheers! 🍺🇦🇺
+        </p>
+      </div>
+
+    </div><!-- end menu-card -->
+
+    <!-- GLOSSARY -->
+    <div class="glossary-section">
+      <div class="glossary-title">📚 Key Aussie Pub Words to Remember</div>
+      <div class="glossary-grid">
+        <div class="glossary-item">
+          <div class="glossary-word">Parma / Parmi 🍗</div>
+          <div class="glossary-def">Chicken Parmagiana = crumbed chicken with tomato sauce & cheese. THE most popular pub meal!</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">Schooner 🍺</div>
+          <div class="glossary-def">A large glass of beer (425ml). Most common size ordered at Aussie pubs.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">Pot / Middy 🍺</div>
+          <div class="glossary-def">A smaller glass of beer (285ml). Common in Victoria.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">Chips 🍟</div>
+          <div class="glossary-def">Hot french fries. Comes with almost every pub meal!</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">Schnitzel 🍖</div>
+          <div class="glossary-def">Crumbed and pan-fried meat. Very popular at Aussie pubs!</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">Gravy 🥣</div>
+          <div class="glossary-def">Thick brown sauce made from meat juices. Ask for extra!</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">Beetroot 🟣</div>
+          <div class="glossary-def">Purple/red vegetable on burgers. Uniquely Australian!</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">RSA 🔞</div>
+          <div class="glossary-def">Responsible Service of Alcohol. Staff may ask for ID. Show your passport!</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">Pavlova 🍰</div>
+          <div class="glossary-def">Australia's most famous dessert! Meringue + cream + fruit.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">Happy Hour 🎉</div>
+          <div class="glossary-def">Time when drinks are cheaper. Usually 5pm–7pm at pubs!</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">Soft drink 🥤</div>
+          <div class="glossary-def">= Fizzy drink / soda. "Can I get a Coke please?"</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-word">Tap water 💧</div>
+          <div class="glossary-def">FREE water. Always ask for it! "Could I get tap water please?"</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="study-actions">
+      <a class="btn-action btn-green" href="index.html">▶ I'm Ready – Play the Game!</a>
+      <button class="btn-action btn-outline" onclick="window.print()">🖨️ Print This Menu</button>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pub Meal: After Work – Aussie Restaurant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #fdf0f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: linear-gradient(135deg, #1a3a1a, #27ae60);
+      color: white;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+    .header a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.85rem;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+    .header a:hover { opacity: 1; }
+    .header h1 { font-size: 1rem; font-weight: 800; }
+
+    /* ── MAIN ── */
+    .main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+
+    .landing-wrapper {
+      max-width: 680px;
+      width: 100%;
+    }
+
+    /* ── INFO CARD ── */
+    .info-card {
+      background: white;
+      border-radius: 20px;
+      padding: 32px 28px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .game-icon { font-size: 3.5rem; margin-bottom: 12px; }
+    .game-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #222;
+      margin-bottom: 8px;
+    }
+    .setting-badge {
+      display: inline-block;
+      background: #e8f8f0;
+      color: #1e8449;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 5px 16px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      border: 1.5px solid #a9dfbf;
+    }
+    .game-desc {
+      font-size: 0.92rem;
+      color: #666;
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto 20px;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .stat-pill {
+      background: #f0f8f4;
+      border: 1.5px solid #a9dfbf;
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #1e8449;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* ── ROLE CARDS ── */
+    .role-label {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 14px;
+    }
+    .role-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .role-card {
+      border-radius: 18px;
+      padding: 28px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+    .role-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.15);
+    }
+    .role-card::before {
+      content: '';
+      position: absolute;
+      top: -30px; right: -30px;
+      width: 100px; height: 100px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+    .role-card.student {
+      background: linear-gradient(135deg, #1a5c2a, #27ae60);
+      color: white;
+    }
+    .role-card.teacher {
+      background: linear-gradient(135deg, #1a3a5c, #2471a3);
+      color: white;
+    }
+    .role-avatar { font-size: 3rem; line-height: 1; }
+    .role-tag {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.75;
+      background: rgba(255,255,255,0.15);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .role-name { font-size: 1.2rem; font-weight: 800; line-height: 1.2; }
+    .role-sub  { font-size: 0.8rem; opacity: 0.85; line-height: 1.4; }
+    .role-links {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 100%;
+      margin-top: 6px;
+    }
+    .role-btn {
+      background: rgba(255,255,255,0.2);
+      border: 1.5px solid rgba(255,255,255,0.35);
+      border-radius: 10px;
+      padding: 9px 12px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+      display: block;
+      transition: background 0.2s;
+      text-align: center;
+    }
+    .role-btn:hover { background: rgba(255,255,255,0.3); }
+    .role-btn.primary {
+      background: rgba(255,255,255,0.95);
+      color: #1a5c2a;
+      border-color: transparent;
+    }
+    .role-btn.primary.blue { color: #1a3a5c; }
+    .role-btn.primary:hover { background: white; }
+
+    /* ── MENU HINT ── */
+    .menu-card {
+      background: white;
+      border-radius: 14px;
+      padding: 18px 22px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .menu-card-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .menu-card-icon {
+      font-size: 2rem;
+      width: 50px; height: 50px;
+      background: #e8f8f0;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .menu-card-text h4 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #222;
+      margin-bottom: 3px;
+    }
+    .menu-card-text p {
+      font-size: 0.78rem;
+      color: #888;
+      line-height: 1.4;
+    }
+    .btn-menu-link {
+      background: #e8f8f0;
+      color: #1e8449;
+      border: 2px solid #27ae60;
+      border-radius: 30px;
+      padding: 10px 22px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    .btn-menu-link:hover {
+      background: #27ae60;
+      color: white;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #aaa;
+      padding: 16px;
+      background: #222;
+    }
+
+    @media (max-width: 500px) {
+      .role-cards { grid-template-columns: 1fr; }
+      .game-title { font-size: 1.4rem; }
+      .menu-card  { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="../index.html">← Back to Games</a>
+    <h1>🥩 Pub Meal: After Work</h1>
+    <span style="font-size:0.8rem; opacity:0.7;">🇦🇺 Role-Play</span>
+  </header>
+
+  <main class="main">
+    <div class="landing-wrapper">
+
+      <div class="info-card">
+        <div class="game-icon">🥩🍺</div>
+        <div class="game-title">Pub Meal: After Work</div>
+        <div class="setting-badge">📍 The Ironbark Hotel, Melbourne – Friday 5:30pm</div>
+        <p class="game-desc">
+          You just finished a long week at the butcher shop! Your Australian workmates invite you to the pub for a meal and drinks. Practice ordering food and drinks, understanding Aussie pub culture, and chatting like a local! 🇦🇺
+        </p>
+        <div class="hero-stats">
+          <span class="stat-pill">🎭 Role-Play</span>
+          <span class="stat-pill">⏱️ 20–30 mins</span>
+          <span class="stat-pill">💬 6 Scenes</span>
+          <span class="stat-pill">😈 8 Challenges</span>
+          <span class="stat-pill">🍺 Pub Culture</span>
+        </div>
+      </div>
+
+      <div class="role-label">👇 Choose your role to begin</div>
+
+      <div class="role-cards">
+        <div class="role-card student">
+          <div class="role-avatar">🧑</div>
+          <div class="role-tag">Student</div>
+          <div class="role-name">I'm the Customer</div>
+          <div class="role-sub">Order food & drinks at an Aussie pub</div>
+          <div class="role-links">
+            <a class="role-btn primary" href="student.html">▶ Start Game</a>
+            <a class="role-btn" href="menu.html">📖 Study Menu First</a>
+          </div>
+        </div>
+
+        <div class="role-card teacher">
+          <div class="role-avatar">👨‍🍳</div>
+          <div class="role-tag">Teacher</div>
+          <div class="role-name">I'm the Pub Staff</div>
+          <div class="role-sub">Guide the student through the pub experience</div>
+          <div class="role-links">
+            <a class="role-btn primary blue" href="teacher.html">📋 Open Teacher Notes</a>
+            <a class="role-btn" href="menu.html" target="_blank">📖 View Student Menu</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-card-left">
+          <div class="menu-card-icon">📖</div>
+          <div class="menu-card-text">
+            <h4>New to Aussie pubs?</h4>
+            <p>Study the pub menu first! Learn food names, drink types & pub culture before playing.</p>
+          </div>
+        </div>
+        <a class="btn-menu-link" href="menu.html">📖 View Pub Menu →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    TeeTalkEnglish © 2025 · Built with ❤️ for Vietnamese learners in Australia
+  </footer>
+
+</body>
+</html>
