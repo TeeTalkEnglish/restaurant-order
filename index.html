@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aussie Restaurant – TeeTalkEnglish</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: #fdf0f0;
+      color: #333;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, #8b1a1a, #c0392b);
+      color: white;
+      text-align: center;
+      padding: 36px 20px 28px;
+    }
+
+    header .emoji-row {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    header h1 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    header p.subtitle {
+      font-size: 0.95rem;
+      margin-top: 6px;
+      opacity: 0.88;
+    }
+
+    header a.back-link {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: #ffd6d6;
+      text-decoration: none;
+    }
+
+    header a.back-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ── MAIN CONTENT ── */
+    main {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 0 20px 60px;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 18px;
+      margin-top: 40px;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 1px solid #e0c8c8;
+      margin-bottom: 20px;
+    }
+
+    /* ── CARDS GRID ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 22px 18px 18px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+
+    .card-number {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: #333;
+      color: #fff;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+
+    .badge.new    { background: #f39c12; color: #fff; }
+    .badge.live   { background: #27ae60; color: #fff; }
+    .badge.soon   { background: #bdc3c7; color: #fff; }
+
+    .card-icon {
+      font-size: 2rem;
+      margin: 28px 0 10px 0;
+    }
+
+    .card-type {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #999;
+      background: #f5f5f5;
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-bottom: 8px;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #222;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 0.82rem;
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-play {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #c0392b;
+      color: #fff;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 30px;
+      padding: 9px 18px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-play:hover {
+      background: #a93226;
+    }
+
+    .btn-coming-soon {
+      display: inline-block;
+      background: #ddd;
+      color: #999;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 30px;
+      padding: 9px 18px;
+      cursor: not-allowed;
+    }
+
+    /* ── INTRO BANNER ── */
+    .intro-banner {
+      background: linear-gradient(135deg, #fff5f5, #ffe0e0);
+      border-left: 4px solid #c0392b;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .intro-banner strong {
+      color: #c0392b;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #aaa;
+      padding: 20px;
+      background: #222;
+    }
+
+    footer a {
+      color: #ccc;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="emoji-row">🍽️ 🇦🇺</div>
+    <h1>Aussie Restaurant</h1>
+    <p class="subtitle">Learn English for dining out and ordering food in Australia</p>
+    <a class="back-link" href="https://teetalkenglish.github.io">← Back to TeeTalkEnglish</a>
+  </header>
+
+  <main>
+
+    <!-- INTRO -->
+    <div class="intro-banner">
+      🥩 You're a <strong>Vietnamese meat butcher</strong> arriving in Australia — time to eat out!
+      Practice ordering food, understanding Aussie menus, and chatting with waitstaff. 
+      Start with a conversation and work your way up!
+    </div>
+
+    <!-- CONVERSATION PRACTICE -->
+    <div class="section-title">💬 Conversation Practice</div>
+    <hr class="section-divider"/>
+    <div class="cards-grid">
+
+      <!-- Card 1 -->
+      <div class="card">
+        <div class="card-number">1</div>
+        <span class="badge live">LIVE</span>
+        <div class="card-icon">☕</div>
+        <div class="card-type">Conversation</div>
+        <h3>Café: Order Brekkie</h3>
+        <p>Order your first Australian breakfast. Ask about the menu, choose a coffee, and pay the bill.</p>
+        <a class="btn-play" href="game-cafe.html">▶ Play Now</a>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <div class="card-number">2</div>
+        <span class="badge live">LIVE</span>
+        <div class="card-icon">🥩</div>
+        <div class="card-type">Conversation</div>
+        <h3>Pub Meal: After Work</h3>
+        <p>After a long shift at the butcher shop, join your workmates for a pub meal. Order food and drinks like a local!</p>
+        <a class="btn-play" href="game-pub.html">▶ Play Now</a>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <div class="card-number">3</div>
+        <span class="badge new">NEW</span>
+        <div class="card-icon">🍜</div>
+        <div class="card-type">Conversation</div>
+        <h3>Food Court: Lunch Break</h3>
+        <p>It's lunchtime! Navigate a busy food court, ask about dietary options, and order your meal quickly.</p>
+        <a class="btn-play" href="game-foodcourt.html">▶ Play Now</a>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card">
+        <div class="card-number">4</div>
+        <span class="badge soon">SOON</span>
+        <div class="card-icon">🍕</div>
+        <div class="card-type">Conversation</div>
+        <h3>Restaurant: Formal Dinner</h3>
+        <p>Practice a sit-down restaurant experience — make a reservation, read the menu, and handle the bill.</p>
+        <span class="btn-coming-soon">Coming Soon</span>
+      </div>
+
+    </div>
+
+    <!-- QUIZ & VOCAB -->
+    <div class="section-title">🧠 Quiz & Vocab Support</div>
+    <hr class="section-divider"/>
+    <div class="cards-grid">
+
+      <!-- Card 5 -->
+      <div class="card">
+        <div class="card-number">5</div>
+        <span class="badge new">NEW</span>
+        <div class="card-icon">🗣️</div>
+        <div class="card-type">Quiz</div>
+        <h3>Aussie Food Slang Quiz</h3>
+        <p>What is a "brekkie"? What does "arvo snack" mean? Test your Aussie food vocabulary!</p>
+        <a class="btn-play" href="game-slang-quiz.html">▶ Play Now</a>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="card">
+        <div class="card-number">6</div>
+        <span class="badge soon">SOON</span>
+        <div class="card-icon">🧩</div>
+        <div class="card-type">Memory</div>
+        <h3>Menu Vocab Match</h3>
+        <p>Match Australian menu words to their meanings. Perfect for reading menus with confidence!</p>
+        <span class="btn-coming-soon">Coming Soon</span>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>TeeTalkEnglish © 2025 &nbsp;·&nbsp; Built with ❤️ for Vietnamese learners in Australia</p>
+  </footer>
+
+</body>
+</html>
