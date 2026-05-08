@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Southern Cross Food Court Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Nunito', sans-serif; background: #0f172a; min-height: 100vh; color: #1f2937; }
+    .top-nav { background: linear-gradient(135deg, #0f766e, #f97316); padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 20; box-shadow: 0 2px 10px rgba(0,0,0,0.28); }
+    .top-nav a, .top-nav span { color: white; text-decoration: none; font-size: 0.88rem; font-weight: 800; }
+    .btn-play-nav { background: white; color: #0f766e !important; border-radius: 20px; padding: 7px 16px; }
+    .study-banner { background: #fff7ed; border-bottom: 2px solid #fb923c; padding: 12px 20px; text-align: center; font-size: 0.88rem; color: #9a3412; font-weight: 700; line-height: 1.5; }
+    .menu-wrapper { max-width: 880px; margin: 30px auto; padding: 0 16px 60px; }
+    .menu-card { background: #f8fafc; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 34px rgba(0,0,0,0.35); border: 1px solid #fed7aa; }
+    .menu-header { background: linear-gradient(135deg, #0f766e, #115e59); color: white; padding: 34px 28px 28px; text-align: center; }
+    .market-row { font-size: 1.35rem; letter-spacing: 6px; margin-bottom: 8px; }
+    .market-name { font-family: 'Playfair Display', serif; font-size: 2.5rem; line-height: 1.05; margin-bottom: 8px; }
+    .market-tagline { color: #ccfbf1; font-size: 0.92rem; margin-bottom: 12px; }
+    .market-info { color: #99f6e4; font-size: 0.78rem; }
+    .menu-body { padding: 0 28px 28px; }
+    .stall-section { margin-top: 30px; background: white; border-radius: 8px; border: 1px solid #e2e8f0; overflow: hidden; }
+    .stall-header { padding: 15px 18px; display: flex; align-items: center; gap: 12px; background: #fff7ed; border-bottom: 1px solid #fed7aa; }
+    .stall-icon { font-size: 1.5rem; }
+    .stall-title { font-size: 1.1rem; font-weight: 800; color: #9a3412; }
+    .stall-note { font-size: 0.78rem; color: #64748b; margin-left: auto; text-align: right; }
+    .items { padding: 18px; display: grid; gap: 16px; }
+    .menu-item { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding-bottom: 14px; border-bottom: 1px dashed #cbd5e1; }
+    .menu-item:last-child { border-bottom: 0; padding-bottom: 0; }
+    .item-name { font-weight: 800; color: #1f2937; margin-bottom: 4px; display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
+    .item-desc { font-size: 0.84rem; color: #64748b; line-height: 1.55; }
+    .item-price { font-weight: 800; color: #0f766e; white-space: nowrap; }
+    .tag { display: inline-block; font-size: 0.64rem; font-weight: 800; padding: 2px 7px; border-radius: 10px; }
+    .tag-pop { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+    .tag-veg { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+    .tag-gf { background: #dbeafe; color: #1d4ed8; border: 1px solid #bfdbfe; }
+    .options-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .option-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; font-size: 0.84rem; color: #475569; line-height: 1.5; }
+    .option-box strong { display: block; color: #0f766e; margin-bottom: 4px; }
+    .phrase-box { margin-top: 24px; padding: 18px; border-radius: 8px; background: #ecfeff; border: 1px solid #67e8f9; color: #155e75; }
+    .phrase-box h3 { font-size: 1rem; margin-bottom: 10px; color: #0e7490; }
+    .phrase-box ul { padding-left: 20px; line-height: 1.8; font-size: 0.86rem; }
+    .menu-footer { background: #111827; color: #cbd5e1; text-align: center; padding: 18px; font-size: 0.78rem; line-height: 1.7; }
+    @media (max-width: 640px) { .top-nav { flex-direction: column; gap: 8px; } .market-name { font-size: 1.85rem; } .menu-body { padding: 0 14px 18px; } .stall-header { align-items: flex-start; } .stall-note { margin-left: 0; text-align: left; } .menu-item { flex-direction: column; gap: 4px; } .options-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <nav class="top-nav">
+    <a href="index.html">← Back</a>
+    <span>🍜 Southern Cross Food Court</span>
+    <a class="btn-play-nav" href="student.html">Start Role-Play</a>
+  </nav>
+
+  <div class="study-banner">
+    Study this menu when your scene needs it. Practise asking about combos, sauces, spice level, and pickup numbers.
+  </div>
+
+  <div class="menu-wrapper">
+    <div class="menu-card">
+      <div class="menu-header">
+        <div class="market-row">🍜 🥗 🍔 🥤</div>
+        <div class="market-name">Southern Cross Food Court</div>
+        <div class="market-tagline">Quick lunch · Big choice · Order at the counter</div>
+        <div class="market-info">Level 2, Collins Arcade · Open 10:30am-3:30pm weekdays</div>
+      </div>
+
+      <div class="menu-body">
+        <section class="stall-section">
+          <div class="stall-header">
+            <span class="stall-icon">🍜</span>
+            <div class="stall-title">Wok & Roll Noodles</div>
+            <div class="stall-note">Ready in 5-8 minutes</div>
+          </div>
+          <div class="items">
+            <div class="menu-item"><div><div class="item-name">Chicken Laksa <span class="tag tag-pop">POPULAR</span></div><div class="item-desc">Coconut curry noodle soup with chicken, tofu puffs, bean sprouts and herbs. Mild or spicy.</div></div><div class="item-price">$16.50</div></div>
+            <div class="menu-item"><div><div class="item-name">Beef Stir-Fry Noodles</div><div class="item-desc">Hokkien noodles with beef strips, mixed vegetables and oyster sauce.</div></div><div class="item-price">$15.90</div></div>
+            <div class="menu-item"><div><div class="item-name">Veggie Rice Bowl <span class="tag tag-veg">VEG</span></div><div class="item-desc">Steamed rice, tofu, broccoli, carrot, edamame and teriyaki sauce.</div></div><div class="item-price">$14.50</div></div>
+          </div>
+        </section>
+
+        <section class="stall-section">
+          <div class="stall-header">
+            <span class="stall-icon">🥙</span>
+            <div class="stall-title">Fresh Wrap Co.</div>
+            <div class="stall-note">Eat here or takeaway</div>
+          </div>
+          <div class="items">
+            <div class="menu-item"><div><div class="item-name">Chicken Schnitzel Wrap <span class="tag tag-pop">POPULAR</span></div><div class="item-desc">Crumbed chicken, lettuce, tomato, cheese and aioli in a toasted wrap.</div></div><div class="item-price">$13.90</div></div>
+            <div class="menu-item"><div><div class="item-name">Falafel Salad Bowl <span class="tag tag-veg">VEG</span> <span class="tag tag-gf">GF</span></div><div class="item-desc">Falafel, tabouli, lettuce, cucumber, pickles and hummus dressing.</div></div><div class="item-price">$14.90</div></div>
+            <div class="menu-item"><div><div class="item-name">Tuna Melt Toastie</div><div class="item-desc">Tuna, cheese, corn and spring onion on toasted sourdough.</div></div><div class="item-price">$11.50</div></div>
+          </div>
+        </section>
+
+        <section class="stall-section">
+          <div class="stall-header">
+            <span class="stall-icon">🍔</span>
+            <div class="stall-title">Burger Lane</div>
+            <div class="stall-note">Combo +$5.50 with chips and drink</div>
+          </div>
+          <div class="items">
+            <div class="menu-item"><div><div class="item-name">Classic Beef Burger</div><div class="item-desc">Beef patty, cheese, lettuce, tomato, pickles and burger sauce.</div></div><div class="item-price">$15.00</div></div>
+            <div class="menu-item"><div><div class="item-name">Grilled Chicken Burger</div><div class="item-desc">Grilled chicken, slaw, tomato and peri-peri mayo.</div></div><div class="item-price">$15.50</div></div>
+            <div class="menu-item"><div><div class="item-name">Chips Box</div><div class="item-desc">Hot chips with chicken salt, plain salt, or no salt.</div></div><div class="item-price">$6.50</div></div>
+          </div>
+        </section>
+
+        <section class="stall-section">
+          <div class="stall-header">
+            <span class="stall-icon">🥤</span>
+            <div class="stall-title">Drinks & Extras</div>
+            <div class="stall-note">Grab-and-go counter</div>
+          </div>
+          <div class="items">
+            <div class="options-grid">
+              <div class="option-box"><strong>Drinks</strong> Coke $4.50 · Lemonade $4.50 · Iced tea $5.00 · Water $3.50</div>
+              <div class="option-box"><strong>Sauces</strong> Aioli · Sweet chilli · BBQ · Peri-peri · Soy sauce · No sauce</div>
+              <div class="option-box"><strong>Requests</strong> No onion · Sauce on the side · Mild spice · Takeaway container</div>
+            </div>
+          </div>
+        </section>
+
+        <div class="phrase-box">
+          <h3>Useful food court phrases</h3>
+          <ul>
+            <li>"Can I get this as a combo, please?"</li>
+            <li>"Is it spicy? Can you make it mild?"</li>
+            <li>"Does this have nuts, dairy, or seafood in it?"</li>
+            <li>"Could I get the sauce on the side?"</li>
+            <li>"Is this for here or takeaway?" - "Takeaway, please."</li>
+            <li>"What pickup number am I?"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="menu-footer">
+        Pickup screens are near each stall. Listen for your number and keep your receipt.
+        <br>Cards accepted · Some stalls add a small card surcharge.
+      </div>
+    </div>
+  </div>
+</body>
+</html>

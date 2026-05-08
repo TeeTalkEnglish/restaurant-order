@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Food Court: Lunch Break - Aussie Restaurant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Nunito', sans-serif; background: #fff7ed; min-height: 100vh; display: flex; flex-direction: column; color: #263238; }
+    .header { background: linear-gradient(135deg, #0f766e, #f97316); color: white; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+    .header a { color: white; text-decoration: none; font-size: 0.85rem; opacity: 0.9; }
+    .header h1 { font-size: 1rem; font-weight: 800; }
+    .main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 16px; }
+    .landing-wrapper { max-width: 720px; width: 100%; }
+    .info-card, .menu-card { background: white; border-radius: 18px; box-shadow: 0 4px 20px rgba(15,118,110,0.12); }
+    .info-card { padding: 32px 28px; text-align: center; margin-bottom: 24px; border: 1px solid #fed7aa; }
+    .game-icon { font-size: 3.4rem; margin-bottom: 12px; }
+    .game-title { font-size: 1.8rem; font-weight: 800; color: #1f2937; margin-bottom: 8px; }
+    .setting-badge { display: inline-block; background: #ccfbf1; color: #0f766e; font-size: 0.82rem; font-weight: 800; padding: 5px 16px; border-radius: 20px; margin-bottom: 16px; border: 1.5px solid #5eead4; }
+    .game-desc { font-size: 0.94rem; color: #5f6b72; line-height: 1.7; max-width: 520px; margin: 0 auto 20px; }
+    .hero-stats { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .stat-pill { background: #fff7ed; border: 1.5px solid #fdba74; border-radius: 20px; padding: 5px 14px; font-size: 0.75rem; font-weight: 800; color: #c2410c; }
+    .role-label { text-align: center; font-size: 0.75rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: #64748b; margin-bottom: 14px; }
+    .role-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .role-card { border-radius: 18px; padding: 28px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+    .role-card.student { background: linear-gradient(135deg, #0f766e, #14b8a6); color: white; }
+    .role-card.teacher { background: linear-gradient(135deg, #9a3412, #f97316); color: white; }
+    .role-avatar { font-size: 3rem; line-height: 1; }
+    .role-tag { font-size: 0.65rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; opacity: 0.78; background: rgba(255,255,255,0.16); padding: 3px 10px; border-radius: 20px; }
+    .role-name { font-size: 1.2rem; font-weight: 800; }
+    .role-sub { font-size: 0.82rem; opacity: 0.9; line-height: 1.4; }
+    .role-links { display: flex; flex-direction: column; gap: 6px; width: 100%; margin-top: 6px; }
+    .role-btn { background: rgba(255,255,255,0.18); border: 1.5px solid rgba(255,255,255,0.35); border-radius: 10px; padding: 9px 12px; color: white; text-decoration: none; font-size: 0.8rem; font-weight: 800; }
+    .role-btn.primary { background: white; color: #0f766e; border-color: transparent; }
+    .role-card.teacher .role-btn.primary { color: #9a3412; }
+    .menu-card { padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; border: 1px solid #fed7aa; }
+    .menu-card-left { display: flex; align-items: center; gap: 14px; }
+    .menu-card-icon { font-size: 2rem; width: 50px; height: 50px; background: #ccfbf1; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .menu-card-text h4 { font-size: 0.95rem; font-weight: 800; margin-bottom: 3px; }
+    .menu-card-text p { font-size: 0.8rem; color: #64748b; line-height: 1.4; }
+    .btn-menu-link { background: #fff7ed; color: #c2410c; border: 2px solid #f97316; border-radius: 30px; padding: 10px 22px; font-size: 0.82rem; font-weight: 800; text-decoration: none; white-space: nowrap; }
+    footer { text-align: center; font-size: 0.75rem; color: #94a3b8; padding: 16px; background: #1f2937; }
+    @media (max-width: 560px) { .role-cards { grid-template-columns: 1fr; } .header { flex-direction: column; gap: 6px; } .menu-card { flex-direction: column; text-align: center; } }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="../index.html">← Back to Games</a>
+    <h1>🍜 Food Court: Lunch Break</h1>
+    <span style="font-size:0.8rem; opacity:0.82;">🇦🇺 Role-Play</span>
+  </header>
+
+  <main class="main">
+    <div class="landing-wrapper">
+      <div class="info-card">
+        <div class="game-icon">🍜🥤</div>
+        <div class="game-title">Food Court: Lunch Break</div>
+        <div class="setting-badge">📍 Southern Cross Food Court, Melbourne - 12:20pm</div>
+        <p class="game-desc">
+          You have a short lunch break during work. Practise choosing a stall, ordering a combo meal,
+          asking about spice and ingredients, listening for your pickup number, and fixing a mistake politely.
+        </p>
+        <div class="hero-stats">
+          <span class="stat-pill">🎭 Role-Play</span>
+          <span class="stat-pill">⏱️ 15-25 mins</span>
+          <span class="stat-pill">💬 6 Scenes</span>
+          <span class="stat-pill">⚡ Fast Service</span>
+          <span class="stat-pill">🥡 Takeaway Culture</span>
+        </div>
+      </div>
+
+      <div class="role-label">Choose your role to begin</div>
+      <div class="role-cards">
+        <div class="role-card student">
+          <div class="role-avatar">🧑</div>
+          <div class="role-tag">Student</div>
+          <div class="role-name">I'm the Customer</div>
+          <div class="role-sub">Order lunch in a busy Aussie food court</div>
+          <div class="role-links">
+            <a class="role-btn primary" href="student.html">▶ Start Game</a>
+            <a class="role-btn" href="menu.html">📖 Study Menu First</a>
+          </div>
+        </div>
+
+        <div class="role-card teacher">
+          <div class="role-avatar">👩‍🍳</div>
+          <div class="role-tag">Teacher</div>
+          <div class="role-name">I'm the Food Court Staff</div>
+          <div class="role-sub">Guide the student through quick-service English</div>
+          <div class="role-links">
+            <a class="role-btn primary" href="teacher.html">📋 Open Teacher Notes</a>
+            <a class="role-btn" href="menu.html" target="_blank">📖 View Student Menu</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-card-left">
+          <div class="menu-card-icon">📖</div>
+          <div class="menu-card-text">
+            <h4>Short lunch break?</h4>
+            <p>Study the stalls, combos, sauces, and pickup language before playing.</p>
+          </div>
+        </div>
+        <a class="btn-menu-link" href="menu.html">📖 View Food Court Menu →</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>TeeTalkEnglish © 2025 · Built for Vietnamese learners in Australia</footer>
+</body>
+</html>

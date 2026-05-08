@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Teacher Notes - Food Court: Lunch Break</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Nunito', sans-serif; background: #f1f5f9; min-height: 100vh; color: #1f2937; }
+    .header { background: linear-gradient(135deg, #0f766e, #f97316); color: white; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; position: sticky; top: 0; z-index: 20; box-shadow: 0 2px 12px rgba(0,0,0,0.2); }
+    .header h1 { font-size: 1.1rem; font-weight: 800; }
+    .header p { font-size: 0.78rem; opacity: 0.86; margin-top: 2px; }
+    .header-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .header-btn { color: white; text-decoration: none; border: 1.5px solid rgba(255,255,255,0.38); border-radius: 999px; padding: 8px 14px; font-size: 0.8rem; font-weight: 800; background: rgba(255,255,255,0.14); }
+    .top-banner { background: #fff7ed; border-bottom: 2px solid #fb923c; color: #9a3412; padding: 12px 24px; font-size: 0.88rem; font-weight: 700; line-height: 1.5; }
+    .main-wrapper { max-width: 1000px; margin: 28px auto; padding: 0 16px 60px; display: grid; gap: 22px; }
+    .card { background: white; border-radius: 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); overflow: hidden; }
+    .card-header { color: white; padding: 16px 22px; display: flex; align-items: center; gap: 10px; }
+    .card-header.green { background: linear-gradient(135deg, #0f766e, #14b8a6); }
+    .card-header.orange { background: linear-gradient(135deg, #9a3412, #f97316); }
+    .card-header.blue { background: linear-gradient(135deg, #1d4ed8, #0284c7); }
+    .card-header.dark { background: linear-gradient(135deg, #1f2937, #475569); }
+    .card-icon { font-size: 1.5rem; }
+    .card-header h2 { font-size: 1rem; font-weight: 800; }
+    .card-header p { font-size: 0.8rem; opacity: 0.88; margin-top: 2px; }
+    .card-body { padding: 22px; }
+    .tips-list { display: grid; gap: 10px; }
+    .tip-row { display: flex; gap: 12px; align-items: flex-start; background: #f8fafc; border-radius: 10px; padding: 12px 16px; }
+    .tip-emoji { font-size: 1.25rem; }
+    .tip-text { font-size: 0.86rem; color: #475569; line-height: 1.55; }
+    .tip-text strong { color: #0f766e; }
+    .scene-focus-toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+    .scene-tab { border: 2px solid #e2e8f0; background: white; color: #0f766e; border-radius: 999px; padding: 8px 13px; font-size: 0.78rem; font-weight: 800; cursor: pointer; }
+    .scene-tab.active { background: #0f766e; border-color: #0f766e; color: white; }
+    .teacher-scene-panel { border: 2px solid #fed7aa; border-radius: 14px; overflow: hidden; background: #fffdf7; }
+    .teacher-scene-head { background: linear-gradient(135deg, #9a3412, #f97316); color: white; padding: 18px 20px; }
+    .teacher-scene-kicker { font-size: 0.74rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; opacity: 0.86; margin-bottom: 5px; }
+    .teacher-scene-title { font-size: 1.35rem; font-weight: 800; }
+    .teacher-scene-body { padding: 18px 20px 20px; display: grid; gap: 12px; }
+    .teacher-scene-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .teacher-note { border-radius: 10px; padding: 12px 14px; font-size: 0.84rem; line-height: 1.55; background: #f8fafc; color: #334155; border-left: 4px solid #0284c7; }
+    .teacher-note strong { display: block; color: #0f172a; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .teacher-note.student { background: #ecfeff; border-left-color: #06b6d4; color: #155e75; }
+    .teacher-note.challenge { background: #fff7ed; border-left-color: #f97316; color: #9a3412; }
+    .teacher-note.full { grid-column: 1 / -1; }
+    .teacher-challenge-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .teacher-challenge-mini { background: white; border: 1px solid #fed7aa; border-radius: 8px; padding: 10px 12px; }
+    .teacher-challenge-mini b { display: block; color: #c2410c; font-size: 0.78rem; margin-bottom: 4px; }
+    .teacher-challenge-mini span { display: block; color: #0f172a; font-style: italic; }
+    .teacher-scene-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 6px; }
+    .btn { text-decoration: none; border: 2px solid #0f766e; border-radius: 999px; padding: 10px 16px; font-size: 0.82rem; font-weight: 800; color: #0f766e; background: white; cursor: pointer; font-family: 'Nunito', sans-serif; }
+    .btn.primary { background: #0f766e; color: white; }
+    .btn.menu { background: #f97316; border-color: #f97316; color: white; }
+    .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+    .vocab-item { background: #f8fafc; border-left: 3px solid #0f766e; border-radius: 8px; padding: 10px 12px; }
+    .vocab-word { font-weight: 800; color: #0f766e; font-size: 0.88rem; }
+    .vocab-meaning { color: #64748b; font-size: 0.78rem; margin-top: 3px; line-height: 1.45; }
+    .checklist { display: grid; gap: 8px; }
+    .check-item { display: flex; align-items: center; gap: 12px; background: #f8fafc; border-radius: 8px; padding: 10px 14px; cursor: pointer; }
+    .check-item input { width: 18px; height: 18px; accent-color: #0f766e; }
+    .check-item label { font-size: 0.85rem; color: #334155; cursor: pointer; line-height: 1.4; }
+    .check-item.checked { background: #ccfbf1; }
+    @media (max-width: 650px) { .header { align-items: flex-start; } .teacher-scene-grid, .teacher-challenge-list { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>🍜 Food Court: Lunch Break - Teacher Notes</h1>
+      <p>Quick-service role-play guide for the teacher / food court staff</p>
+    </div>
+    <div class="header-btns">
+      <a class="header-btn" href="index.html">Home</a>
+      <a class="header-btn" href="student.html" target="_blank">Student Page</a>
+      <a class="header-btn" href="menu.html" target="_blank">Menu</a>
+    </div>
+  </header>
+
+  <div class="top-banner">
+    Teacher only. Keep one scene active, speak as busy but friendly food court staff, and show the student menu only when the scene needs it.
+  </div>
+
+  <main class="main-wrapper">
+    <div class="card">
+      <div class="card-header green"><span class="card-icon">🎯</span><div><h2>How to Run</h2><p>Fast lunch-break English with realistic pressure</p></div></div>
+      <div class="card-body">
+        <div class="tips-list">
+          <div class="tip-row"><div class="tip-emoji">🧑</div><div class="tip-text"><strong>Student device:</strong> Open <code>game-foodcourt/student.html</code>. The student sees one scene at a time and opens the menu only when needed.</div></div>
+          <div class="tip-row"><div class="tip-emoji">👩‍🍳</div><div class="tip-text"><strong>Teacher device:</strong> Use this page. Move scene by scene and add challenges when the student is ready.</div></div>
+          <div class="tip-row"><div class="tip-emoji">⚡</div><div class="tip-text"><strong>Food court style:</strong> Keep it quick, clear, and slightly noisy. Ask short follow-up questions like real counter staff.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header orange"><span class="card-icon">🎬</span><div><h2>Scene-by-Scene Script</h2><p>Each scene includes teacher lines and matching challenges</p></div></div>
+      <div class="card-body">
+        <div class="scene-focus-toolbar" id="teacherSceneTabs"></div>
+        <div class="teacher-scene-panel">
+          <div class="teacher-scene-head">
+            <div class="teacher-scene-kicker" id="teacherSceneKicker">Scene 1 of 6</div>
+            <div class="teacher-scene-title" id="teacherSceneTitle">Choose a Stall</div>
+          </div>
+          <div class="teacher-scene-body">
+            <div class="teacher-note"><strong>Say</strong><span id="teacherSceneSay"></span></div>
+            <div class="teacher-scene-grid">
+              <div class="teacher-note student"><strong>Student focus</strong><span id="teacherSceneStudent"></span></div>
+              <div class="teacher-note"><strong>When to show the menu</strong><span id="teacherSceneMenu"></span></div>
+              <div class="teacher-note challenge full"><strong>Extra challenges for this scene</strong><div class="teacher-challenge-list" id="teacherSceneChallenges"></div></div>
+            </div>
+            <div class="teacher-scene-actions">
+              <button class="btn" type="button" onclick="changeTeacherScene(-1)">Back</button>
+              <button class="btn primary" type="button" onclick="changeTeacherScene(1)">Next Scene</button>
+              <a class="btn menu" href="student.html" target="_blank">Open Student Page</a>
+              <a class="btn menu" href="menu.html" target="_blank">Full Menu</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header blue"><span class="card-icon">📖</span><div><h2>Food Court Vocab</h2><p>Useful language to recycle during the role-play</p></div></div>
+      <div class="card-body">
+        <div class="vocab-grid">
+          <div class="vocab-item"><div class="vocab-word">For here / takeaway</div><div class="vocab-meaning">Eat in the food court or take the food away.</div></div>
+          <div class="vocab-item"><div class="vocab-word">Combo</div><div class="vocab-meaning">Meal plus chips or drink for one price.</div></div>
+          <div class="vocab-item"><div class="vocab-word">Pickup number</div><div class="vocab-meaning">Number called when food is ready.</div></div>
+          <div class="vocab-item"><div class="vocab-word">Sauce on the side</div><div class="vocab-meaning">Sauce separate, not mixed into the meal.</div></div>
+          <div class="vocab-item"><div class="vocab-word">Mild / spicy</div><div class="vocab-meaning">How hot the food tastes.</div></div>
+          <div class="vocab-item"><div class="vocab-word">Surcharge</div><div class="vocab-meaning">Small extra card payment fee.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header dark"><span class="card-icon">✅</span><div><h2>Post-Lesson Checklist</h2><p>Tick off what the student achieved</p></div></div>
+      <div class="card-body">
+        <div class="checklist">
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/><label>Student chose a stall and asked a recommendation question</label></div>
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/><label>Student ordered clearly and answered for here / takeaway</label></div>
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/><label>Student asked about spice, ingredients, or sauce</label></div>
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/><label>Student understood the total and pickup number</label></div>
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/><label>Student corrected a wrong or missing item politely</label></div>
+          <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/><label>Student stayed calm and clear in a busy setting</label></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const teacherScenes = [
+      {
+        title: 'Choose a Stall',
+        say: 'Hi there. Are you still deciding, or do you know what you would like?',
+        student: 'Choose quickly, ask what is popular, and mention the short lunch break.',
+        menu: 'Show the menu so the student can compare stalls.',
+        challenges: [
+          { title: 'Long wait', line: '"Just so you know, noodles are about a 12-minute wait today."' },
+          { title: 'Recommendation', line: '"The chicken laksa is popular, but it is a little spicy."' },
+          { title: 'Busy counter', line: '"Sorry, could you speak up a bit? It is loud in here."' }
+        ]
+      },
+      {
+        title: 'Order at the Counter',
+        say: 'What can I get for you? And is that for here or takeaway?',
+        student: 'Order one meal clearly, answer takeaway/for here, and choose a combo or drink.',
+        menu: 'Show the menu while they choose the item and combo.',
+        challenges: [
+          { title: 'Combo offer', line: '"Do you want to make that a combo with chips and a drink?"' },
+          { title: 'Sold out item', line: '"Sorry, the tuna melt is sold out. Would you like the schnitzel wrap instead?"' },
+          { title: 'Fast follow-up', line: '"Any drink with that? Coke, water, iced tea?"' }
+        ]
+      },
+      {
+        title: 'Customise the Meal',
+        say: 'Any changes? Sauce, spice level, or anything you do not want in it?',
+        student: 'Ask about ingredients and make a small change politely.',
+        menu: 'Show the menu if they need to check allergens or sauces.',
+        challenges: [
+          { title: 'Spice warning', line: '"The laksa is medium spicy. Do you want mild?"' },
+          { title: 'Allergen check', line: '"It may contain traces of peanuts. Is that okay?"' },
+          { title: 'No change possible', line: '"Sorry, the sauce is already mixed in. Is that still alright?"' }
+        ]
+      },
+      {
+        title: 'Pay and Get a Number',
+        say: 'That is $21.40 altogether. You are pickup number 42.',
+        student: 'Pay by card, understand the total, and repeat the pickup number if needed.',
+        menu: 'No menu needed. Focus on numbers and payment language.',
+        challenges: [
+          { title: 'Card surcharge', line: '"There is a 1% card surcharge. Is that okay?"' },
+          { title: 'Fast number', line: '"Number forty-two. Watch the screen near the counter."' },
+          { title: 'Receipt reminder', line: '"Keep your receipt. You will need it for pickup."' }
+        ]
+      },
+      {
+        title: 'Pick Up the Food',
+        say: 'Number 42! Chicken laksa, takeaway!',
+        student: 'Listen for the pickup number and confirm the correct order.',
+        menu: 'No menu needed unless they need to confirm the order name.',
+        challenges: [
+          { title: 'Wrong number', line: '"This is number 24, not 42. Yours will be next."' },
+          { title: 'Missing cutlery', line: '"Cutlery and napkins are just over there on the side."' },
+          { title: 'Order check', line: '"Can I see your receipt quickly?"' }
+        ]
+      },
+      {
+        title: 'Fix a Problem',
+        say: 'Is everything alright with your order?',
+        student: 'Politely explain a wrong order, missing item, or spice problem.',
+        menu: 'Show the menu if they need to compare what they ordered.',
+        challenges: [
+          { title: 'Wrong meal', line: '"Oh, did you order the veggie bowl? Let me check that for you."' },
+          { title: 'Missing drink', line: '"Sorry about that. What drink was included in your combo?"' },
+          { title: 'Too spicy', line: '"I can remake it mild, but it may take another five minutes."' }
+        ]
+      }
+    ];
+
+    let teacherSceneIndex = 0;
+
+    function renderTeacherScene() {
+      const scene = teacherScenes[teacherSceneIndex];
+      document.getElementById('teacherSceneKicker').textContent = 'Scene ' + (teacherSceneIndex + 1) + ' of ' + teacherScenes.length;
+      document.getElementById('teacherSceneTitle').textContent = scene.title;
+      document.getElementById('teacherSceneSay').textContent = scene.say;
+      document.getElementById('teacherSceneStudent').textContent = scene.student;
+      document.getElementById('teacherSceneMenu').textContent = scene.menu;
+
+      const list = document.getElementById('teacherSceneChallenges');
+      list.innerHTML = '';
+      scene.challenges.forEach(function(challenge) {
+        const item = document.createElement('div');
+        item.className = 'teacher-challenge-mini';
+        const title = document.createElement('b');
+        title.textContent = challenge.title;
+        const line = document.createElement('span');
+        line.textContent = challenge.line;
+        item.appendChild(title);
+        item.appendChild(line);
+        list.appendChild(item);
+      });
+
+      const tabs = document.getElementById('teacherSceneTabs');
+      tabs.innerHTML = '';
+      teacherScenes.forEach(function(_, index) {
+        const tab = document.createElement('button');
+        tab.type = 'button';
+        tab.className = 'scene-tab' + (index === teacherSceneIndex ? ' active' : '');
+        tab.textContent = 'Scene ' + (index + 1);
+        tab.onclick = function() { goToTeacherScene(index); };
+        tabs.appendChild(tab);
+      });
+    }
+
+    function goToTeacherScene(index) {
+      teacherSceneIndex = Math.max(0, Math.min(teacherScenes.length - 1, index));
+      renderTeacherScene();
+    }
+
+    function changeTeacherScene(direction) { goToTeacherScene(teacherSceneIndex + direction); }
+
+    function toggleCheck(item) {
+      const cb = item.querySelector('input[type="checkbox"]');
+      cb.checked = !cb.checked;
+      item.classList.toggle('checked', cb.checked);
+    }
+
+    renderTeacherScene();
+  </script>
+</body>
+</html>

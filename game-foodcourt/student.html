@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student - Food Court: Lunch Break</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Nunito', sans-serif; background: #0f172a; min-height: 100vh; color: #1f2937; }
+    .top-nav { background: linear-gradient(135deg, #0f766e, #f97316); padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 30; box-shadow: 0 2px 10px rgba(0,0,0,0.28); }
+    .top-nav a, .top-nav span { color: white; text-decoration: none; font-size: 0.88rem; font-weight: 800; }
+    .role-pill { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.34); border-radius: 20px; padding: 5px 14px; font-size: 0.75rem; color: white; font-weight: 800; }
+    .student-banner { background: #fff7ed; border-bottom: 2px solid #fb923c; padding: 12px 20px; text-align: center; font-size: 0.88rem; color: #9a3412; font-weight: 700; line-height: 1.5; }
+    .scene-focus, .menu-wrapper { max-width: 860px; margin: 30px auto 0; padding: 0 16px; }
+    .scene-card { background: #fffdf7; border: 2px solid #fed7aa; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.24); overflow: hidden; }
+    .scene-top { background: linear-gradient(135deg, #0f766e, #14b8a6); color: white; padding: 20px 24px; }
+    .scene-kicker { font-size: 0.78rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; opacity: 0.84; margin-bottom: 6px; }
+    .scene-title-focus { font-size: 1.55rem; line-height: 1.2; margin-bottom: 6px; }
+    .scene-goal { font-size: 0.95rem; line-height: 1.55; color: rgba(255,255,255,0.92); }
+    .scene-dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
+    .scene-dot-mini { width: 10px; height: 10px; border-radius: 50%; border: 0; background: rgba(255,255,255,0.5); cursor: pointer; }
+    .scene-dot-mini.active { background: #fed7aa; }
+    .scene-body { padding: 22px 24px 24px; display: grid; gap: 16px; }
+    .scene-prompt { background: #f8fafc; border-left: 4px solid #0f766e; border-radius: 0 10px 10px 0; padding: 14px 16px; line-height: 1.6; font-size: 0.95rem; }
+    .scene-help { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .scene-help-box, .scene-talk-box { border-radius: 10px; padding: 13px 14px; font-size: 0.86rem; line-height: 1.55; }
+    .scene-help-box { background: #fff7ed; border: 1px solid #fed7aa; color: #9a3412; }
+    .scene-talk-box { background: #ecfeff; border: 1px solid #67e8f9; color: #155e75; }
+    .scene-help-box strong, .scene-talk-box strong { display: block; color: #1f2937; margin-bottom: 6px; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .talk-list { display: grid; gap: 8px; }
+    .talk-item { background: white; border: 1px solid #bae6fd; border-radius: 8px; padding: 9px 11px; color: #0f172a; }
+    .talk-item b { display: block; color: #0f766e; font-size: 0.78rem; margin-bottom: 2px; }
+    .scene-controls, .actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 18px; }
+    .scene-btn, .btn-action { border-radius: 999px; padding: 12px 18px; font-family: 'Nunito', sans-serif; font-size: 0.86rem; font-weight: 800; cursor: pointer; text-decoration: none; border: 2px solid #0f766e; background: white; color: #0f766e; }
+    .scene-btn.primary, .btn-green { background: #0f766e; color: white; }
+    .scene-btn.menu { background: #f97316; border-color: #f97316; color: white; }
+    .scene-btn.menu.active { background: #9a3412; border-color: #9a3412; }
+    .menu-card.is-hidden { display: none; }
+    .menu-wrapper { padding-bottom: 60px; }
+    .menu-card { background: #f8fafc; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 34px rgba(0,0,0,0.35); border: 1px solid #fed7aa; margin-top: 4px; }
+    .menu-header { background: linear-gradient(135deg, #0f766e, #115e59); color: white; padding: 28px; text-align: center; }
+    .menu-title { font-size: 1.85rem; font-weight: 800; margin-bottom: 6px; }
+    .menu-sub { color: #ccfbf1; font-size: 0.9rem; }
+    .menu-body { padding: 22px; display: grid; gap: 16px; }
+    .stall { background: white; border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px; }
+    .stall h3 { font-size: 1rem; color: #9a3412; margin-bottom: 10px; }
+    .item { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px dashed #cbd5e1; font-size: 0.86rem; }
+    .item:last-child { border-bottom: 0; }
+    .item strong { color: #1f2937; }
+    .item span { color: #0f766e; font-weight: 800; white-space: nowrap; }
+    .ask-tip { background: #fff7ed; border: 1.5px dashed #fb923c; border-radius: 10px; padding: 14px 18px; font-size: 0.85rem; color: #9a3412; text-align: center; line-height: 1.6; }
+    @media (max-width: 620px) { .top-nav { flex-direction: column; gap: 8px; } .scene-help { grid-template-columns: 1fr; } .item { flex-direction: column; gap: 2px; } }
+  </style>
+</head>
+<body>
+  <nav class="top-nav">
+    <a href="index.html">← Back</a>
+    <span>🍜 Food Court: Lunch Break</span>
+    <div class="role-pill">🧑 Student</div>
+  </nav>
+
+  <div class="student-banner">
+    Focus on the current scene first. Open the menu only when you need to choose lunch.
+  </div>
+
+  <section class="scene-focus" aria-label="Current scene">
+    <div class="scene-card">
+      <div class="scene-top">
+        <div class="scene-kicker" id="sceneKicker">Scene 1 of 6</div>
+        <h1 class="scene-title-focus" id="sceneTitle">Choose a Stall</h1>
+        <p class="scene-goal" id="sceneGoal">Look around the food court and decide what kind of lunch you want.</p>
+        <div class="scene-dots" id="sceneDots"></div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-prompt" id="scenePrompt"></div>
+        <div class="scene-help">
+          <div class="scene-help-box"><strong>Useful phrases</strong><span id="scenePhrases"></span></div>
+          <div class="scene-help-box"><strong>Focus</strong><span id="sceneFocus"></span></div>
+        </div>
+        <div class="scene-talk-box">
+          <strong>Conversation ideas</strong>
+          <div class="talk-list" id="sceneTalkList"></div>
+        </div>
+      </div>
+    </div>
+    <div class="scene-controls">
+      <button class="scene-btn" type="button" onclick="changeScene(-1)">Back</button>
+      <button class="scene-btn primary" type="button" onclick="changeScene(1)">Next Scene</button>
+      <button class="scene-btn menu" id="menuToggle" type="button" onclick="toggleMenu()">Show Menu</button>
+    </div>
+  </section>
+
+  <div class="menu-wrapper">
+    <div class="menu-card is-hidden" id="studentMenu">
+      <div class="menu-header">
+        <div class="menu-title">Southern Cross Food Court</div>
+        <div class="menu-sub">Quick lunch stalls · Combos · Takeaway · Pickup numbers</div>
+      </div>
+      <div class="menu-body">
+        <div class="stall">
+          <h3>🍜 Wok & Roll Noodles</h3>
+          <div class="item"><strong>Chicken Laksa</strong><span>$16.50</span></div>
+          <div class="item"><strong>Beef Stir-Fry Noodles</strong><span>$15.90</span></div>
+          <div class="item"><strong>Veggie Rice Bowl</strong><span>$14.50</span></div>
+        </div>
+        <div class="stall">
+          <h3>🥙 Fresh Wrap Co.</h3>
+          <div class="item"><strong>Chicken Schnitzel Wrap</strong><span>$13.90</span></div>
+          <div class="item"><strong>Falafel Salad Bowl</strong><span>$14.90</span></div>
+          <div class="item"><strong>Tuna Melt Toastie</strong><span>$11.50</span></div>
+        </div>
+        <div class="stall">
+          <h3>🍔 Burger Lane</h3>
+          <div class="item"><strong>Classic Beef Burger</strong><span>$15.00</span></div>
+          <div class="item"><strong>Grilled Chicken Burger</strong><span>$15.50</span></div>
+          <div class="item"><strong>Combo with chips and drink</strong><span>+$5.50</span></div>
+        </div>
+        <div class="ask-tip">
+          Try asking: "Can I get that as a combo?" · "Is it spicy?" · "Could I get sauce on the side?" · "What pickup number am I?"
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn-action btn-green" onclick="showSceneOnly()">Focus on Scene</button>
+      <a class="btn-action" href="menu.html" target="_blank">Full Menu</a>
+      <a class="btn-action" href="index.html">Back to Home</a>
+    </div>
+  </div>
+
+  <script>
+    const scenes = [
+      {
+        title: 'Choose a Stall',
+        goal: 'Look around the food court and decide what kind of lunch you want.',
+        prompt: 'You are on a short lunch break. The food court is busy, so choose a stall and ask a quick question before ordering.',
+        phrases: 'What is popular here? / How long is the wait?',
+        focus: 'Choosing quickly and asking for a recommendation.',
+        talk: [
+          { title: 'Ask for speed', line: 'Which meal is the quickest today?' },
+          { title: 'Ask for popular item', line: 'What do people usually order here?' },
+          { title: 'Mention lunch break', line: 'I only have 20 minutes for lunch.' }
+        ],
+        needsMenu: true
+      },
+      {
+        title: 'Order at the Counter',
+        goal: 'Order one meal clearly and say if it is for here or takeaway.',
+        prompt: 'Step up to the counter. Say your order, answer "for here or takeaway?", and choose a drink if you want one.',
+        phrases: 'Can I get the chicken laksa, please? / Takeaway, please.',
+        focus: 'Clear ordering, takeaway language, and combo choices.',
+        talk: [
+          { title: 'Make it a combo', line: 'Can I make that a combo with chips and a drink?' },
+          { title: 'Takeaway answer', line: 'Takeaway, please. I need to get back to work.' },
+          { title: 'Drink choice', line: 'Could I get a bottle of water with that?' }
+        ],
+        needsMenu: true
+      },
+      {
+        title: 'Customise the Meal',
+        goal: 'Ask about spice, ingredients, and sauces.',
+        prompt: 'You want to make sure the food suits you. Ask about spice level or ingredients, then make one small change.',
+        phrases: 'Is it spicy? / Could I get the sauce on the side?',
+        focus: 'Food questions, dietary needs, and polite changes.',
+        talk: [
+          { title: 'Spice level', line: 'Can you make it mild, please?' },
+          { title: 'Ingredient check', line: 'Does this have peanuts or seafood in it?' },
+          { title: 'Sauce request', line: 'Could I get the sauce on the side?' }
+        ],
+        needsMenu: true
+      },
+      {
+        title: 'Pay and Get a Number',
+        goal: 'Pay, understand the total, and remember your pickup number.',
+        prompt: 'The staff tell you the total and give you a receipt number. Listen carefully and repeat the number if needed.',
+        phrases: 'Can I tap? / Sorry, what number was that?',
+        focus: 'Payment language and listening for numbers.',
+        talk: [
+          { title: 'Card payment', line: 'Can I pay by card?' },
+          { title: 'Check number', line: 'Sorry, did you say number 42?' },
+          { title: 'Ask wait time', line: 'How long will it be, roughly?' }
+        ],
+        needsMenu: false
+      },
+      {
+        title: 'Pick Up the Food',
+        goal: 'Listen for your number and collect the correct order.',
+        prompt: 'You hear numbers being called. Check if it is your order and ask if you are unsure.',
+        phrases: 'Is this number 42? / Is this the chicken laksa?',
+        focus: 'Pickup numbers and checking the order.',
+        talk: [
+          { title: 'Confirm number', line: 'Hi, I think that is my number.' },
+          { title: 'Check order', line: 'Is this the chicken laksa with mild spice?' },
+          { title: 'Ask for cutlery', line: 'Could I please grab a fork and napkin?' }
+        ],
+        needsMenu: false
+      },
+      {
+        title: 'Fix a Problem',
+        goal: 'Politely explain if the order is wrong or something is missing.',
+        prompt: 'Something is not right: the sauce is missing, the spice is wrong, or it is not your order. Fix it politely.',
+        phrases: 'Sorry, I think this is the wrong order. / Could I please get the sauce?',
+        focus: 'Polite correction and staying calm in a busy place.',
+        talk: [
+          { title: 'Wrong order', line: 'Sorry, I ordered the veggie rice bowl, not the beef noodles.' },
+          { title: 'Missing item', line: 'I think the drink is missing from my combo.' },
+          { title: 'Too spicy', line: 'Sorry, I asked for mild. Is it possible to change it?' }
+        ],
+        needsMenu: true
+      }
+    ];
+
+    let currentScene = 0;
+    let menuVisible = false;
+
+    function renderScene() {
+      const scene = scenes[currentScene];
+      document.getElementById('sceneKicker').textContent = 'Scene ' + (currentScene + 1) + ' of ' + scenes.length;
+      document.getElementById('sceneTitle').textContent = scene.title;
+      document.getElementById('sceneGoal').textContent = scene.goal;
+      document.getElementById('scenePrompt').textContent = scene.prompt;
+      document.getElementById('scenePhrases').textContent = scene.phrases;
+      document.getElementById('sceneFocus').textContent = scene.focus;
+      document.getElementById('menuToggle').textContent = menuVisible ? 'Hide Menu' : (scene.needsMenu ? 'Show Menu' : 'Show Menu if Needed');
+      document.getElementById('menuToggle').classList.toggle('active', menuVisible);
+
+      const talkList = document.getElementById('sceneTalkList');
+      talkList.innerHTML = '';
+      scene.talk.forEach(function(item) {
+        const node = document.createElement('div');
+        node.className = 'talk-item';
+        const title = document.createElement('b');
+        title.textContent = item.title;
+        const line = document.createElement('span');
+        line.textContent = item.line;
+        node.appendChild(title);
+        node.appendChild(line);
+        talkList.appendChild(node);
+      });
+
+      const dots = document.getElementById('sceneDots');
+      dots.innerHTML = '';
+      scenes.forEach(function(_, index) {
+        const dot = document.createElement('button');
+        dot.className = 'scene-dot-mini' + (index === currentScene ? ' active' : '');
+        dot.type = 'button';
+        dot.onclick = function() { goToScene(index); };
+        dots.appendChild(dot);
+      });
+    }
+
+    function goToScene(index) {
+      currentScene = Math.max(0, Math.min(scenes.length - 1, index));
+      showSceneOnly();
+      renderScene();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function changeScene(direction) { goToScene(currentScene + direction); }
+
+    function toggleMenu() {
+      menuVisible = !menuVisible;
+      document.getElementById('studentMenu').classList.toggle('is-hidden', !menuVisible);
+      renderScene();
+      if (menuVisible) document.getElementById('studentMenu').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function showSceneOnly() {
+      menuVisible = false;
+      document.getElementById('studentMenu').classList.add('is-hidden');
+      renderScene();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    renderScene();
+  </script>
+</body>
+</html>
