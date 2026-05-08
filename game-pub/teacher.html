@@ -202,6 +202,131 @@
 
     .scene-content { padding-bottom: 28px; }
     .scene-title { font-size: 0.9rem; font-weight: 800; color: #222; margin-bottom: 6px; }
+    .scene-focus-toolbar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .scene-tab {
+      border: 2px solid #e0e8f0;
+      background: white;
+      color: #1a3a5c;
+      border-radius: 999px;
+      padding: 8px 13px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .scene-tab:hover { transform: translateY(-2px); border-color: #27ae60; }
+    .scene-tab.active { background: #27ae60; border-color: #27ae60; color: white; }
+    .teacher-scene-panel {
+      border: 2px solid #f0c060;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fffdf7;
+    }
+    .teacher-scene-head {
+      background: linear-gradient(135deg, #7d3c00, #e67e22);
+      color: white;
+      padding: 18px 20px;
+    }
+    .teacher-scene-kicker {
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.84;
+      margin-bottom: 5px;
+    }
+    .teacher-scene-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      line-height: 1.2;
+    }
+    .teacher-scene-body {
+      padding: 18px 20px 20px;
+      display: grid;
+      gap: 12px;
+    }
+    .teacher-scene-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .teacher-note {
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.84rem;
+      line-height: 1.55;
+      background: #f4f8fc;
+      color: #334;
+      border-left: 4px solid #2471a3;
+    }
+    .teacher-note strong {
+      display: block;
+      color: #1a3a5c;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .teacher-note.challenge {
+      background: #fef9e7;
+      border-left-color: #f39c12;
+      color: #7d5a00;
+    }
+    .teacher-note.full { grid-column: 1 / -1; }
+    .teacher-challenge-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .teacher-challenge-mini {
+      background: white;
+      border: 1px solid #e0c9a0;
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+    .teacher-challenge-mini b {
+      display: block;
+      color: #d35400;
+      font-size: 0.78rem;
+      margin-bottom: 4px;
+    }
+    .teacher-challenge-mini span {
+      display: block;
+      color: #1a3a5c;
+      font-style: italic;
+    }
+    .teacher-note.student {
+      background: #eafaf1;
+      border-left-color: #27ae60;
+      color: #1a5e35;
+    }
+    .teacher-scene-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 6px;
+    }
+    .teacher-scene-actions .btn {
+      text-decoration: none;
+      border: 2px solid #27ae60;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #27ae60;
+      background: white;
+      cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+    }
+    .teacher-scene-actions .btn.primary { background: #27ae60; color: white; }
+    .teacher-scene-actions .btn.menu { background: #f39c12; border-color: #f39c12; color: white; }
 
     /* ── SPEECH BUBBLES ── */
     .speech {
@@ -610,6 +735,8 @@
       .challenge-grid { grid-template-columns: 1fr; }
       .profile-grid   { grid-template-columns: 1fr; text-align: center; }
       .profile-avatar { margin: 0 auto; }
+      .teacher-scene-grid { grid-template-columns: 1fr; }
+      .teacher-challenge-list { grid-template-columns: 1fr; }
       .vocab-grid     { grid-template-columns: 1fr 1fr; }
       .header         { flex-direction: column; align-items: flex-start; }
       .header-right   { align-items: flex-start; width: 100%; }
@@ -746,10 +873,44 @@
         <span class="card-icon">🎬</span>
         <div>
           <h2>Scene-by-Scene Script</h2>
-          <p>Follow this order. Add challenges when the student is ready!</p>
+          <p>Keep one scene on screen, then send the student to the menu only when needed.</p>
         </div>
       </div>
-    
+      <div class="card-body">
+        <div class="scene-focus-toolbar" id="teacherSceneTabs"></div>
+        <div class="teacher-scene-panel">
+          <div class="teacher-scene-head">
+            <div class="teacher-scene-kicker" id="teacherSceneKicker">Scene 1 of 6</div>
+            <div class="teacher-scene-title" id="teacherSceneTitle">Arrive at the Pub</div>
+          </div>
+          <div class="teacher-scene-body">
+            <div class="teacher-note">
+              <strong>Say</strong>
+              <span id="teacherSceneSay">How ya going, mate? What can I get started for you?</span>
+            </div>
+            <div class="teacher-scene-grid">
+              <div class="teacher-note student">
+                <strong>Student focus</strong>
+                <span id="teacherSceneStudent">Greeting, casual answers, and polite drink ordering.</span>
+              </div>
+              <div class="teacher-note challenge full">
+                <strong>Extra challenges for this scene</strong>
+                <div class="teacher-challenge-list" id="teacherSceneChallenges"></div>
+              </div>
+            </div>
+            <div class="teacher-note">
+              <strong>When to show the menu</strong>
+              <span id="teacherSceneMenu">Show the menu when the student is ready to choose a drink.</span>
+            </div>
+            <div class="teacher-scene-actions">
+              <button class="btn" type="button" onclick="changeTeacherScene(-1)">Back</button>
+              <button class="btn primary" type="button" onclick="changeTeacherScene(1)">Next Scene</button>
+              <a class="btn menu" href="student.html" target="_blank">Open Student Scene Page</a>
+              <a class="btn menu" href="menu.html" target="_blank">Full Menu</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- ══════════════════════════════
@@ -1203,6 +1364,173 @@
   </div>
 
   <script>
+    const teacherScenes = [
+      {
+        title: 'Arrive at the Pub',
+        say: 'How ya going, mate? What can I get started for you?',
+        student: 'Greeting, casual answers, and polite drink ordering.',
+        challenges: [
+          {
+            title: 'Drink size check',
+            line: '"Do you want that as a schooner or just a pot?"'
+          },
+          {
+            title: 'Noisy pub',
+            line: '"Sorry mate, it is pretty loud in here. Could you say that again?"'
+          },
+          {
+            title: 'Recommend special',
+            line: '"Happy hour is on now. All schooners are $7 until 7pm."'
+          }
+        ],
+        menu: 'Show the menu when the student is ready to choose a drink.'
+      },
+      {
+        title: 'Get a Table',
+        say: 'No worries. You can grab any free table. Food orders are at the bar, then we bring it out.',
+        student: 'Asking how pub service works and confirming instructions.',
+        challenges: [
+          {
+            title: 'Table number',
+            line: '"You are on table 14. Just mention that when you order food."'
+          },
+          {
+            title: 'Explain pub service',
+            line: '"Drinks are ordered here at the bar, food too, then we bring it out."'
+          },
+          {
+            title: 'Busy venue',
+            line: '"It is pretty packed tonight. You might need to share a table. Is that okay?"'
+          }
+        ],
+        menu: 'Keep the menu hidden unless they ask what food is available.'
+      },
+      {
+        title: 'Order Food',
+        say: 'What can I get you for dinner? Any sauce or sides with that?',
+        student: 'Ordering a meal clearly with sides, sauces, and a backup choice.',
+        challenges: [
+          {
+            title: 'Sold out',
+            line: '"Sorry mate, we just ran out of Parmas. Can I suggest the schnitzel instead?"'
+          },
+          {
+            title: 'Sauce choice',
+            line: '"Would you like gravy, mushroom sauce, or pepper sauce with that?"'
+          },
+          {
+            title: 'Upsell',
+            line: '"Do you want to add garlic bread or a bowl of chips for the table?"'
+          }
+        ],
+        menu: 'Show the menu now so the student can choose a specific dish.'
+      },
+      {
+        title: 'ID Check',
+        say: 'Sorry mate, I just need to check your ID quickly. Do you have your passport with you?',
+        student: 'Responding calmly and understanding this is normal in Australian pubs.',
+        challenges: [
+          {
+            title: 'No ID option',
+            line: '"No worries, but I cannot serve alcohol without ID. Would you like a soft drink instead?"'
+          },
+          {
+            title: 'Explain RSA',
+            line: '"It is just RSA rules. We have to check if someone looks under 25."'
+          },
+          {
+            title: 'Passport follow-up',
+            line: '"A photo is not enough, sorry. Do you have the physical passport with you?"'
+          }
+        ],
+        menu: 'No menu needed unless they switch to a non-alcoholic drink.'
+      },
+      {
+        title: 'Food Arrives',
+        say: 'Here you go. One Beef Schnitzel with chips and salad.',
+        student: 'Thanking the staff and politely correcting a wrong order.',
+        challenges: [
+          {
+            title: 'Wrong meal',
+            line: '"Here is your Beef Schnitzel." (They ordered the Chicken Parma.)'
+          },
+          {
+            title: 'Missing sauce',
+            line: '"That should be everything." (Forget the gravy or sauce they asked for.)'
+          },
+          {
+            title: 'Check-in',
+            line: '"How is everything tasting? All good with the meal?"'
+          }
+        ],
+        menu: 'Show the menu if the student needs to check what they ordered.'
+      },
+      {
+        title: 'Pay the Bill',
+        say: 'That comes to $37.50 all up. Are you paying together or separately?',
+        student: 'Asking for the bill, understanding the total, and closing politely.',
+        challenges: [
+          {
+            title: 'Split the bill',
+            line: '"Do you want to split this between the table or are you all paying separately?"'
+          },
+          {
+            title: 'Card surcharge',
+            line: '"Just so you know, there is a 1.5% surcharge on Visa cards. Is that all good?"'
+          },
+          {
+            title: 'Wrong total',
+            line: '"That is $47.50 all up." (See if they notice the total is wrong.)'
+          }
+        ],
+        menu: 'Menu is usually not needed. Keep focus on bill language and goodbye.'
+      }
+    ];
+
+    let teacherSceneIndex = 0;
+
+    function renderTeacherScene() {
+      const scene = teacherScenes[teacherSceneIndex];
+      document.getElementById('teacherSceneKicker').textContent = 'Scene ' + (teacherSceneIndex + 1) + ' of ' + teacherScenes.length;
+      document.getElementById('teacherSceneTitle').textContent = scene.title;
+      document.getElementById('teacherSceneSay').textContent = scene.say;
+      document.getElementById('teacherSceneStudent').textContent = scene.student;
+      document.getElementById('teacherSceneMenu').textContent = scene.menu;
+
+      const challenges = document.getElementById('teacherSceneChallenges');
+      challenges.innerHTML = '';
+      scene.challenges.forEach(function(challenge) {
+        const item = document.createElement('div');
+        item.className = 'teacher-challenge-mini';
+        const title = document.createElement('b');
+        title.textContent = challenge.title;
+        const line = document.createElement('span');
+        line.textContent = challenge.line;
+        item.appendChild(title);
+        item.appendChild(line);
+        challenges.appendChild(item);
+      });
+
+      const tabs = document.getElementById('teacherSceneTabs');
+      tabs.innerHTML = '';
+      teacherScenes.forEach(function(sceneItem, index) {
+        const tab = document.createElement('button');
+        tab.type = 'button';
+        tab.className = 'scene-tab' + (index === teacherSceneIndex ? ' active' : '');
+        tab.textContent = 'Scene ' + (index + 1);
+        tab.onclick = function() { goToTeacherScene(index); };
+        tabs.appendChild(tab);
+      });
+    }
+
+    function goToTeacherScene(index) {
+      teacherSceneIndex = Math.max(0, Math.min(teacherScenes.length - 1, index));
+      renderTeacherScene();
+    }
+
+    function changeTeacherScene(direction) {
+      goToTeacherScene(teacherSceneIndex + direction);
+    }
     // ── DISH MODAL ──
     function showDish(name, imgSrc, price, desc) {
       document.getElementById('modalName').textContent  = name;
@@ -1242,6 +1570,8 @@
         item.classList.remove('checked');
       });
     }
+
+    renderTeacherScene();
   </script>
 
 </body>
