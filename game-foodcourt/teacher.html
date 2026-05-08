@@ -27,6 +27,13 @@
     .card-header p { font-size: 0.8rem; opacity: 0.88; margin-top: 2px; }
     .card-body { padding: 22px; }
     .tips-list { display: grid; gap: 10px; }
+    .photo-guide { display: grid; grid-template-columns: minmax(240px, 0.9fr) 1fr; gap: 16px; align-items: stretch; margin-bottom: 16px; }
+    .photo-frame { position: relative; min-height: 210px; overflow: hidden; border-radius: 12px; background: linear-gradient(135deg, #ccfbf1, #fed7aa); border: 1px solid #fed7aa; }
+    .photo-frame img { width: 100%; height: 100%; min-height: 210px; object-fit: cover; display: block; }
+    .photo-label { position: absolute; left: 14px; bottom: 14px; background: rgba(15,23,42,0.78); color: white; border-radius: 999px; padding: 7px 12px; font-size: 0.76rem; font-weight: 800; }
+    .photo-fallback { display: none; height: 100%; min-height: 210px; align-items: center; justify-content: center; padding: 18px; text-align: center; color: #9a3412; font-weight: 800; line-height: 1.45; }
+    .photo-frame.missing img, .photo-frame.missing .photo-label { display: none; }
+    .photo-frame.missing .photo-fallback { display: flex; }
     .tip-row { display: flex; gap: 12px; align-items: flex-start; background: #f8fafc; border-radius: 10px; padding: 12px 16px; }
     .tip-emoji { font-size: 1.25rem; }
     .tip-text { font-size: 0.86rem; color: #475569; line-height: 1.55; }
@@ -45,6 +52,8 @@
     .teacher-note.student { background: #ecfeff; border-left-color: #06b6d4; color: #155e75; }
     .teacher-note.challenge { background: #fff7ed; border-left-color: #f97316; color: #9a3412; }
     .teacher-note.full { grid-column: 1 / -1; }
+    .teacher-vocab-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+    .teacher-vocab-chip { background: white; border: 1px solid #99f6e4; color: #0f766e; border-radius: 999px; padding: 6px 10px; font-size: 0.78rem; font-weight: 800; }
     .teacher-challenge-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .teacher-challenge-mini { background: white; border: 1px solid #fed7aa; border-radius: 8px; padding: 10px 12px; }
     .teacher-challenge-mini b { display: block; color: #c2410c; font-size: 0.78rem; margin-bottom: 4px; }
@@ -62,7 +71,7 @@
     .check-item input { width: 18px; height: 18px; accent-color: #0f766e; }
     .check-item label { font-size: 0.85rem; color: #334155; cursor: pointer; line-height: 1.4; }
     .check-item.checked { background: #ccfbf1; }
-    @media (max-width: 650px) { .header { align-items: flex-start; } .teacher-scene-grid, .teacher-challenge-list { grid-template-columns: 1fr; } }
+    @media (max-width: 650px) { .header { align-items: flex-start; } .photo-guide, .teacher-scene-grid, .teacher-challenge-list { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -86,10 +95,17 @@
     <div class="card">
       <div class="card-header green"><span class="card-icon">🎯</span><div><h2>How to Run</h2><p>Fast lunch-break English with realistic pressure</p></div></div>
       <div class="card-body">
-        <div class="tips-list">
-          <div class="tip-row"><div class="tip-emoji">🧑</div><div class="tip-text"><strong>Student device:</strong> Open <code>game-foodcourt/student.html</code>. The student sees one scene at a time and opens the menu only when needed.</div></div>
-          <div class="tip-row"><div class="tip-emoji">👩‍🍳</div><div class="tip-text"><strong>Teacher device:</strong> Use this page. Move scene by scene and add challenges when the student is ready.</div></div>
-          <div class="tip-row"><div class="tip-emoji">⚡</div><div class="tip-text"><strong>Food court style:</strong> Keep it quick, clear, and slightly noisy. Ask short follow-up questions like real counter staff.</div></div>
+        <div class="photo-guide">
+          <div class="photo-frame">
+            <img src="images/foodcourt-scene.jpg" alt="Busy Australian food court with multiple takeaway stalls" onerror="this.closest('.photo-frame').classList.add('missing')"/>
+            <div class="photo-label">Use this to set the scene</div>
+            <div class="photo-fallback">Add images/foodcourt-scene.jpg to show the food court visual here.</div>
+          </div>
+          <div class="tips-list">
+            <div class="tip-row"><div class="tip-emoji">🧑</div><div class="tip-text"><strong>Student device:</strong> Open <code>game-foodcourt/student.html</code>. The student sees one scene at a time and opens the menu only when needed.</div></div>
+            <div class="tip-row"><div class="tip-emoji">👩‍🍳</div><div class="tip-text"><strong>Teacher device:</strong> Use this page. Move scene by scene and add challenges when the student is ready.</div></div>
+            <div class="tip-row"><div class="tip-emoji">⚡</div><div class="tip-text"><strong>Food court style:</strong> Keep it quick, clear, and slightly noisy. Ask short follow-up questions like real counter staff.</div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -108,6 +124,7 @@
             <div class="teacher-scene-grid">
               <div class="teacher-note student"><strong>Student focus</strong><span id="teacherSceneStudent"></span></div>
               <div class="teacher-note"><strong>When to show the menu</strong><span id="teacherSceneMenu"></span></div>
+              <div class="teacher-note full"><strong>Food court vocab to prompt</strong><div class="teacher-vocab-list" id="teacherSceneVocab"></div></div>
               <div class="teacher-note challenge full"><strong>Extra challenges for this scene</strong><div class="teacher-challenge-list" id="teacherSceneChallenges"></div></div>
             </div>
             <div class="teacher-scene-actions">
@@ -157,6 +174,7 @@
         say: 'Hi there. Are you still deciding, or do you know what you would like?',
         student: 'Choose quickly, ask what is popular, and mention the short lunch break.',
         menu: 'Show the menu so the student can compare stalls.',
+        vocab: ['stall', 'popular', 'wait time', 'lunch break'],
         challenges: [
           { title: 'Long wait', line: '"Just so you know, noodles are about a 12-minute wait today."' },
           { title: 'Recommendation', line: '"The chicken laksa is popular, but it is a little spicy."' },
@@ -168,6 +186,7 @@
         say: 'What can I get for you? And is that for here or takeaway?',
         student: 'Order one meal clearly, answer takeaway/for here, and choose a combo or drink.',
         menu: 'Show the menu while they choose the item and combo.',
+        vocab: ['for here', 'takeaway', 'combo', 'counter'],
         challenges: [
           { title: 'Combo offer', line: '"Do you want to make that a combo with chips and a drink?"' },
           { title: 'Sold out item', line: '"Sorry, the tuna melt is sold out. Would you like the schnitzel wrap instead?"' },
@@ -179,6 +198,7 @@
         say: 'Any changes? Sauce, spice level, or anything you do not want in it?',
         student: 'Ask about ingredients and make a small change politely.',
         menu: 'Show the menu if they need to check allergens or sauces.',
+        vocab: ['mild', 'spicy', 'ingredients', 'sauce on the side'],
         challenges: [
           { title: 'Spice warning', line: '"The laksa is medium spicy. Do you want mild?"' },
           { title: 'Allergen check', line: '"It may contain traces of peanuts. Is that okay?"' },
@@ -190,6 +210,7 @@
         say: 'That is $21.40 altogether. You are pickup number 42.',
         student: 'Pay by card, understand the total, and repeat the pickup number if needed.',
         menu: 'No menu needed. Focus on numbers and payment language.',
+        vocab: ['total', 'tap', 'surcharge', 'pickup number'],
         challenges: [
           { title: 'Card surcharge', line: '"There is a 1% card surcharge. Is that okay?"' },
           { title: 'Fast number', line: '"Number forty-two. Watch the screen near the counter."' },
@@ -201,6 +222,7 @@
         say: 'Number 42! Chicken laksa, takeaway!',
         student: 'Listen for the pickup number and confirm the correct order.',
         menu: 'No menu needed unless they need to confirm the order name.',
+        vocab: ['pickup screen', 'receipt', 'cutlery', 'napkin'],
         challenges: [
           { title: 'Wrong number', line: '"This is number 24, not 42. Yours will be next."' },
           { title: 'Missing cutlery', line: '"Cutlery and napkins are just over there on the side."' },
@@ -212,6 +234,7 @@
         say: 'Is everything alright with your order?',
         student: 'Politely explain a wrong order, missing item, or spice problem.',
         menu: 'Show the menu if they need to compare what they ordered.',
+        vocab: ['wrong order', 'missing item', 'remake', 'combo drink'],
         challenges: [
           { title: 'Wrong meal', line: '"Oh, did you order the veggie bowl? Let me check that for you."' },
           { title: 'Missing drink', line: '"Sorry about that. What drink was included in your combo?"' },
@@ -229,6 +252,15 @@
       document.getElementById('teacherSceneSay').textContent = scene.say;
       document.getElementById('teacherSceneStudent').textContent = scene.student;
       document.getElementById('teacherSceneMenu').textContent = scene.menu;
+
+      const vocabList = document.getElementById('teacherSceneVocab');
+      vocabList.innerHTML = '';
+      scene.vocab.forEach(function(word) {
+        const chip = document.createElement('span');
+        chip.className = 'teacher-vocab-chip';
+        chip.textContent = word;
+        vocabList.appendChild(chip);
+      });
 
       const list = document.getElementById('teacherSceneChallenges');
       list.innerHTML = '';

@@ -15,6 +15,12 @@
     .student-banner { background: #fff7ed; border-bottom: 2px solid #fb923c; padding: 12px 20px; text-align: center; font-size: 0.88rem; color: #9a3412; font-weight: 700; line-height: 1.5; }
     .scene-focus, .menu-wrapper { max-width: 860px; margin: 30px auto 0; padding: 0 16px; }
     .scene-card { background: #fffdf7; border: 2px solid #fed7aa; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.24); overflow: hidden; }
+    .scene-photo { position: relative; min-height: 190px; background: linear-gradient(135deg, #ccfbf1, #fed7aa); overflow: hidden; }
+    .scene-photo img { width: 100%; height: 240px; object-fit: cover; display: block; }
+    .scene-photo-label { position: absolute; left: 18px; bottom: 16px; background: rgba(15,23,42,0.8); color: white; border-radius: 999px; padding: 8px 13px; font-size: 0.78rem; font-weight: 800; }
+    .scene-photo-fallback { display: none; min-height: 190px; align-items: center; justify-content: center; padding: 18px; color: #9a3412; font-weight: 800; text-align: center; }
+    .scene-photo.missing img, .scene-photo.missing .scene-photo-label { display: none; }
+    .scene-photo.missing .scene-photo-fallback { display: flex; }
     .scene-top { background: linear-gradient(135deg, #0f766e, #14b8a6); color: white; padding: 20px 24px; }
     .scene-kicker { font-size: 0.78rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; opacity: 0.84; margin-bottom: 6px; }
     .scene-title-focus { font-size: 1.55rem; line-height: 1.2; margin-bottom: 6px; }
@@ -29,6 +35,10 @@
     .scene-help-box { background: #fff7ed; border: 1px solid #fed7aa; color: #9a3412; }
     .scene-talk-box { background: #ecfeff; border: 1px solid #67e8f9; color: #155e75; }
     .scene-help-box strong, .scene-talk-box strong { display: block; color: #1f2937; margin-bottom: 6px; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .scene-vocab-box { background: #f0fdfa; border: 1px solid #5eead4; border-radius: 10px; padding: 13px 14px; }
+    .scene-vocab-box strong { display: block; color: #0f172a; margin-bottom: 8px; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .vocab-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .vocab-chip { background: white; border: 1px solid #99f6e4; color: #0f766e; border-radius: 999px; padding: 6px 10px; font-size: 0.8rem; font-weight: 800; }
     .talk-list { display: grid; gap: 8px; }
     .talk-item { background: white; border: 1px solid #bae6fd; border-radius: 8px; padding: 9px 11px; color: #0f172a; }
     .talk-item b { display: block; color: #0f766e; font-size: 0.78rem; margin-bottom: 2px; }
@@ -67,6 +77,11 @@
 
   <section class="scene-focus" aria-label="Current scene">
     <div class="scene-card">
+      <div class="scene-photo">
+        <img src="images/foodcourt-scene.jpg" alt="Busy food court with takeaway counters and tables" onerror="this.closest('.scene-photo').classList.add('missing')"/>
+        <div class="scene-photo-label">Look around before you order</div>
+        <div class="scene-photo-fallback">Add images/foodcourt-scene.jpg to practise with a real food court visual.</div>
+      </div>
       <div class="scene-top">
         <div class="scene-kicker" id="sceneKicker">Scene 1 of 6</div>
         <h1 class="scene-title-focus" id="sceneTitle">Choose a Stall</h1>
@@ -78,6 +93,10 @@
         <div class="scene-help">
           <div class="scene-help-box"><strong>Useful phrases</strong><span id="scenePhrases"></span></div>
           <div class="scene-help-box"><strong>Focus</strong><span id="sceneFocus"></span></div>
+        </div>
+        <div class="scene-vocab-box">
+          <strong>Food court words to use</strong>
+          <div class="vocab-chips" id="sceneVocab"></div>
         </div>
         <div class="scene-talk-box">
           <strong>Conversation ideas</strong>
@@ -138,6 +157,7 @@
         prompt: 'You are on a short lunch break. The food court is busy, so choose a stall and ask a quick question before ordering.',
         phrases: 'What is popular here? / How long is the wait?',
         focus: 'Choosing quickly and asking for a recommendation.',
+        vocab: ['stall', 'popular', 'wait time', 'lunch break'],
         talk: [
           { title: 'Ask for speed', line: 'Which meal is the quickest today?' },
           { title: 'Ask for popular item', line: 'What do people usually order here?' },
@@ -151,6 +171,7 @@
         prompt: 'Step up to the counter. Say your order, answer "for here or takeaway?", and choose a drink if you want one.',
         phrases: 'Can I get the chicken laksa, please? / Takeaway, please.',
         focus: 'Clear ordering, takeaway language, and combo choices.',
+        vocab: ['for here', 'takeaway', 'combo', 'counter'],
         talk: [
           { title: 'Make it a combo', line: 'Can I make that a combo with chips and a drink?' },
           { title: 'Takeaway answer', line: 'Takeaway, please. I need to get back to work.' },
@@ -164,6 +185,7 @@
         prompt: 'You want to make sure the food suits you. Ask about spice level or ingredients, then make one small change.',
         phrases: 'Is it spicy? / Could I get the sauce on the side?',
         focus: 'Food questions, dietary needs, and polite changes.',
+        vocab: ['mild', 'spicy', 'ingredients', 'sauce on the side'],
         talk: [
           { title: 'Spice level', line: 'Can you make it mild, please?' },
           { title: 'Ingredient check', line: 'Does this have peanuts or seafood in it?' },
@@ -177,6 +199,7 @@
         prompt: 'The staff tell you the total and give you a receipt number. Listen carefully and repeat the number if needed.',
         phrases: 'Can I tap? / Sorry, what number was that?',
         focus: 'Payment language and listening for numbers.',
+        vocab: ['total', 'tap', 'surcharge', 'pickup number'],
         talk: [
           { title: 'Card payment', line: 'Can I pay by card?' },
           { title: 'Check number', line: 'Sorry, did you say number 42?' },
@@ -190,6 +213,7 @@
         prompt: 'You hear numbers being called. Check if it is your order and ask if you are unsure.',
         phrases: 'Is this number 42? / Is this the chicken laksa?',
         focus: 'Pickup numbers and checking the order.',
+        vocab: ['pickup screen', 'receipt', 'cutlery', 'napkin'],
         talk: [
           { title: 'Confirm number', line: 'Hi, I think that is my number.' },
           { title: 'Check order', line: 'Is this the chicken laksa with mild spice?' },
@@ -203,6 +227,7 @@
         prompt: 'Something is not right: the sauce is missing, the spice is wrong, or it is not your order. Fix it politely.',
         phrases: 'Sorry, I think this is the wrong order. / Could I please get the sauce?',
         focus: 'Polite correction and staying calm in a busy place.',
+        vocab: ['wrong order', 'missing item', 'remake', 'combo drink'],
         talk: [
           { title: 'Wrong order', line: 'Sorry, I ordered the veggie rice bowl, not the beef noodles.' },
           { title: 'Missing item', line: 'I think the drink is missing from my combo.' },
@@ -228,6 +253,15 @@
 
       const talkList = document.getElementById('sceneTalkList');
       talkList.innerHTML = '';
+      const vocabList = document.getElementById('sceneVocab');
+      vocabList.innerHTML = '';
+      scene.vocab.forEach(function(word) {
+        const chip = document.createElement('span');
+        chip.className = 'vocab-chip';
+        chip.textContent = word;
+        vocabList.appendChild(chip);
+      });
+
       scene.talk.forEach(function(item) {
         const node = document.createElement('div');
         node.className = 'talk-item';
