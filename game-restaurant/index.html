@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurant: Formal Dinner - Aussie Restaurant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { min-height: 100vh; font-family: 'Nunito', sans-serif; background: #f6f1ea; color: #1f2937; display: flex; flex-direction: column; }
+    .header { background: #18212f; color: white; padding: 15px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; box-shadow: 0 2px 14px rgba(0,0,0,0.22); }
+    .header a { color: #f8d391; text-decoration: none; font-size: 0.86rem; font-weight: 800; }
+    .header h1 { font-size: 1rem; font-weight: 800; }
+    .main { flex: 1; padding: 36px 16px 56px; }
+    .wrap { width: min(960px, 100%); margin: 0 auto; }
+    .hero { overflow: hidden; border-radius: 8px; background: #fffaf2; border: 1px solid #dfc9a7; box-shadow: 0 16px 40px rgba(24,33,47,0.14); }
+    .hero-photo { position: relative; height: clamp(240px, 38vw, 390px); background: #18212f; }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-photo:after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(12,18,28,0.82), rgba(12,18,28,0.25) 58%, rgba(12,18,28,0.1)); }
+    .hero-copy { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: clamp(22px, 5vw, 48px); color: white; max-width: 650px; }
+    .venue { color: #f8d391; font-size: 0.78rem; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; margin-bottom: 9px; }
+    .hero h2 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 0.95; margin-bottom: 14px; letter-spacing: 0; }
+    .hero p { max-width: 560px; color: #f5efe5; font-size: 0.98rem; line-height: 1.65; }
+    .hero-body { padding: 24px; display: grid; gap: 22px; }
+    .stats { display: flex; flex-wrap: wrap; gap: 9px; }
+    .pill { border: 1px solid #d9b36d; background: #fff6e6; color: #7a4c0f; border-radius: 999px; padding: 7px 13px; font-size: 0.78rem; font-weight: 800; }
+    .role-label { text-align: center; color: #617084; font-size: 0.75rem; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; }
+    .roles { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .role { min-height: 210px; border-radius: 8px; padding: 24px; color: white; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; justify-content: flex-end; }
+    .role.student { background: linear-gradient(135deg, #254c54, #497b72); }
+    .role.teacher { background: linear-gradient(135deg, #7a2f2f, #b55a35); }
+    .role small { font-size: 0.68rem; font-weight: 800; letter-spacing: 1.3px; text-transform: uppercase; opacity: 0.78; }
+    .role h3 { font-size: 1.35rem; font-weight: 800; }
+    .role p { font-size: 0.88rem; line-height: 1.48; opacity: 0.93; flex: 1; }
+    .links { display: flex; flex-wrap: wrap; gap: 8px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; border-radius: 999px; padding: 10px 16px; text-decoration: none; font-weight: 800; font-size: 0.84rem; border: 1.5px solid rgba(255,255,255,0.35); color: white; background: rgba(255,255,255,0.14); }
+    .btn.primary { background: white; color: #254c54; border-color: white; }
+    .teacher .btn.primary { color: #7a2f2f; }
+    .menu-strip { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 20px; border: 1px solid #dfc9a7; border-radius: 8px; background: #fffaf2; }
+    .menu-strip h4 { font-size: 0.98rem; margin-bottom: 3px; }
+    .menu-strip p { color: #617084; font-size: 0.84rem; line-height: 1.4; }
+    .menu-strip a { background: #18212f; color: white; border-radius: 999px; padding: 10px 16px; text-decoration: none; font-weight: 800; font-size: 0.84rem; white-space: nowrap; }
+    footer { text-align: center; background: #18212f; color: #c9d0da; padding: 16px; font-size: 0.76rem; }
+    @media (max-width: 680px) { .header { flex-direction: column; text-align: center; } .roles { grid-template-columns: 1fr; } .menu-strip { flex-direction: column; text-align: center; } .hero-photo:after { background: rgba(12,18,28,0.62); } }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="../index.html">Back to Games</a>
+    <h1>Restaurant: Formal Dinner</h1>
+    <span>Australian dining role-play</span>
+  </header>
+
+  <main class="main">
+    <div class="wrap">
+      <section class="hero">
+        <div class="hero-photo">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=80" alt="Formal restaurant dining room with tables set for dinner">
+          <div class="hero-copy">
+            <div class="venue">Harbour Room Bistro, Sydney - 7:15pm</div>
+            <h2>Formal Dinner</h2>
+            <p>Book a table, arrive politely, order three courses, handle dietary needs, respond to a service problem, and pay the bill with real restaurant language.</p>
+          </div>
+        </div>
+        <div class="hero-body">
+          <div class="stats">
+            <span class="pill">8 challenge scenes</span>
+            <span class="pill">Reservation to bill</span>
+            <span class="pill">Real menu details</span>
+            <span class="pill">Polite corrections</span>
+            <span class="pill">Teacher prompts</span>
+          </div>
+          <div class="role-label">Choose your role</div>
+          <div class="roles">
+            <div class="role student">
+              <small>Student</small>
+              <h3>I am the guest</h3>
+              <p>Play through a realistic formal dinner with pressure, choices, and small surprises.</p>
+              <div class="links">
+                <a class="btn primary" href="student.html">Start Challenge</a>
+                <a class="btn" href="menu.html">Study Menu</a>
+              </div>
+            </div>
+            <div class="role teacher">
+              <small>Teacher</small>
+              <h3>I am the host and waiter</h3>
+              <p>Run each scene, add realistic complications, and score restaurant confidence.</p>
+              <div class="links">
+                <a class="btn primary" href="teacher.html">Open Notes</a>
+                <a class="btn" href="menu.html" target="_blank">View Menu</a>
+              </div>
+            </div>
+          </div>
+          <div class="menu-strip">
+            <div>
+              <h4>Need to read the wine-list style menu first?</h4>
+              <p>Review courses, prices, allergens, doneness, sides, service charge, and bill-splitting language.</p>
+            </div>
+            <a href="menu.html">Open Dinner Menu</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>TeeTalkEnglish - Built for Vietnamese learners practising Australian restaurant English</footer>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher Notes - Restaurant: Formal Dinner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Nunito', sans-serif; min-height: 100vh; background: #f4f0e9; color: #1f2937; }
+    .header { position: sticky; top: 0; z-index: 20; background: #18212f; color: white; padding: 17px 24px; display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; box-shadow: 0 2px 14px rgba(0,0,0,0.24); }
+    .header h1 { font-size: 1.1rem; font-weight: 800; }
+    .header p { color: #dce2ea; font-size: 0.8rem; margin-top: 2px; }
+    .links { display: flex; flex-wrap: wrap; gap: 8px; }
+    .links a, .btn { color: white; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.32); border-radius: 999px; padding: 8px 13px; text-decoration: none; font-weight: 800; font-size: 0.82rem; }
+    .banner { background: #fff6e6; color: #7a4c0f; border-bottom: 2px solid #d9b36d; padding: 12px 24px; font-weight: 800; line-height: 1.45; }
+    .wrap { width: min(1060px, 100%); margin: 26px auto; padding: 0 16px 60px; display: grid; gap: 20px; }
+    .card { background: white; border: 1px solid #e3d3bb; border-radius: 8px; box-shadow: 0 4px 16px rgba(24,33,47,0.08); overflow: hidden; }
+    .card-head { padding: 16px 20px; color: white; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .green { background: linear-gradient(135deg, #254c54, #497b72); }
+    .rust { background: linear-gradient(135deg, #7a2f2f, #b55a35); }
+    .dark { background: linear-gradient(135deg, #18212f, #38465b); }
+    .card-head h2 { font-size: 1rem; }
+    .card-head p { color: rgba(255,255,255,0.86); font-size: 0.8rem; }
+    .card-body { padding: 20px; }
+    .guide { display: grid; grid-template-columns: minmax(260px, 0.9fr) 1fr; gap: 16px; }
+    .photo { overflow: hidden; border-radius: 8px; min-height: 250px; background: #18212f; }
+    .photo img { width: 100%; height: 100%; min-height: 250px; object-fit: cover; display: block; }
+    .tips { display: grid; gap: 10px; }
+    .tip { background: #f8fafc; border-left: 4px solid #254c54; border-radius: 0 8px 8px 0; padding: 12px 14px; line-height: 1.52; font-size: 0.86rem; }
+    .tip strong { color: #254c54; }
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .tab { border: 2px solid #d9b36d; background: white; color: #7a4c0f; border-radius: 999px; padding: 8px 12px; font: 800 0.78rem 'Nunito', sans-serif; cursor: pointer; }
+    .tab.active { background: #7a4c0f; color: white; border-color: #7a4c0f; }
+    .scene { border: 1px solid #dfc9a7; border-radius: 8px; overflow: hidden; }
+    .scene-top { background: #7a2f2f; color: white; padding: 18px 20px; }
+    .kicker { font-size: 0.74rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; opacity: 0.84; margin-bottom: 4px; }
+    .scene-title { font-size: 1.28rem; font-weight: 800; }
+    .scene-body { padding: 18px; display: grid; gap: 12px; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .note { background: #f8fafc; border-left: 4px solid #254c54; border-radius: 0 8px 8px 0; padding: 12px 14px; line-height: 1.52; font-size: 0.86rem; }
+    .note.challenge { background: #fff6e6; border-left-color: #b55a35; color: #7a4c0f; }
+    .note.full { grid-column: 1 / -1; }
+    .note strong { display: block; color: #18212f; font-size: 0.72rem; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 5px; }
+    .mini-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 4px; }
+    .mini { background: white; border: 1px solid #ead7b8; border-radius: 8px; padding: 10px 12px; }
+    .mini b { color: #7a2f2f; font-size: 0.78rem; display: block; margin-bottom: 3px; }
+    .food-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+    .food-card { border: 1px solid #ead7b8; border-radius: 8px; overflow: hidden; background: #fffaf2; }
+    .food-card img { width: 100%; height: 130px; object-fit: cover; display: block; background: #e5e7eb; }
+    .food-copy { padding: 11px 12px 12px; }
+    .food-copy b { display: block; color: #18212f; font-size: 0.88rem; margin-bottom: 3px; }
+    .food-copy span { display: block; color: #617084; font-size: 0.78rem; line-height: 1.38; }
+    .food-price { color: #254c54; font-weight: 800; margin-top: 5px; font-size: 0.8rem; }
+    .rubric { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .check { display: flex; gap: 10px; align-items: center; background: #f8fafc; border-radius: 8px; padding: 10px 12px; cursor: pointer; }
+    .check input { width: 18px; height: 18px; accent-color: #254c54; }
+    .check label { font-size: 0.86rem; line-height: 1.4; cursor: pointer; }
+    .check.done { background: #edf7f4; }
+    @media (max-width: 760px) { .guide, .grid, .mini-list, .rubric { grid-template-columns: 1fr; } .header { align-items: flex-start; } }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>Restaurant: Formal Dinner - Teacher Notes</h1>
+      <p>Run the role-play as host, waiter, sommelier, and cashier.</p>
+    </div>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="student.html" target="_blank">Student Page</a>
+      <a href="menu.html" target="_blank">Menu</a>
+    </div>
+  </header>
+  <div class="banner">Teacher only: keep the pace realistic. Start calm, then add menu questions, timing pressure, and polite problem-solving.</div>
+
+  <main class="wrap">
+    <section class="card">
+      <div class="card-head green"><div><h2>How to Run</h2><p>Formal restaurant English with real-life details</p></div></div>
+      <div class="card-body">
+        <div class="guide">
+          <div class="photo"><img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=80" alt="Waiter serving a formal dinner table"></div>
+          <div class="tips">
+            <div class="tip"><strong>Student device:</strong> Open <code>game-restaurant/student.html</code>. The student sees one scene at a time and can open the mini menu.</div>
+            <div class="tip"><strong>Teacher voice:</strong> Speak warmly but professionally. Use natural phrases: "Certainly", "Let me check with the kitchen", "Would you like a few more minutes?"</div>
+            <div class="tip"><strong>Challenge style:</strong> Add one complication per scene only after the student gives a basic answer. The goal is confidence, not speed alone.</div>
+            <div class="tip"><strong>Realism:</strong> Ask about reservation name, allergies, water preference, steak doneness, sides, card split, and surcharge.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head rust"><div><h2>Scene Script</h2><p>Teacher lines, expected student task, and optional pressure</p></div></div>
+      <div class="card-body">
+        <div class="tabs" id="tabs"></div>
+        <div class="scene">
+          <div class="scene-top">
+            <div class="kicker" id="kicker">Scene 1 of 8</div>
+            <div class="scene-title" id="title">Make a Reservation</div>
+          </div>
+          <div class="scene-body">
+            <div class="note full"><strong>Say as staff</strong><span id="say"></span></div>
+            <div class="grid">
+              <div class="note"><strong>Student must do</strong><span id="student"></span></div>
+              <div class="note"><strong>Menu use</strong><span id="menu"></span></div>
+              <div class="note challenge full"><strong>Complications to add</strong><div class="mini-list" id="complications"></div></div>
+              <div class="note full"><strong>Feedback focus</strong><span id="feedback"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head green"><div><h2>Food Visual Guide</h2><p>Show these dishes while students ask menu questions or order courses</p></div></div>
+      <div class="card-body">
+        <div class="food-grid">
+          <div class="food-card">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Seared%20scallops.jpg?width=640" alt="Seared scallops">
+            <div class="food-copy"><b>Seared Scallops</b><span>Shellfish, dairy, lemon butter, crispy capers.</span><div class="food-price">$24 starter</div></div>
+          </div>
+          <div class="food-card">
+            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=500&q=80" alt="Burrata and tomato salad">
+            <div class="food-copy"><b>Burrata and Tomato Salad</b><span>Vegetarian, dairy, basil oil, toasted sourdough.</span><div class="food-price">$19 starter</div></div>
+          </div>
+          <div class="food-card">
+            <img src="https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?auto=format&fit=crop&w=500&q=80" alt="Roasted pumpkin soup">
+            <div class="food-copy"><b>Roasted Pumpkin Soup</b><span>Vegetarian, warm bread roll, can be dairy-free.</span><div class="food-price">$16 starter</div></div>
+          </div>
+          <div class="food-card">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80" alt="Eye fillet steak">
+            <div class="food-copy"><b>Eye Fillet Steak</b><span>Ask doneness: rare, medium rare, medium, well done.</span><div class="food-price">$46 main</div></div>
+          </div>
+          <div class="food-card">
+            <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=500&q=80" alt="Crispy skin barramundi">
+            <div class="food-copy"><b>Crispy Skin Barramundi</b><span>Fish main with potato gratin and lemon myrtle butter.</span><div class="food-price">$38 main</div></div>
+          </div>
+          <div class="food-card">
+            <img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?auto=format&fit=crop&w=500&q=80" alt="Wild mushroom risotto">
+            <div class="food-copy"><b>Wild Mushroom Risotto</b><span>Vegetarian, parmesan, truffle oil, vegan option possible.</span><div class="food-price">$31 main</div></div>
+          </div>
+          <div class="food-card">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=500&q=80" alt="Slow-cooked lamb shoulder">
+            <div class="food-copy"><b>Slow-Cooked Lamb Shoulder</b><span>Tonight's special with rosemary jus and potato puree.</span><div class="food-price">$42 special</div></div>
+          </div>
+          <div class="food-card">
+            <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=500&q=80" alt="Dessert selection">
+            <div class="food-copy"><b>Dessert Options</b><span>Lemon tart, chocolate fondant, cheese plate, coffee.</span><div class="food-price">$15-$22 dessert</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head dark"><div><h2>Assessment Checklist</h2><p>Tick what the student handled naturally</p></div></div>
+      <div class="card-body">
+        <div class="rubric">
+          <div class="check" onclick="toggleCheck(this)"><input type="checkbox"><label>Booked a table with time, name, phone number, and allergy note.</label></div>
+          <div class="check" onclick="toggleCheck(this)"><input type="checkbox"><label>Checked in at the host stand and handled a delay politely.</label></div>
+          <div class="check" onclick="toggleCheck(this)"><input type="checkbox"><label>Asked about specials, ingredients, and unfamiliar menu words.</label></div>
+          <div class="check" onclick="toggleCheck(this)"><input type="checkbox"><label>Ordered water, drinks, courses, sides, and steak doneness clearly.</label></div>
+          <div class="check" onclick="toggleCheck(this)"><input type="checkbox"><label>Corrected a wrong dish or missing item without sounding rude.</label></div>
+          <div class="check" onclick="toggleCheck(this)"><input type="checkbox"><label>Asked for the bill, queried a charge, split payment, and thanked staff.</label></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const scenes = [
+      { title: 'Make a Reservation', say: 'Good evening, Harbour Room Bistro. How may I help you?', student: 'Book for two, choose from two available times, spell the name, give phone number, mention allergy.', menu: 'No food menu required. Focus on booking details.', feedback: 'Clear date/time, polite negotiation, correct spelling and numbers.', complications: ['Only 7:15 or 8:30 is available.', 'Ask for phone number quickly.', 'Repeat allergy back incorrectly once.'] },
+      { title: 'Arrive and Check In', say: 'Good evening. Do you have a booking with us tonight?', student: 'Give booking name, answer coat check, ask about a quiet table, manage a wait.', menu: 'No menu yet.', feedback: 'Confident greeting, patient tone, natural small talk.', complications: ['Table is not ready for 10 minutes.', 'Host asks if they want to wait at the bar.', 'Quiet tables are fully booked.'] },
+      { title: 'Understand the Menu', say: 'Here are your menus. Tonight\'s special is our lamb shoulder with rosemary jus.', student: 'Ask about special, ingredients, course structure, and one unknown word.', menu: 'Open the full menu or student mini menu.', feedback: 'Good clarifying questions and active listening.', complications: ['Describe the special quickly.', 'Use one new word: confit, jus, or seasonal.', 'Ask if they need a few more minutes.'] },
+      { title: 'Order Drinks and Water', say: 'Would you prefer still, sparkling, or tap water for the table?', student: 'Choose water and order wine by glass or a non-alcoholic drink.', menu: 'Menu helps with drink choices.', feedback: 'Resists pressure to buy a bottle, orders clearly.', complications: ['Offer an expensive bottle.', 'One drink is unavailable.', 'Ask if they want lemon with water.'] },
+      { title: 'Order Food in Courses', say: 'Are you ready to order, or would you like a few more minutes?', student: 'Order starter, main, side, doneness, substitution, and confirm allergy.', menu: 'Full menu useful.', feedback: 'Specific details in one clear order.', complications: ['One main is sold out.', 'Ask steak doneness.', 'Kitchen cannot remove one ingredient.'] },
+      { title: 'Handle a Service Problem', say: 'How is everything tasting?', student: 'Explain overcooked steak, missing side, or wrong sauce politely and ask for solution.', menu: 'No menu unless checking original order.', feedback: 'Polite but firm correction.', complications: ['Staff is busy.', 'Offer discount instead of remake.', 'Side dish will take five minutes.'] },
+      { title: 'Order Dessert or Coffee', say: 'Would you like to see the dessert menu or order coffee?', student: 'Ask recommendation, suggest sharing, decline politely, or order coffee.', menu: 'Menu useful for dessert.', feedback: 'Natural suggestion and polite declining.', complications: ['Friend wants dessert.', 'Coffee machine is delayed.', 'Only one dessert left.'] },
+      { title: 'Pay the Bill', say: 'Here is the bill whenever you are ready.', student: 'Ask to split, query surcharge, pay by card, ask for receipt, thank staff.', menu: 'No menu required.', feedback: 'Comfortable payment language and friendly closing.', complications: ['10% Sunday surcharge.', 'Card machine asks for tip.', 'Split payment must be equal amounts.'] }
+    ];
+    let current = 0;
+    function render() {
+      const s = scenes[current];
+      document.getElementById('kicker').textContent = 'Scene ' + (current + 1) + ' of ' + scenes.length;
+      document.getElementById('title').textContent = s.title;
+      document.getElementById('say').textContent = s.say;
+      document.getElementById('student').textContent = s.student;
+      document.getElementById('menu').textContent = s.menu;
+      document.getElementById('feedback').textContent = s.feedback;
+      const comp = document.getElementById('complications');
+      comp.innerHTML = '';
+      s.complications.forEach((text, index) => {
+        const item = document.createElement('div');
+        item.className = 'mini';
+        const b = document.createElement('b');
+        b.textContent = 'Challenge ' + (index + 1);
+        const span = document.createElement('span');
+        span.textContent = text;
+        item.appendChild(b);
+        item.appendChild(span);
+        comp.appendChild(item);
+      });
+      const tabs = document.getElementById('tabs');
+      tabs.innerHTML = '';
+      scenes.forEach((scene, index) => {
+        const tab = document.createElement('button');
+        tab.type = 'button';
+        tab.className = 'tab' + (index === current ? ' active' : '');
+        tab.textContent = index + 1 + '. ' + scene.title.split(' ')[0];
+        tab.onclick = () => { current = index; render(); };
+        tabs.appendChild(tab);
+      });
+    }
+    function toggleCheck(el) {
+      const cb = el.querySelector('input');
+      cb.checked = !cb.checked;
+      el.classList.toggle('done', cb.checked);
+    }
+    render();
+  </script>
+</body>
+</html>

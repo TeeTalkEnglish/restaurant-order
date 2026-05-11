@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student - Restaurant: Formal Dinner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Nunito', sans-serif; background: #111827; color: #1f2937; min-height: 100vh; }
+    .nav { position: sticky; top: 0; z-index: 20; background: #18212f; color: white; padding: 13px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+    .nav a, .nav span { color: white; text-decoration: none; font-weight: 800; font-size: 0.88rem; }
+    .role { border: 1px solid rgba(255,255,255,0.32); border-radius: 999px; padding: 6px 12px; color: #f8d391; }
+    .banner { background: #fff6e6; color: #7a4c0f; border-bottom: 2px solid #d9b36d; padding: 12px 20px; text-align: center; font-weight: 800; line-height: 1.45; }
+    .wrap { width: min(980px, 100%); margin: 28px auto 0; padding: 0 16px 60px; }
+    .scorebar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px; }
+    .score { background: #fffaf2; border: 1px solid #dfc9a7; border-radius: 8px; padding: 10px 12px; }
+    .score b { display: block; color: #254c54; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .score span { font-weight: 800; font-size: 1.2rem; color: #18212f; }
+    .card { background: #fffaf2; border: 1px solid #dfc9a7; border-radius: 8px; overflow: hidden; box-shadow: 0 12px 34px rgba(0,0,0,0.26); }
+    .photo { position: relative; height: 230px; background: #18212f; }
+    .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .photo:after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, rgba(10,15,24,0.76)); }
+    .photo-label { position: absolute; left: 18px; bottom: 15px; z-index: 1; color: white; background: rgba(24,33,47,0.82); border-radius: 999px; padding: 8px 13px; font-size: 0.78rem; font-weight: 800; }
+    .scene-head { background: linear-gradient(135deg, #254c54, #497b72); color: white; padding: 22px 24px; }
+    .kicker { color: #d9f0eb; font-size: 0.76rem; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase; margin-bottom: 6px; }
+    h1 { font-size: 1.6rem; line-height: 1.15; margin-bottom: 7px; }
+    .goal { color: rgba(255,255,255,0.92); line-height: 1.5; }
+    .dots { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 15px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; border: 0; background: rgba(255,255,255,0.45); cursor: pointer; }
+    .dot.active { background: #f8d391; }
+    .body { padding: 22px 24px 24px; display: grid; gap: 14px; }
+    .prompt { background: white; border-left: 4px solid #b55a35; border-radius: 0 8px 8px 0; padding: 14px 16px; line-height: 1.58; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .box { background: white; border: 1px solid #ead7b8; border-radius: 8px; padding: 13px 14px; font-size: 0.87rem; line-height: 1.55; }
+    .box strong { display: block; color: #18212f; font-size: 0.73rem; letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 6px; }
+    .box.challenge { background: #fff6e6; color: #7a4c0f; border-color: #d9b36d; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { background: #edf7f4; border: 1px solid #a5cbc3; color: #254c54; border-radius: 999px; padding: 6px 10px; font-weight: 800; font-size: 0.8rem; }
+    .lines { display: grid; gap: 8px; }
+    .line { border: 1px solid #d7e7e3; background: #f8fcfb; border-radius: 8px; padding: 10px 12px; }
+    .line b { display: block; color: #254c54; font-size: 0.78rem; margin-bottom: 2px; }
+    .controls, .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 16px; }
+    button, .btn { border: 2px solid #254c54; border-radius: 999px; background: white; color: #254c54; padding: 11px 17px; min-height: 42px; font: 800 0.86rem 'Nunito', sans-serif; cursor: pointer; text-decoration: none; }
+    .primary { background: #254c54; color: white; }
+    .menu-btn { background: #b55a35; border-color: #b55a35; color: white; }
+    .menu-btn.active { background: #7a2f2f; border-color: #7a2f2f; }
+    .mini-menu { display: none; margin-top: 20px; background: #fffaf2; border: 1px solid #dfc9a7; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.28); }
+    .mini-menu.show { display: block; }
+    .mini-head { background: #18212f; color: white; padding: 18px 22px; text-align: center; }
+    .mini-body { padding: 18px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .mini-section { background: white; border: 1px solid #ead7b8; border-radius: 8px; padding: 14px; }
+    .mini-section h3 { color: #7a2f2f; font-size: 0.94rem; margin-bottom: 9px; }
+    .mini-section p { display: flex; justify-content: space-between; gap: 8px; border-bottom: 1px dashed #d6c3a5; padding: 7px 0; font-size: 0.83rem; }
+    .mini-section p:last-child { border-bottom: 0; }
+    .mini-section span { color: #254c54; font-weight: 800; white-space: nowrap; }
+    @media (max-width: 720px) { .nav { flex-direction: column; } .scorebar, .grid, .mini-body { grid-template-columns: 1fr; } .photo { height: 190px; } }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html">Back</a>
+    <span>Restaurant: Formal Dinner Challenge</span>
+    <span class="role">Student guest</span>
+  </nav>
+  <div class="banner">Goal: stay polite, ask clear questions, and solve problems like a real dinner guest.</div>
+
+  <main class="wrap">
+    <div class="scorebar">
+      <div class="score"><b>Scene</b><span id="scoreScene">1/8</span></div>
+      <div class="score"><b>Pressure</b><span id="scorePressure">Low</span></div>
+      <div class="score"><b>Menu needed</b><span id="scoreMenu">Yes</span></div>
+      <div class="score"><b>Target</b><span id="scoreTarget">Polite request</span></div>
+    </div>
+
+    <section class="card">
+      <div class="photo">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=1400&q=80" alt="Chef plating a formal restaurant dish">
+        <div class="photo-label" id="photoLabel">Read the room before you speak</div>
+      </div>
+      <div class="scene-head">
+        <div class="kicker" id="kicker">Scene 1 of 8</div>
+        <h1 id="title">Make a Reservation</h1>
+        <p class="goal" id="goal">Call the restaurant and book a table clearly.</p>
+        <div class="dots" id="dots"></div>
+      </div>
+      <div class="body">
+        <div class="prompt" id="prompt"></div>
+        <div class="grid">
+          <div class="box"><strong>Useful phrases</strong><span id="phrases"></span></div>
+          <div class="box challenge"><strong>Real-life challenge</strong><span id="challenge"></span></div>
+        </div>
+        <div class="box">
+          <strong>Restaurant words</strong>
+          <div class="chips" id="vocab"></div>
+        </div>
+        <div class="box">
+          <strong>Conversation options</strong>
+          <div class="lines" id="lines"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="controls">
+      <button type="button" onclick="changeScene(-1)">Back</button>
+      <button class="primary" type="button" onclick="changeScene(1)">Next Scene</button>
+      <button class="menu-btn" id="menuToggle" type="button" onclick="toggleMenu()">Show Mini Menu</button>
+    </div>
+
+    <section class="mini-menu" id="miniMenu">
+      <div class="mini-head">
+        <h2>Harbour Room Bistro - Quick Menu</h2>
+        <p>Formal dining, shared table water, card payments, and 10% Sunday surcharge.</p>
+      </div>
+      <div class="mini-body">
+        <div class="mini-section"><h3>Starters</h3><p>Seared scallops <span>$24</span></p><p>Burrata salad <span>$19</span></p><p>Pumpkin soup <span>$16</span></p></div>
+        <div class="mini-section"><h3>Mains</h3><p>Eye fillet steak <span>$46</span></p><p>Barramundi <span>$38</span></p><p>Mushroom risotto <span>$31</span></p></div>
+        <div class="mini-section"><h3>Dessert</h3><p>Lemon tart <span>$15</span></p><p>Chocolate fondant <span>$17</span></p><p>Cheese plate <span>$22</span></p></div>
+      </div>
+    </section>
+
+    <div class="actions">
+      <a class="btn" href="menu.html" target="_blank">Full Menu</a>
+      <a class="btn" href="teacher.html" target="_blank">Teacher Notes</a>
+      <a class="btn" href="index.html">Home</a>
+    </div>
+  </main>
+
+  <script>
+    const scenes = [
+      { title: 'Make a Reservation', goal: 'Call the restaurant and book a table clearly.', prompt: 'You want dinner for two this Friday at 7:30pm. Ask for a booking, spell your name, give your phone number, and mention one guest has a shellfish allergy.', phrases: 'Do you have a table for two this Friday? / Could I book under Nguyen? / One guest has a shellfish allergy.', challenge: 'The restaurant only has 7:15pm or 8:30pm available. Negotiate politely.', vocab: ['reservation', 'available', 'under the name', 'allergy'], pressure: 'Low', target: 'Polite request', menu: true, photo: 'Confirm the booking details', lines: [{t:'Opening', l:'Hi, I would like to book a table for two, please.'}, {t:'Details', l:'Friday at 7:15 works. The name is Nguyen.'}, {t:'Allergy', l:'Could you please note a shellfish allergy on the booking?'}] },
+      { title: 'Arrive and Check In', goal: 'Greet the host and confirm your booking.', prompt: 'You arrive five minutes early. The host asks for your booking name and whether you would like to check your coat.', phrases: 'We have a booking under Nguyen. / Yes, thank you. / Could we have a quiet table if possible?', challenge: 'Your table is not ready yet. Ask how long the wait will be without sounding angry.', vocab: ['host', 'booking', 'coat check', 'quiet table'], pressure: 'Low', target: 'Greeting', menu: false, photo: 'Meet the host at the entrance', lines: [{t:'Check in', l:'Good evening. We have a booking for two under Nguyen.'}, {t:'Request', l:'If possible, could we sit somewhere a little quiet?'}, {t:'Delay', l:'No problem. How long do you think the wait will be?'}] },
+      { title: 'Understand the Menu', goal: 'Ask about courses, specials, and unfamiliar ingredients.', prompt: 'The waiter gives you the menu. Ask about the special, choose whether to order two or three courses, and check one ingredient you do not know.', phrases: 'What is the special tonight? / What does confit mean? / Is the barramundi served with sauce?', challenge: 'The waiter describes the special quickly. Ask them to repeat the key details.', vocab: ['special', 'course', 'confit', 'served with'], pressure: 'Medium', target: 'Clarifying', menu: true, photo: 'Use the menu like a real guest', lines: [{t:'Special', l:'Could you tell us about tonight\'s special?'}, {t:'Clarify', l:'Sorry, could you say the sauce again?'}, {t:'Plan', l:'I think we will do starters and mains tonight.'}] },
+      { title: 'Order Drinks and Water', goal: 'Order table water and one drink politely.', prompt: 'The waiter asks if you would like still, sparkling, or tap water. Choose water and ask for a non-alcoholic option or one glass of wine.', phrases: 'Tap water is fine, thanks. / Do you have any non-alcoholic drinks? / Could I get one glass of Pinot Noir?', challenge: 'The bottle is expensive. Ask for a glass instead of a bottle.', vocab: ['still water', 'sparkling', 'tap water', 'by the glass'], pressure: 'Medium', target: 'Drink order', menu: true, photo: 'Choose drinks without pressure', lines: [{t:'Water', l:'Tap water for the table would be great, thank you.'}, {t:'Wine', l:'Do you serve that wine by the glass?'}, {t:'No alcohol', l:'What non-alcoholic options do you recommend?'}] },
+      { title: 'Order Food in Courses', goal: 'Order a starter, main, side, and steak doneness if needed.', prompt: 'Now order dinner. Mention steak doneness, ask to change a side, and confirm the allergy note before the waiter leaves.', phrases: 'Could I have the eye fillet, medium rare? / Could I swap the chips for salad? / Just checking, this is safe for shellfish allergy?', challenge: 'One dish is sold out. Choose a replacement without freezing.', vocab: ['starter', 'main', 'side', 'medium rare', 'sold out'], pressure: 'High', target: 'Detailed order', menu: true, photo: 'Order clearly with details', lines: [{t:'Main', l:'I will have the barramundi, please.'}, {t:'Steak', l:'Could I have the steak medium rare with salad instead of chips?'}, {t:'Safety', l:'Could you please check this is safe with a shellfish allergy?'}] },
+      { title: 'Handle a Service Problem', goal: 'Politely fix a mistake or delay.', prompt: 'Your main course arrives, but the steak is well done instead of medium rare, or the side dish is missing. Explain the problem calmly.', phrases: 'Sorry, I think this was meant to be medium rare. / We are still waiting on the side salad. / Is it possible to fix this?', challenge: 'The waiter seems busy. Stay polite but clear.', vocab: ['overcooked', 'missing', 'side dish', 'remake'], pressure: 'High', target: 'Polite correction', menu: false, photo: 'Solve the problem calmly', lines: [{t:'Mistake', l:'Sorry, I ordered this medium rare, but it looks well done.'}, {t:'Missing item', l:'I think the salad is still missing from our order.'}, {t:'Solution', l:'Is it possible to have it remade, please?'}] },
+      { title: 'Order Dessert or Coffee', goal: 'Ask for dessert recommendations and decide if you are full.', prompt: 'The waiter offers dessert and coffee. Ask what is popular, decline politely, or share one dessert.', phrases: 'What dessert is most popular? / We might share the lemon tart. / I am too full, but thank you.', challenge: 'Your friend wants dessert but you are full. Suggest sharing.', vocab: ['dessert menu', 'share', 'decaf', 'recommend'], pressure: 'Medium', target: 'Suggestion', menu: true, photo: 'End the meal naturally', lines: [{t:'Ask', l:'What would you recommend for dessert?'}, {t:'Share', l:'We might share one chocolate fondant, please.'}, {t:'Coffee', l:'Could I get a decaf coffee with that?'}] },
+      { title: 'Pay the Bill', goal: 'Ask for the bill, check charges, split payment, and thank staff.', prompt: 'Ask for the bill. Check the surcharge and one item you do not understand. Decide whether to split the bill or pay together.', phrases: 'Could we get the bill, please? / Could we split it two ways? / What is this service charge?', challenge: 'There is a 10% Sunday surcharge. Ask about it politely and then pay.', vocab: ['bill', 'split payment', 'surcharge', 'receipt'], pressure: 'High', target: 'Payment', menu: false, photo: 'Finish with confidence', lines: [{t:'Bill', l:'Excuse me, could we please get the bill?'}, {t:'Split', l:'Could we split it evenly between two cards?'}, {t:'Question', l:'Sorry, could you explain this surcharge?'}] }
+    ];
+    let current = 0;
+    let menuOpen = false;
+
+    function render() {
+      const s = scenes[current];
+      document.getElementById('scoreScene').textContent = (current + 1) + '/' + scenes.length;
+      document.getElementById('scorePressure').textContent = s.pressure;
+      document.getElementById('scoreMenu').textContent = s.menu ? 'Yes' : 'No';
+      document.getElementById('scoreTarget').textContent = s.target;
+      document.getElementById('kicker').textContent = 'Scene ' + (current + 1) + ' of ' + scenes.length;
+      document.getElementById('title').textContent = s.title;
+      document.getElementById('goal').textContent = s.goal;
+      document.getElementById('prompt').textContent = s.prompt;
+      document.getElementById('phrases').textContent = s.phrases;
+      document.getElementById('challenge').textContent = s.challenge;
+      document.getElementById('photoLabel').textContent = s.photo;
+      document.getElementById('menuToggle').textContent = menuOpen ? 'Hide Mini Menu' : (s.menu ? 'Show Mini Menu' : 'Show Menu if Needed');
+      document.getElementById('menuToggle').classList.toggle('active', menuOpen);
+      const vocab = document.getElementById('vocab');
+      vocab.innerHTML = '';
+      s.vocab.forEach(word => {
+        const chip = document.createElement('span');
+        chip.className = 'chip';
+        chip.textContent = word;
+        vocab.appendChild(chip);
+      });
+      const lines = document.getElementById('lines');
+      lines.innerHTML = '';
+      s.lines.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'line';
+        const b = document.createElement('b');
+        b.textContent = item.t;
+        const span = document.createElement('span');
+        span.textContent = item.l;
+        row.appendChild(b);
+        row.appendChild(span);
+        lines.appendChild(row);
+      });
+      const dots = document.getElementById('dots');
+      dots.innerHTML = '';
+      scenes.forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'dot' + (index === current ? ' active' : '');
+        dot.onclick = () => goTo(index);
+        dots.appendChild(dot);
+      });
+    }
+    function goTo(index) {
+      current = Math.max(0, Math.min(scenes.length - 1, index));
+      menuOpen = false;
+      document.getElementById('miniMenu').classList.remove('show');
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function changeScene(step) { goTo(current + step); }
+    function toggleMenu() {
+      menuOpen = !menuOpen;
+      document.getElementById('miniMenu').classList.toggle('show', menuOpen);
+      render();
+      if (menuOpen) document.getElementById('miniMenu').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    render();
+  </script>
+</body>
+</html>
