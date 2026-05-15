@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Teacher – NOMAD Melbourne Fine Dining</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      min-height: 100vh;
+      color: #fff;
+    }
+
+    /* ── TOP NAV ── */
+    .top-nav {
+      background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+      border-bottom: 2px solid #d4af37;
+    }
+
+    .top-nav a {
+      color: #d4af37;
+      text-decoration: none;
+      font-size: 0.85rem;
+      opacity: 0.9;
+      transition: opacity 0.2s;
+    }
+
+    .top-nav a:hover { opacity: 1; }
+
+    .top-nav span {
+      color: #fff;
+      font-weight: 800;
+      font-size: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 1px;
+    }
+
+    .role-pill {
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid #d4af37;
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #d4af37;
+      letter-spacing: 1px;
+    }
+
+    /* ── CONTAINER ── */
+    .container {
+      width: 95%;
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px 0 60px;
+    }
+
+    /* ── HEADER ── */
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: #d4af37;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #bbb;
+      font-size: 0.95rem;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: rgba(255,255,255,0.08);
+      padding: 30px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .card h2 {
+      color: #d4af37;
+      margin-bottom: 20px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+    }
+
+    .card h3 {
+      color: #e5c158;
+      margin: 20px 0 12px 0;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      line-height: 1.8;
+      margin-bottom: 12px;
+      color: #ddd;
+    }
+
+    .card ul, .card ol {
+      margin-left: 20px;
+      color: #ddd;
+      line-height: 1.8;
+    }
+
+    .card li {
+      margin-bottom: 10px;
+    }
+
+    .learning-objective {
+      background: rgba(212, 175, 55, 0.1);
+      border-left: 4px solid #d4af37;
+      padding: 16px;
+      border-radius: 4px;
+      margin: 16px 0;
+    }
+
+    .scenario-box {
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 4px;
+      margin: 16px 0;
+      border: 1px solid rgba(212, 175, 55, 0.1);
+    }
+
+    .back-btn {
+      display: inline-block;
+      background: transparent;
+      border: 2px solid #d4af37;
+      color: #d4af37;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+      letter-spacing: 1px;
+      margin-top: 20px;
+    }
+
+    .back-btn:hover {
+      background: rgba(212, 175, 55, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .highlight {
+      color: #e5c158;
+      font-weight: 600;
+    }
+
+    .tips-box {
+      background: rgba(100, 200, 100, 0.05);
+      border-left: 4px solid #64c864;
+      padding: 16px;
+      border-radius: 4px;
+      margin: 16px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- TOP NAVIGATION -->
+<div class="top-nav">
+  <div>
+    <span>NOMAD Melbourne</span>
+    <span class="role-pill">👨‍🏫 Teacher Guide</span>
+  </div>
+  <a href="index.html">← Back</a>
+</div>
+
+<!-- MAIN CONTAINER -->
+<div class="container">
+
+  <h1>👨‍🏫 Teacher Guide: Fine Dining at NOMAD Melbourne</h1>
+  <p class="subtitle">Advanced hospitality roleplay scenarios for high-level students</p>
+
+  <!-- OVERVIEW -->
+  <div class="card">
+    <h2>📋 Program Overview</h2>
+    <p>
+      NOMAD Melbourne provides advanced roleplay scenarios designed to teach sophisticated hospitality skills. 
+      Students encounter diverse guests from VIP couples to challenging service situations, mastering:
+    </p>
+    <ul>
+      <li>VIP guest recognition and personalized service</li>
+      <li>Wine pairing expertise and recommendations</li>
+      <li>Multi-course service management and timing</li>
+      <li>Sophisticated language and etiquette</li>
+      <li>Problem-solving with grace and professionalism</li>
+      <li>Special requests and dietary accommodations</li>
+      <li>Time-pressured service and efficiency</li>
+      <li>Severe allergy management and cross-contamination prevention</li>
+      <li>Complaint recovery and service failure resolution</li>
+      <li>Values-aligned guest communication</li>
+    </ul>
+  </div>
+
+  <!-- LEARNING OUTCOMES -->
+  <div class="card">
+    <h2>🎯 Learning Outcomes</h2>
+    <p>After completing this module, students will be able to:</p>
+    
+    <div class="learning-objective">
+      <strong>1. Welcome VIP Guests Appropriately</strong>
+      <p>Recognize important guests and acknowledge special occasions with warmth and professionalism</p>
+    </div>
+
+    <div class="learning-objective">
+      <strong>2. Recommend Wine Pairings</strong>
+      <p>Suggest wines confidently based on food selections and guest preferences</p>
+    </div>
+
+    <div class="learning-objective">
+      <strong>3. Guide Multi-Course Service</strong>
+      <p>Explain courses, manage timing, and describe dishes with sophistication</p>
+    </div>
+
+    <div class="learning-objective">
+      <strong>4. Handle Special Requests & Allergies</strong>
+      <p>Manage allergies, dietary restrictions, cross-contamination prevention, and modifications with expertise and care</p>
+    </div>
+
+    <div class="learning-objective">
+      <strong>5. Resolve Problems Professionally</strong>
+      <p>Address complaints with empathy, involve management, offer solutions, and turn service failures into loyalty</p>
+    </div>
+
+    <div class="learning-objective">
+      <strong>6. Use Sophisticated Language</strong>
+      <p>Employ fine dining vocabulary and formal register appropriately across diverse guest types</p>
+    </div>
+
+    <div class="learning-objective">
+      <strong>7. Manage Time Pressure Efficiently</strong>
+      <p>Coordinate with kitchen, streamline orders, and deliver quality service under tight deadlines</p>
+    </div>
+
+    <div class="learning-objective">
+      <strong>8. Adapt to Different Guest Needs</strong>
+      <p>Read situations quickly and adjust service style to VIP guests, business diners, experts, activists, and difficult customers</p>
+    </div>
+  </div>
+
+  <!-- GUEST PERSONAS -->
+  <div class="card">
+    <h2>👥 Guest Personas</h2>
+    <p>Students will encounter eight distinct scenarios, from VIP to challenging service situations:</p>
+
+    <h3>1. Mr. & Mrs. Thornton – Anniversary Celebration</h3>
+    <div class="scenario-box">
+      <p><strong>Type:</strong> VIP Couple celebrating special occasion</p>
+      <p><strong>Key Focus:</strong> Warmth, wine pairing, sophistication, personal attention</p>
+      <p><strong>Teaching Point:</strong> VIP service is about making guests feel special and valued</p>
+      <p><strong>Skills Tested:</strong> Greeting, wine selection, course explanation, allergy management</p>
+    </div>
+
+    <h3>2. James Chen – Business Executive</h3>
+    <div class="scenario-box">
+      <p><strong>Type:</strong> Professional hosting important client meeting</p>
+      <p><strong>Key Focus:</strong> Discretion, timing flexibility, invisible service</p>
+      <p><strong>Teaching Point:</strong> Business diners need attentive but unobtrusive service</p>
+      <p><strong>Skills Tested:</strong> Professional greeting, timing management, accommodation requests</p>
+    </div>
+
+    <h3>3. Sophia & Marcus – Food Critics</h3>
+    <div class="scenario-box">
+      <p><strong>Type:</strong> Experienced diners with expertise</p>
+      <p><strong>Key Focus:</strong> Technical knowledge, storytelling, detailed descriptions</p>
+      <p><strong>Teaching Point:</strong> Sophisticated guests appreciate detailed explanations and expertise</p>
+      <p><strong>Skills Tested:</strong> Menu knowledge, wine expertise, handling criticism</p>
+    </div>
+
+    <h3>4. Rachel & David – Difficult Guests</h3>
+    <div class="scenario-box">
+      <p><strong>Type:</strong> Discerning guests with high expectations and skepticism</p>
+      <p><strong>Key Focus:</strong> Confidence, problem-solving, turning skeptics into admirers</p>
+      <p><strong>Teaching Point:</strong> Excellence under pressure wins over even difficult guests</p>
+      <p><strong>Skills Tested:</strong> Confidence, dietary accommodation, complaint resolution</p>
+    </div>
+
+    <h3>5. Priya Kapoor – Vegan Activist</h3>
+    <div class="scenario-box">
+      <p><strong>Type:</strong> Values-driven guest with ethical dining concerns</p>
+      <p><strong>Key Focus:</strong> Sustainability, plant-based excellence, values alignment</p>
+      <p><strong>Teaching Point:</strong> Activists become powerful advocates when they see authentic commitment</p>
+      <p><strong>Skills Tested:</strong> Values respect, sustainable sourcing knowledge, non-defensive responses</p>
+    </div>
+
+    <h3>6. Michael Torres – Culinary Student</h3>
+    <div class="scenario-box">
+      <p><strong>Type:</strong> Aspiring chef with serious technique questions</p>
+      <p><strong>Key Focus:</strong> Technical knowledge, mentorship, supporting next generation</p>
+      <p><strong>Teaching Point:</strong> Expert diners don't want hand-holding; they want knowledge sharing</p>
+      <p><strong>Skills Tested:</strong> Technical expertise, teaching ability, Chef communication</p>
+    </div>
+
+    <h3>7. Alex & Jordan – Rush Hour Couple ⏰</h3>
+    <div class="scenario-box">
+      <p><strong>Type:</strong> Time-pressured diners with theater tickets</p>
+      <p><strong>Key Focus:</strong> Efficiency, speed without sacrificing quality, precise timing</p>
+      <p><strong>Teaching Point:</strong> Fast service requires coordination with kitchen and clear communication</p>
+      <p><strong>Skills Tested:</strong> Timeline management, streamlined ordering, kitchen coordination, quick problem-solving</p>
+    </div>
+
+    <h3>8. Casey & Sam – Dietary Restrictions Group ⚠️</h3>
+    <div class="scenario-box">
+      <p><strong>Type:</strong> Careful diners with severe allergies and cross-contamination concerns</p>
+      <p><strong>Key Focus:</strong> Detailed protocols, cross-contamination prevention, transparency</p>
+      <p><strong>Teaching Point:</strong> Allergy management builds trust and loyalty when done meticulously</p>
+      <p><strong>Skills Tested:</strong> Allergy protocol knowledge, detailed menu review, Chef coordination, empathy</p>
+    </div>
+
+    <h3>9. Morgan & Taylor – Disappointed Diner 😕</h3>
+    <div class="scenario-box">
+      <p><strong>Type:</strong> Guests who received substandard food that didn't meet expectations</p>
+      <p><strong>Key Focus:</strong> Complaint recovery, empathy, service recovery, turning problems into loyalty</p>
+      <p><strong>Teaching Point:</strong> How you recover from mistakes defines your restaurant's reputation</p>
+      <p><strong>Skills Tested:</strong> Complaint listening, management escalation, replacement execution, follow-up care</p>
+    </div>
+  </div>
+
+  <!-- VOCABULARY & PHRASES -->
+  <div class="card">
+    <h2>📚 Fine Dining Vocabulary & Phrases</h2>
+    
+    <h3>VIP Greeting Phrases</h3>
+    <ul>
+      <li>"Welcome to NOMAD. How lovely to see you this evening."</li>
+      <li>"I understand this is a special occasion – you both look absolutely magnificent."</li>
+      <li>"Might I suggest our private corner table for more intimate conversation?"</li>
+      <li>"We're honored to have you join us this evening."</li>
+    </ul>
+
+    <h3>Wine Pairing Vocabulary</h3>
+    <ul>
+      <li>Minerality, acidity, tannins, body (light/full), notes, bouquet</li>
+      <li>"This Cabernet pairs beautifully with our premium beef."</li>
+      <li>"Notice the interplay between the wine's acidity and the fish's richness."</li>
+      <li>"This Chardonnay is elegant and refined, perfect for the seafood course."</li>
+    </ul>
+
+    <h3>Course Presentation Phrases</h3>
+    <ul>
+      <li>"May I present your first course?"</li>
+      <li>"This is pan-seared diver scallop, sourced fresh this morning from Tasmania."</li>
+      <li>"Notice the delicate edible flowers and the velvety saffron sauce."</li>
+      <li>"The scallop is seared to a perfect golden exterior while maintaining tender sweetness inside."</li>
+    </ul>
+
+    <h3>Handling Special Requests & Allergies</h3>
+    <ul>
+      <li>"We take allergies extremely seriously – never just 'being careful.'"</li>
+      <li>"Let me explain our cross-contamination protocols: separate prep area, dedicated equipment, Chef oversight."</li>
+      <li>"Your questions are exactly right – documenting these shows you're taking your safety seriously."</li>
+      <li>"We absolutely can work with that – our Chef specializes in accommodating dietary needs."</li>
+      <li>"I'll ensure our Chef is informed immediately."</li>
+      <li>"This is your evening, and we're here to make it exceptional."</li>
+    </ul>
+
+    <h3>Time-Pressured Service Phrases</h3>
+    <ul>
+      <li>"I see you're on a schedule. Let me be direct about timing so we can work together."</li>
+      <li>"Our appetizer-to-table is 12 minutes, mains are 18-20 minutes. We can absolutely make your timeline."</li>
+      <li>"Perfect strategy – I'll coordinate with our kitchen so everything comes out on schedule."</li>
+      <li>"You're staying right on track – we'll have you out by [specific time]."</li>
+    </ul>
+
+    <h3>Complaint Resolution Phrases</h3>
+    <ul>
+      <li>"I sincerely apologize – you're absolutely right, and this isn't acceptable."</li>
+      <li>"Your feedback actually helps us improve. Thank you for being honest."</li>
+      <li>"Let me take this back immediately and have our Chef prepare a fresh [dish] cooked perfectly."</li>
+      <li>"I'm going to bring our manager out – they should hear this directly from you."</li>
+      <li>"Here's your replacement – our Chef prepared this personally with extra care."</li>
+      <li>"Thank you for your grace in how you handled that. You've earned our gratitude."</li>
+    </ul>
+
+    <h3>Allergy Safety Communication</h3>
+    <ul>
+      <li>"Gluten-free? We have a dedicated prep station with separate cutting boards and fryer."</li>
+      <li>"Our Chef will personally handle your plate preparation from start to finish."</li>
+      <li>"Before your plate leaves the kitchen, the Chef confirms it personally."</li>
+      <li>"Your meal was prepared in our dedicated [allergen] station by our Chef personally."</li>
+    </ul>
+  </div>
+
+  <!-- TEACHING TIPS -->
+  <div class="card">
+    <h2>💡 Teaching Tips</h2>
+
+    <div class="tips-box">
+      <h3>Before Starting</h3>
+      <ul>
+        <li>Ensure students understand the difference between casual and fine dining service</li>
+        <li>Review the menu together and discuss wine pairings</li>
+        <li>Discuss what makes a guest "VIP" and the importance of recognition</li>
+        <li>Practice sophisticated language and formal register</li>
+      </ul>
+    </div>
+
+    <div class="tips-box">
+      <h3>During the Roleplay</h3>
+      <ul>
+        <li>Encourage students to take risks and try sophisticated language</li>
+        <li>If a guest scenario appears, use it as a teaching moment</li>
+        <li>Ask students to explain the 'why' behind their choices (why that wine, why that timing)</li>
+        <li>Have students practice scenario multiple times with different guests</li>
+      </ul>
+    </div>
+
+    <div class="tips-box">
+      <h3>After the Roleplay</h3>
+      <ul>
+        <li>Discuss what went well and what could be improved</li>
+        <li>Ask: "How did you make this guest feel special?"</li>
+        <li>Review wine pairing choices – were they appropriate?</li>
+        <li>Discuss alternatives for difficult situations</li>
+        <li>Encourage reflection on professional hospitality</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ASSESSMENT RUBRIC -->
+  <div class="card">
+    <h2>📊 Assessment Rubric</h2>
+    <p>Use this rubric to evaluate student performance across different scenarios:</p>
+
+    <h3>Professional Greeting (5 points)</h3>
+    <ul>
+      <li>Recognizes guest type, occasion, and time constraints</li>
+      <li>Offers personalized welcome appropriate to situation</li>
+      <li>Sets professional, welcoming tone immediately</li>
+    </ul>
+
+    <h3>Wine Selection (5 points)</h3>
+    <ul>
+      <li>Makes appropriate recommendation based on guest needs</li>
+      <li>Explains pairing logic with confidence</li>
+      <li>Shows flexibility for different guest types</li>
+    </ul>
+
+    <h3>Menu Guidance (5 points)</h3>
+    <ul>
+      <li>Describes dishes with detail and sophistication</li>
+      <li>Adapts explanations to guest knowledge level</li>
+      <li>Answers questions knowledgeably and completely</li>
+    </ul>
+
+    <h3>Allergy & Special Requests (5 points)</h3>
+    <ul>
+      <li>Takes allergies extremely seriously – never minimizes concerns</li>
+      <li>Explains cross-contamination protocols specifically</li>
+      <li>Involves Chef directly and shows confidence in solutions</li>
+      <li>Provides detailed menu reviews for dietary restrictions</li>
+    </ul>
+
+    <h3>Time Management & Efficiency (5 points)</h3>
+    <ul>
+      <li>Acknowledges time constraints and communicates realistic timelines</li>
+      <li>Streamlines ordering process when needed</li>
+      <li>Coordinates kitchen timing to meet guest deadlines</li>
+    </ul>
+
+    <h3>Complaint Resolution (5 points)</h3>
+    <ul>
+      <li>Listens to complaints without defensiveness</li>
+      <li>Apologizes sincerely and takes responsibility</li>
+      <li>Escalates to management appropriately</li>
+      <li>Executes replacement with exceptional care</li>
+    </ul>
+
+    <h3>Language & Professionalism (5 points)</h3>
+    <ul>
+      <li>Uses appropriate formal register and vocabulary</li>
+      <li>Maintains professional composure under pressure</li>
+      <li>Adapts communication style to different guest types</li>
+    </ul>
+
+    <p style="margin-top: 20px; color: #e5c158;"><strong>Total: 35 points</strong></p>
+  </div>
+
+  <!-- EXTENSION ACTIVITIES -->
+  <div class="card">
+    <h2>🚀 Extension Activities</h2>
+    <ul>
+      <li><strong>Wine Tasting:</strong> Research Australian wines and practice descriptions</li>
+      <li><strong>Menu Design:</strong> Have students create their own fine dining menu with descriptions</li>
+      <li><strong>Time Management Training:</strong> Practice streamlining orders under pressure; coordinate timing with actual kitchen</li>
+      <li><strong>Allergy Protocol Simulation:</strong> Role-play different allergen scenarios; practice cross-contamination questions</li>
+      <li><strong>Complaint Handling Workshop:</strong> Discuss various dining failures and practice service recovery responses</li>
+      <li><strong>Guest Interaction Practice:</strong> Pair students and have one act as guest, one as waiter – rotate through different scenarios</li>
+      <li><strong>Video Analysis:</strong> Watch fine dining service videos and critique techniques, noting what works and what doesn't</li>
+      <li><strong>Research Projects:</strong> Research fine dining etiquette, allergy protocols, emergency procedures</li>
+      <li><strong>Role Reversal:</strong> Have students play difficult guests to understand the server's perspective when handling complaints</li>
+      <li><strong>Menu Allergy Training:</strong> Create detailed charts showing which menu items contain common allergens</li>
+    </ul>
+  </div>
+
+  <!-- BACK BUTTON -->
+  <a href="index.html" class="back-btn">← Back to NOMAD</a>
+
+</div>
+
+</body>
+</html>

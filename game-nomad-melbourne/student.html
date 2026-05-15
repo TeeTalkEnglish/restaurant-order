@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student – NOMAD Melbourne Fine Dining</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      min-height: 100vh;
+      color: #fff;
+    }
+
+    /* ── TOP NAV ── */
+    .top-nav {
+      background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+      border-bottom: 2px solid #d4af37;
+    }
+
+    .top-nav a {
+      color: #d4af37;
+      text-decoration: none;
+      font-size: 0.85rem;
+      opacity: 0.9;
+      transition: opacity 0.2s;
+    }
+
+    .top-nav a:hover { opacity: 1; }
+
+    .top-nav span {
+      color: #fff;
+      font-weight: 800;
+      font-size: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 1px;
+    }
+
+    .role-pill {
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid #d4af37;
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #d4af37;
+      letter-spacing: 1px;
+    }
+
+    /* ── CONTAINER ── */
+    .container {
+      width: 95%;
+      max-width: 900px;
+      margin: auto;
+      padding: 30px 0;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ── */
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: #d4af37;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #bbb;
+      font-size: 0.95rem;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: rgba(255,255,255,0.08);
+      padding: 30px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .card select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 4px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border: 1px solid #d4af37;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .card select option {
+      background: #2d2d2d;
+      color: #fff;
+    }
+
+    .card button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 4px;
+      background: #d4af37;
+      color: #1a1a1a;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    .card button:hover {
+      background: #e5c158;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+    }
+
+    /* ── SCENARIO BOX ── */
+    .scenario-box {
+      background: rgba(255,255,255,0.08);
+      padding: 30px;
+      border-radius: 8px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      backdrop-filter: blur(10px);
+      flex-grow: 1;
+    }
+
+    .scenario-box h2 {
+      color: #d4af37;
+      margin-bottom: 12px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+    }
+
+    .scenario-box h3 {
+      color: #e5c158;
+      margin: 20px 0 12px 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+    }
+
+    .scenario-box p {
+      line-height: 1.8;
+      margin-bottom: 12px;
+      color: #ddd;
+    }
+
+    .scenario-box hr {
+      border: none;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+      margin: 20px 0;
+    }
+
+    /* ── BACK BUTTON ── */
+    .back-btn {
+      background: transparent;
+      border: 2px solid #d4af37;
+      color: #d4af37;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 1px;
+      display: inline-block;
+    }
+
+    .back-btn:hover {
+      background: rgba(212, 175, 55, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- TOP NAVIGATION -->
+<div class="top-nav">
+  <div>
+    <span>NOMAD Melbourne</span>
+    <span class="role-pill">🎓 Student Roleplay</span>
+  </div>
+  <a href="index.html">← Back</a>
+</div>
+
+<!-- MAIN CONTAINER -->
+<div class="container">
+
+  <h1>✨ Fine Dining Roleplay</h1>
+  <p class="subtitle">Practice advanced hospitality: VIP service, wine pairing, multi-course management, and complaint resolution</p>
+
+  <div class="card">
+    <h2>🎭 Generate Guest Scenario</h2>
+    <p style="color: #bbb; margin-bottom: 16px;">
+      You are the waiter/waitress at NOMAD. Each guest has their own personality, preferences, and needs. 
+      Can you provide exceptional service?
+    </p>
+    <p style="color: #999; margin-bottom: 20px; font-size: 0.9rem;">
+      <strong>⭐ Advanced Level:</strong> Each scenario tests a different hospitality skill. 
+      Respond thoughtfully to each guest's needs and preferences.
+    </p>
+    
+    <button onclick="generateCustomer()" style="background: #d4af37; color: #1a1a1a;">
+      🎲 Meet Your Next Guest
+    </button>
+  </div>
+
+  <div id="customerCard" class="scenario-box">
+    <p style="text-align: center; color: #bbb; font-size: 1.05rem;">
+      👋 Welcome to NOMAD Melbourne<br><br>
+      You are a waiter/waitress at Melbourne's finest establishment. Each guest brings unique expectations, preferences, and challenges.<br><br>
+      <strong>Your mission:</strong> Provide exceptional service that makes every guest feel valued and creates a memorable experience.<br><br>
+      Click "Meet Your Next Guest" to begin.
+    </p>
+  </div>
+
+  <div class="button-group">
+    <a href="menu.html" class="back-btn">📋 View Menu</a>
+    <a href="index.html" class="back-btn">← Back Home</a>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

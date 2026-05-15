@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NOMAD Melbourne – Fine Dining Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      background: #0a0a0a;
+      color: #ddd;
+      line-height: 1.8;
+    }
+
+    /* ── TOP NAV ── */
+    .top-nav {
+      background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+      border-bottom: 2px solid #d4af37;
+    }
+
+    .top-nav a {
+      color: #d4af37;
+      text-decoration: none;
+      font-size: 0.85rem;
+      opacity: 0.9;
+      transition: opacity 0.2s;
+    }
+
+    .top-nav a:hover { opacity: 1; }
+
+    .top-nav span {
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.95rem;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    .btn-play-game {
+      background: #d4af37;
+      color: #1a1a1a;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-play-game:hover {
+      background: #e5c158;
+      transform: translateY(-2px);
+    }
+
+    /* ── MAIN CONTENT ── */
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px 60px;
+    }
+
+    .menu-header {
+      text-align: center;
+      margin-bottom: 50px;
+      border-bottom: 2px solid #d4af37;
+      padding-bottom: 30px;
+    }
+
+    .menu-header h1 {
+      font-size: 3.5rem;
+      font-weight: 400;
+      letter-spacing: 3px;
+      color: #d4af37;
+      margin-bottom: 8px;
+    }
+
+    .menu-header p {
+      font-size: 1.1rem;
+      color: #bbb;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .menu-header .description {
+      font-size: 1rem;
+      color: #999;
+      font-style: italic;
+      margin-top: 16px;
+    }
+
+    /* ── MENU SECTION ── */
+    .menu-section {
+      margin-bottom: 50px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      color: #d4af37;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    /* ── DISH ── */
+    .dish {
+      margin-bottom: 25px;
+      padding: 16px;
+      border-left: 2px solid #d4af37;
+      background: rgba(212, 175, 55, 0.02);
+      border-radius: 4px;
+    }
+
+    .dish-name {
+      font-size: 1.4rem;
+      color: #e5c158;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .dish-description {
+      font-size: 0.95rem;
+      color: #ccc;
+      line-height: 1.6;
+      margin-bottom: 10px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .dish-price {
+      font-size: 0.95rem;
+      color: #d4af37;
+      font-weight: 600;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .dish-note {
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* ── WINE LIST ── */
+    .wine-section {
+      background: rgba(212, 175, 55, 0.05);
+      padding: 30px;
+      border-radius: 8px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      margin-bottom: 50px;
+    }
+
+    .wine {
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed rgba(212, 175, 55, 0.2);
+    }
+
+    .wine:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .wine-name {
+      font-size: 1.2rem;
+      color: #e5c158;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .wine-details {
+      font-size: 0.9rem;
+      color: #bbb;
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 6px;
+    }
+
+    .wine-price {
+      font-size: 0.95rem;
+      color: #d4af37;
+      font-weight: 600;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #666;
+      padding: 20px;
+      border-top: 1px solid #d4af37;
+      margin-top: 40px;
+    }
+
+    .note-box {
+      background: rgba(212, 175, 55, 0.1);
+      border-left: 3px solid #d4af37;
+      padding: 16px;
+      border-radius: 4px;
+      margin: 30px 0;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: transparent;
+      border: 2px solid #d4af37;
+      color: #d4af37;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.2s;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .back-button:hover {
+      background: rgba(212, 175, 55, 0.1);
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- TOP NAVIGATION -->
+<div class="top-nav">
+  <span>NOMAD Melbourne – Fine Dining Menu</span>
+  <a href="student.html" class="btn-play-game">🎓 Start Roleplay</a>
+</div>
+
+<!-- MENU CONTENT -->
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="menu-header">
+    <h1>NOMAD</h1>
+    <p>Melbourne</p>
+    <div class="description">
+      À la carte fine dining experience
+      <br>
+      Seasonal ingredients • Contemporary techniques • Wine pairings
+    </div>
+  </div>
+
+  <!-- APPETIZERS -->
+  <div class="menu-section">
+    <div class="section-title">Amuse-Bouche</div>
+
+    <div class="dish">
+      <div class="dish-name">Foie Gras Mousse</div>
+      <div class="dish-description">Silky foie gras terrine with brioche and fig compote</div>
+      <div class="dish-price">$22</div>
+    </div>
+
+    <div class="dish">
+      <div class="dish-name">Oysters – Natural & Kilpatrick</div>
+      <div class="dish-description">Selection of fresh Tasmania oysters, served with various preparations</div>
+      <div class="dish-price">$18 per piece</div>
+      <div class="dish-note">Ask about today's selection</div>
+    </div>
+
+    <div class="dish">
+      <div class="dish-name">Seared Scallop & Caviar</div>
+      <div class="dish-description">Hand-dived scallop with Oscietra caviar, saffron beurre blanc, edible flowers</div>
+      <div class="dish-price">$28</div>
+      <div class="dish-note">Contains shellfish</div>
+    </div>
+
+    <div class="dish">
+      <div class="dish-name">Wagyu Carpaccio</div>
+      <div class="dish-description">Thinly sliced Japanese Wagyu A5, truffle oil, microgreens, aged parmesan</div>
+      <div class="dish-price">$26</div>
+    </div>
+  </div>
+
+  <!-- MAIN COURSES -->
+  <div class="menu-section">
+    <div class="section-title">Main Courses</div>
+
+    <div class="dish">
+      <div class="dish-name">Pan-Seared Diver Scallop</div>
+      <div class="dish-description">Hand-dived scallop from Tasmania with seasonal root vegetables and brown butter sauce</div>
+      <div class="dish-price">$48</div>
+      <div class="dish-note">Contains shellfish • Chef's recommendation</div>
+    </div>
+
+    <div class="dish">
+      <div class="dish-name">Grass-Fed Wagyu Beef – Ribeye</div>
+      <div class="dish-description">250g Prime grade Wagyu ribeye, rested for 28 days, served with charred broccolini and jus</div>
+      <div class="dish-price">$78</div>
+      <div class="dish-note">Cooked to your preference</div>
+    </div>
+
+    <div class="dish">
+      <div class="dish-name">Slow-Cooked Lamb Shoulder</div>
+      <div class="dish-description">12-hour braised lamb shoulder with Mediterranean herbs, root vegetable purée, red wine jus</div>
+      <div class="dish-price">$62</div>
+    </div>
+
+    <div class="dish">
+      <div class="dish-name">Seared Venison Loin</div>
+      <div class="dish-description">Gippsland venison with pickled beetroot, beetroot gel, and native pepper berry sauce</div>
+      <div class="dish-price">$68</div>
+      <div class="dish-note">Game – delicate flavor profile</div>
+    </div>
+
+    <div class="dish">
+      <div class="dish-name">Roasted Barramundi</div>
+      <div class="dish-description">Whole fish roasted with lemon, herbs, and seasonal vegetables with beurre blanc</div>
+      <div class="dish-price">$52</div>
+      <div class="dish-note">Contains fish</div>
+    </div>
+  </div>
+
+  <!-- SIDES -->
+  <div class="menu-section">
+    <div class="section-title">Sides</div>
+
+    <div class="dish">
+      <div class="dish-name">Truffle Mac & Cheese</div>
+      <div class="dish-price">$16</div>
+    </div>
+
+    <div class="dish">
+      <div class="dish-name">Gratin Potato Dauphinoise</div>
+      <div class="dish-price">$14</div>
+    </div>
+
+    <div class="dish">
+      <div class="dish-name">Wild Mushroom Risotto</div>
+      <div class="dish-price">$15</div>
+    </div>
+
+    <div class="dish">
+      <div class="dish-name">Charred Broccolini with Garlic & Chili</div>
+      <div class="dish-price">$12</div>
+      <div class="dish-note">Vegan option available</div>
+    </div>
+  </div>
+
+  <!-- WINE SELECTION -->
+  <div class="wine-section">
+    <h2 style="font-size: 2rem; color: #d4af37; margin-bottom: 30px; letter-spacing: 2px; text-transform: uppercase;">Wine Pairings</h2>
+
+    <div style="margin-bottom: 20px;">
+      <h3 style="color: #e5c158; font-size: 1.3rem; margin-bottom: 16px;">Red Wines</h3>
+
+      <div class="wine">
+        <div class="wine-name">Margaret River Cabernet Sauvignon 2018</div>
+        <div class="wine-details">Bold, full-bodied with dark berry notes – pairs with beef & lamb</div>
+        <div class="wine-price">$95 per bottle | $24 per glass</div>
+      </div>
+
+      <div class="wine">
+        <div class="wine-name">Yarra Valley Pinot Noir 2019</div>
+        <div class="wine-details">Elegant, light to medium-bodied – perfect for business dining</div>
+        <div class="wine-price">$72 per bottle | $18 per glass</div>
+      </div>
+
+      <div class="wine">
+        <div class="wine-name">Adelaide Hills Shiraz 2017</div>
+        <div class="wine-details">Medium-bodied, peppery spice – versatile with most mains</div>
+        <div class="wine-price">$68 per bottle | $17 per glass</div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <h3 style="color: #e5c158; font-size: 1.3rem; margin-bottom: 16px;">White Wines</h3>
+
+      <div class="wine">
+        <div class="wine-name">Yarra Valley Chardonnay 2019</div>
+        <div class="wine-details">Crisp, refined with citrus – excellent with seafood</div>
+        <div class="wine-price">$78 per bottle | $20 per glass</div>
+      </div>
+
+      <div class="wine">
+        <div class="wine-name">Clare Valley Riesling 2020</div>
+        <div class="wine-details">Sophisticated, fruity – ideal for business conversations</div>
+        <div class="wine-price">$62 per bottle | $16 per glass</div>
+      </div>
+
+      <div class="wine">
+        <div class="wine-name">Adelaide Hills Sauvignon Blanc 2021</div>
+        <div class="wine-details">Crisp, fresh – perfect for light appetizers</div>
+        <div class="wine-price">$55 per bottle | $14 per glass</div>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="color: #e5c158; font-size: 1.3rem; margin-bottom: 16px;">Champagne & Sparkling</h3>
+
+      <div class="wine">
+        <div class="wine-name">Taittinger Comtes de Champagne Blanc de Blancs</div>
+        <div class="wine-details">Celebratory, elegant – perfect for special occasions</div>
+        <div class="wine-price">$150 per bottle | $38 per glass</div>
+      </div>
+
+      <div class="wine">
+        <div class="wine-name">Krug Champagne 2016</div>
+        <div class="wine-details">Complex, sophisticated – pairs with seafood and celebrations</div>
+        <div class="wine-price">$175 per bottle | $44 per glass</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESSERTS -->
+  <div class="menu-section">
+    <div class="section-title">Desserts</div>
+
+    <div class="dish">
+      <div class="dish-name">Chocolate Soufflé</div>
+      <div class="dish-description">70% dark chocolate soufflé with raspberry coulis and vanilla gelato</div>
+      <div class="dish-price">$16</div>
+      <div class="dish-note">Contains gluten & dairy</div>
+    </div>
+
+    <div class="dish">
+      <div class="dish-name">Crème Brûlée</div>
+      <div class="dish-description">Classic vanilla bean crème brûlée with caramelized sugar</div>
+      <div class="dish-price">$14</div>
+    </div>
+
+    <div class="dish">
+      <div class="dish-name">Lemon Posset</div>
+      <div class="dish-description">Delicate lemon and cream posset with shortbread</div>
+      <div class="dish-price">$13</div>
+    </div>
+
+    <div class="dish">
+      <div class="dish-name">Cheese Board – Selection of 3</div>
+      <div class="dish-description">Locally sourced Australian & imported cheeses with quince paste, nuts, and crackers</div>
+      <div class="dish-price">$24</div>
+    </div>
+  </div>
+
+  <!-- NOTE -->
+  <div class="note-box">
+    <strong>Service Information:</strong><br><br>
+    • Multi-course tasting menu available: 3-course ($85), 5-course ($120), 7-course ($150)<br>
+    • Wine pairings available with any menu<br>
+    • Dietary requirements accommodated with 24 hours notice<br>
+    • Private dining room available for groups of 10+<br>
+    • Service charge: 10% for groups of 8+
+  </div>
+
+  <!-- BACK BUTTON -->
+  <a href="index.html" class="back-button">← Back to NOMAD</a>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  NOMAD Melbourne | 847 Chapel Street, South Yarra VIC 3141 | Phone: (03) 9827 1234<br>
+  Open Tuesday to Sunday, 6pm – 11pm | Closed Mondays<br>
+  Menu subject to change based on seasonal availability
+</footer>
+
+</body>
+</html>

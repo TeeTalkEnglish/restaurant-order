@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Student Roleplay Card</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Customer Roleplay Card</h1>
+
+  <div class="card">
+
+    <h2>Select Difficulty</h2>
+
+    <select id="difficulty">
+
+      <option value="beginner">
+        Beginner
+      </option>
+
+      <option value="intermediate">
+        Intermediate
+      </option>
+
+      <option value="advanced">
+        Advanced
+      </option>
+
+    </select>
+
+    <button onclick="generateCustomer()">
+      Generate Customer
+    </button>
+
+  </div>
+
+  <div id="customerCard" class="scenario-box">
+
+    Your customer role card will appear here.
+
+  </div>
+
+  <a href="index.html">
+    <button class="back-btn">
+      Back Home
+    </button>
+  </a>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

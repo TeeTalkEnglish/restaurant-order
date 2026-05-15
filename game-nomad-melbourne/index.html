@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NOMAD Melbourne – Fine Dining</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: #fff;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+      color: #fff;
+      padding: 32px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      border-bottom: 2px solid #d4af37;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-left h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 2px;
+    }
+
+    .header-left p {
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #d4af37;
+      opacity: 0.9;
+    }
+
+    .header a {
+      color: #d4af37;
+      text-decoration: none;
+      font-size: 0.85rem;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+    .header a:hover { opacity: 1; }
+
+    /* ── MAIN ── */
+    .main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 16px;
+    }
+
+    .intro-section {
+      max-width: 700px;
+      background: rgba(255,255,255,0.05);
+      border: 2px solid #d4af37;
+      border-radius: 8px;
+      padding: 40px 30px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .intro-section h2 {
+      font-size: 2.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      margin-bottom: 16px;
+      color: #d4af37;
+      letter-spacing: 1px;
+    }
+
+    .intro-section p {
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 24px;
+      color: #ddd;
+    }
+
+    .buttons-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 4px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+      letter-spacing: 1px;
+    }
+
+    .btn-primary {
+      background: #d4af37;
+      color: #1a1a1a;
+    }
+
+    .btn-primary:hover {
+      background: #e5c158;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #d4af37;
+      border: 2px solid #d4af37;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(212, 175, 55, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .back-btn {
+      background: transparent;
+      color: #d4af37;
+      border: none;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: none;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+
+    .back-btn:hover { opacity: 1; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #888;
+      padding: 20px;
+      border-top: 1px solid #d4af37;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div>
+      <h1>NOMAD</h1>
+      <p>Melbourne Fine Dining</p>
+    </div>
+  </div>
+  <a href="../index.html" class="back-btn">← Back</a>
+</div>
+
+<div class="main">
+  <div class="intro-section">
+    <h2>✨ Welcome to NOMAD</h2>
+    <p>
+      An exclusive fine dining establishment in Melbourne. 
+      Practice advanced hospitality skills: greeting VIP guests, 
+      recommending wines, managing multi-course service, 
+      and handling sophisticated customer requests with elegance.
+    </p>
+    <p style="font-size: 0.9rem; color: #bbb; margin-top: 20px;">
+      ⭐ Advanced Level Only | Haute Cuisine Experience
+    </p>
+    <div class="buttons-group">
+      <a href="student.html" class="btn btn-primary">▶ Start Roleplay</a>
+      <a href="menu.html" class="btn btn-secondary">📋 View Menu</a>
+      <a href="teacher.html" class="btn btn-secondary">👨‍🏫 Teacher Version</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  NOMAD Melbourne Fine Dining Experience • TeeTalkEnglish © 2024
+</footer>
+
+</body>
+</html>

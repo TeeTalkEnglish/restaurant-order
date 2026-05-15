@@ -1,0 +1,120 @@
+body{
+
+  margin:0;
+  padding:0;
+  background:#f5f1eb;
+  font-family:Arial, sans-serif;
+  color:#222;
+
+}
+
+.container{
+
+  width:90%;
+  max-width:900px;
+  margin:auto;
+  padding:30px;
+
+}
+
+h1{
+
+  text-align:center;
+  margin-bottom:10px;
+
+}
+
+.subtitle{
+
+  text-align:center;
+  margin-bottom:40px;
+  color:#666;
+
+}
+
+.card{
+
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  margin-bottom:25px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+
+}
+
+select{
+
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  margin-top:10px;
+  margin-bottom:20px;
+
+}
+
+button{
+
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:10px;
+  background:black;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+
+}
+
+button:hover{
+
+  opacity:0.9;
+
+}
+
+.home-buttons{
+
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+
+}
+
+.scenario-box{
+
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  margin-top:20px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+
+}
+
+.menu{
+
+  list-style:none;
+  padding:0;
+  line-height:2;
+
+}
+
+.instructions{
+
+  line-height:2;
+
+}
+
+.back-btn{
+
+  margin-top:20px;
+
+}
+
+@media(max-width:768px){
+
+  .container{
+
+    width:95%;
+
+  }
+
+}
