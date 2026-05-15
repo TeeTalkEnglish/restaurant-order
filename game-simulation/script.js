@@ -205,6 +205,13 @@ function generateCustomer(){
 
 }
 
+function applyDifficultyClass() {
+  const customerCard = document.getElementById("customerCard");
+  if (customerCard && currentCustomer) {
+    customerCard.className = 'scenario-box difficulty-' + currentCustomer.difficulty.toLowerCase();
+  }
+}
+
 
 
 function showStage(){
@@ -222,61 +229,50 @@ function showStage(){
 
     <h2>${currentCustomer.name}</h2>
 
-    <p>
-      <strong>Difficulty:</strong>
-      ${currentCustomer.difficulty}
+    <p style="margin: 10px 0; color: #666;">
+      <strong>Difficulty:</strong> ${currentCustomer.difficulty}
     </p>
 
-    <hr>
+    <hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
 
-    <h3>${stage.title}</h3>
+    <h3 style="margin: 20px 0 15px 0;">${stage.title}</h3>
 
-    <p>
-      <strong>Objective:</strong>
-    </p>
+    <div style="background: #fff3e0; padding: 15px; border-radius: 8px; border-left: 4px solid #ff9800; margin: 15px 0;">
+      <p style="margin: 0 0 8px 0; font-weight: bold; color: #ff6f00;">Objective:</p>
+      <p style="margin: 0; color: #333;">
+        ${stage.objective}
+      </p>
+    </div>
 
-    <p>
-      ${stage.objective}
-    </p>
-
-    <p
-      onclick="toggleHint()"
-
-      style="
-        text-decoration:underline;
-        cursor:pointer;
-        margin-top:20px;
-        color:#555;
-      "
-    >
-
-      Show Aussie Hint
-
-    </p>
+    <div style="background: #fff8e1; padding: 12px; border-radius: 6px; border-left: 4px solid #fbc02d; margin: 15px 0; cursor: pointer;" onclick="toggleHint()">
+      <p style="margin: 0; font-weight: 600; color: #f57f17;">💡 Show Aussie Hint</p>
+    </div>
 
     <p
       id="hintText"
-
       style="
-        display:none;
-        margin-top:10px;
-        font-style:italic;
+        display: none;
+        margin: 12px 0;
+        padding: 12px;
+        background: #f5f5f5;
+        border-radius: 6px;
+        border-left: 4px solid #9e9e9e;
+        font-style: italic;
+        color: #555;
       "
     >
-
       "${stage.slang}"
-
     </p>
 
     <br>
 
     <button onclick="nextStage()">
-
       Next Stage
-
     </button>
 
   `;
+
+  applyDifficultyClass();
 
 }
 
@@ -290,36 +286,23 @@ function showOrderingInterface(){
 
     <h2>${currentCustomer.name}</h2>
 
-    <p>
-      <strong>Difficulty:</strong>
-      ${currentCustomer.difficulty}
+    <p style="margin: 10px 0; color: #666;">
+      <strong>Difficulty:</strong> ${currentCustomer.difficulty}
     </p>
 
-    <hr>
+    <hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
 
-    <h3>${stage.title}</h3>
+    <h3 style="margin: 20px 0 15px 0;">${stage.title}</h3>
 
-    <p style="font-size:16px; line-height:1.6;">
-      The customer is ready to order. They look at you and seem unsure about what they want...
-    </p>
-
-    <hr>
-
-    <div style="background:#f0f8ff; padding:15px; border-radius:8px; margin:15px 0;">
-      <p style="margin:0 0 15px 0; font-weight:bold;">What would the customer like to do?</p>
-      
-      <button onclick="lookAtMenu()" style="background:#4CAF50; margin-bottom:10px;">
-        📋 Look at the Menu
-      </button>
-
-      <button onclick="askForSuggestion()" style="background:#2196F3; margin-bottom:10px;">
+    <div style="background: #f0f8ff; padding: 15px; border-radius: 8px; border-left: 4px solid #2196F3; margin: 15px 0;">
+      <button onclick="askForSuggestion()" style="background: #2196F3; margin: 0; width: 100%; padding: 14px; border-radius: 6px; color: white; font-weight: 600; border: none; cursor: pointer; font-size: 1em;">
         🤝 Ask the Waiter/Waitress for Suggestion
       </button>
     </div>
 
-    ${menuViewed ? '<p style="color:green; margin:10px 0;"><strong>✓ Customer looked at the menu</strong></p>' : ''}
-
   `;
+
+  applyDifficultyClass();
 
 }
 
@@ -413,46 +396,60 @@ function askForSuggestion(){
 
   const stage = currentCustomer.stages[currentStage];
 
+  // prepare suggestion payload
+  const suggestionText = customerPreference ? stage.suggestion[customerPreference] : 'I recommend our special of the day!';
+  const customerSays = customerPreference ? stage.preferences[customerPreference] : stage.slang;
+
+  const payload = {
+    customer: currentCustomer.name,
+    difficulty: currentCustomer.difficulty,
+    stage: stage.title,
+    customerSays: customerSays,
+    suggestion: suggestionText,
+    timestamp: Date.now()
+  };
+
+  // publish suggestion for teacher dashboard via localStorage
+  try {
+    localStorage.setItem('lastSuggestion', JSON.stringify(payload));
+  } catch (e) {
+    console.warn('Could not write suggestion to localStorage', e);
+  }
+
+  // Student view: show only what the customer says and note the teacher will suggest
   let html = `
 
     <h2>${currentCustomer.name}</h2>
 
-    <p>
-      <strong>Difficulty:</strong>
-      ${currentCustomer.difficulty}
+    <p style="margin: 10px 0; color: #666;">
+      <strong>Difficulty:</strong> ${currentCustomer.difficulty}
     </p>
 
-    <hr>
+    <hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
 
-    <h3>${stage.title}</h3>
+    <h3 style="margin: 20px 0 15px 0;">${stage.title}</h3>
 
-    <div style="background:#fff3e0; padding:15px; border-radius:8px; border-left:4px solid #ff5722; margin:15px 0;">
-      <p style="margin:0 0 10px 0; font-weight:bold;">Customer says:</p>
-      <p style="margin:0; font-style:italic;">
-        "${customerPreference ? stage.preferences[customerPreference] : stage.slang}"
+    <div style="background: #fff3e0; padding: 15px; border-radius: 8px; border-left: 4px solid #ff5722; margin: 15px 0;">
+      <p style="margin: 0 0 8px 0; font-weight: bold; color: #e65100;">Customer says:</p>
+      <p style="margin: 0; font-style: italic; color: #333;">
+        "${customerSays}"
       </p>
     </div>
 
-    <div style="background:#e3f2fd; padding:15px; border-radius:8px; border-left:4px solid #2196F3; margin:15px 0;">
-      <p style="margin:0 0 10px 0; font-weight:bold;">Waiter/Waitress suggests:</p>
-      <p style="margin:0; font-size:16px; color:#1565c0;">
-        <strong>"${customerPreference ? stage.suggestion[customerPreference] : 'I recommend our special of the day!'}"</strong>
-      </p>
+    <div style="background: #f5f5f5; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 4px solid #9e9e9e;">
+      <p style="margin: 0; color: #666;"><strong>📌 Note:</strong> The waiter/waitress suggestion will be provided on the Teacher Dashboard.</p>
     </div>
-
-    <p style="margin-top:20px; color:#666; font-size:14px;">
-      <strong>Great job!</strong> You listened to what the customer wanted and provided a helpful suggestion. Now they can make their order!
-    </p>
 
     <br>
 
-    <button onclick="completeOrdering()" style="width:100%;">
+    <button onclick="completeOrdering()" style="width: 100%;">
       Next Stage
     </button>
 
   `;
 
   document.getElementById("customerCard").innerHTML = html;
+  applyDifficultyClass();
 
 }
 

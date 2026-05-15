@@ -1,120 +1,243 @@
-body{
-
-  margin:0;
-  padding:0;
-  background:#f5f1eb;
-  font-family:Arial, sans-serif;
-  color:#222;
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.container{
-
-  width:90%;
-  max-width:900px;
-  margin:auto;
-  padding:30px;
-
+body {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #222;
+  min-height: 100vh;
+  padding: 20px 0;
 }
 
-h1{
-
-  text-align:center;
-  margin-bottom:10px;
-
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+  padding: 40px 30px;
 }
 
-.subtitle{
-
-  text-align:center;
-  margin-bottom:40px;
-  color:#666;
-
+h1 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 2.5em;
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  letter-spacing: 1px;
 }
 
-.card{
-
-  background:white;
-  padding:25px;
-  border-radius:15px;
-  margin-bottom:25px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
-
+.subtitle {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #ddd;
+  font-size: 1.1em;
 }
 
-select{
-
-  width:100%;
-  padding:12px;
-  border-radius:10px;
-  margin-top:10px;
-  margin-bottom:20px;
-
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  border-left: 5px solid #d4a574;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-button{
-
-  width:100%;
-  padding:15px;
-  border:none;
-  border-radius:10px;
-  background:black;
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.3);
 }
 
-button:hover{
-
-  opacity:0.9;
-
+.card h2 {
+  color: #8b4513;
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #d4a574;
 }
 
-.home-buttons{
-
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-
+select {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  border: 2px solid #d4a574;
+  font-size: 1em;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
 }
 
-.scenario-box{
-
-  background:white;
-  padding:25px;
-  border-radius:15px;
-  margin-top:20px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
-
+select:focus {
+  outline: none;
+  border-color: #8b4513;
+  box-shadow: 0 0 5px rgba(139, 69, 19, 0.3);
 }
 
-.menu{
-
-  list-style:none;
-  padding:0;
-  line-height:2;
-
+select option {
+  padding: 10px;
+  background: white;
 }
 
-.instructions{
-
-  line-height:2;
-
+button {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+  color: white;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-.back-btn{
-
-  margin-top:20px;
-
+button:hover {
+  background: linear-gradient(135deg, #a0522d 0%, #8b4513 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
 }
 
-@media(max-width:768px){
+button:active {
+  transform: translateY(0);
+}
 
-  .container{
+.home-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
-    width:95%;
+.scenario-box {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  margin-top: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  border-left: 5px solid #d4a574;
+}
 
+.scenario-box h2 {
+  color: #8b4513;
+  font-size: 1.8em;
+  margin-bottom: 15px;
+}
+
+.scenario-box h3 {
+  color: #a0522d;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.scenario-box p {
+  line-height: 1.8;
+  font-size: 1.05em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  line-height: 2.2;
+  font-size: 1.05em;
+}
+
+.menu li {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  color: #555;
+}
+
+.menu li:last-child {
+  border-bottom: none;
+}
+
+.instructions {
+  line-height: 2.2;
+  font-size: 1.05em;
+}
+
+.instructions li {
+  padding: 8px 0;
+  color: #555;
+}
+
+.back-btn {
+  margin-top: 30px;
+  background: linear-gradient(135deg, #555 0%, #333 100%);
+}
+
+.back-btn:hover {
+  background: linear-gradient(135deg, #333 0%, #555 100%);
+}
+
+/* Difficulty Level Styling */
+.difficulty-beginner {
+  border-left-color: #4CAF50 !important;
+}
+
+.difficulty-beginner h2,
+.difficulty-beginner h3 {
+  color: #4CAF50 !important;
+}
+
+.difficulty-intermediate {
+  border-left-color: #FF9800 !important;
+}
+
+.difficulty-intermediate h2,
+.difficulty-intermediate h3 {
+  color: #FF9800 !important;
+}
+
+.difficulty-advanced {
+  border-left-color: #f44336 !important;
+}
+
+.difficulty-advanced h2,
+.difficulty-advanced h3 {
+  color: #f44336 !important;
+}
+
+/* Customer Card Styling */
+.customer-info {
+  background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border-left: 4px solid #d4a574;
+}
+
+.customer-info p {
+  margin: 8px 0;
+  font-size: 1.05em;
+  color: #333;
+}
+
+@media(max-width:768px) {
+  .container {
+    width: 95%;
+    padding: 30px 20px;
   }
 
+  h1 {
+    font-size: 2em;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  button {
+    padding: 14px;
+    font-size: 0.95em;
+  }
 }

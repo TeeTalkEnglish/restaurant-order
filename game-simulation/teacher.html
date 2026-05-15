@@ -59,6 +59,16 @@
 
   </div>
 
+  <div class="card">
+
+    <h2>Latest Waiter Suggestion</h2>
+
+    <div id="teacherSuggestion" style="background:#fff; padding:15px; border-radius:8px; min-height:80px;">
+      <p style="color:#777; margin:0;">No suggestion yet. Suggestions from the student view will appear here.</p>
+    </div>
+
+  </div>
+
   <a href="index.html">
     <button class="back-btn">
       Back Home
@@ -68,4 +78,41 @@
 </div>
 
 </body>
+<script>
+  function renderSuggestion(payload) {
+    const container = document.getElementById('teacherSuggestion');
+    if (!container) return;
+
+    if (!payload) {
+      container.innerHTML = '<p style="color:#777; margin:0;">No suggestion yet. Suggestions from the student view will appear here.</p>';
+      return;
+    }
+
+    container.innerHTML = `
+      <p style="margin:0 0 8px 0;"><strong>Customer:</strong> ${payload.customer} <em>(${payload.difficulty})</em></p>
+      <p style="margin:0 0 8px 0;"><strong>Customer says:</strong> <span style="font-style:italic;">"${payload.customerSays}"</span></p>
+      <p style="margin:0 0 8px 0;"><strong>Suggested by Waiter/Waitress:</strong> <span style="color:#1565c0; font-weight:600;">"${payload.suggestion}"</span></p>
+      <p style="margin:0; color:#999; font-size:12px;">Updated: ${new Date(payload.timestamp).toLocaleTimeString()}</p>
+    `;
+  }
+
+  // initial load
+  try {
+    const raw = localStorage.getItem('lastSuggestion');
+    if (raw) renderSuggestion(JSON.parse(raw));
+  } catch (e) {
+    console.warn('Could not read lastSuggestion', e);
+  }
+
+  // listen for updates from other tabs (student page)
+  window.addEventListener('storage', (ev) => {
+    if (ev.key === 'lastSuggestion') {
+      try {
+        renderSuggestion(JSON.parse(ev.newValue));
+      } catch (e) {
+        renderSuggestion(null);
+      }
+    }
+  });
+</script>
 </html>
